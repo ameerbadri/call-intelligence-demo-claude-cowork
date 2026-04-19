@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing CI Brief — Q1 2026 · Acme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+:root,body.theme-ft{
+  --bg:#FFF1E5;--s1:#F8E6D4;--s2:#F0D8C2;--s3:#E6C9AE;
+  --text:#1A0F07;--muted:#5C4430;--faint:#C4AE99;
+  --accent:#990000;--accent-dim:rgba(153,0,0,.09);--accent-border:rgba(153,0,0,.28);
+  --green:#1F6B3E;--red:#B02B1A;--blue:#1B4F8A;
+  --border:rgba(26,15,7,.10);--border2:rgba(26,15,7,.05);
+  --header-bg:rgba(255,241,229,.93);--bar-bg:rgba(26,15,7,.10);
+  --ff-d:'Playfair Display',Georgia,serif;--ff-b:'Source Serif 4',Georgia,serif;
+  --ff-u:'DM Sans',system-ui,sans-serif;--ff-m:'IBM Plex Mono','Courier New',monospace;
+  --ease:cubic-bezier(.77,0,.18,1);
+}
+body.theme-wsj{
+  --bg:#F5F2EA;--s1:#EDEAE0;--s2:#E5E1D6;--s3:#D8D4C8;--text:#0D0B08;--muted:#4A4840;--faint:#B6B2A8;
+  --accent:#C01515;--accent-dim:rgba(192,21,21,.08);--accent-border:rgba(192,21,21,.30);
+  --green:#1A5C30;--red:#C01515;--blue:#0F3E7A;--border:rgba(0,0,0,.12);--border2:rgba(0,0,0,.055);
+  --header-bg:rgba(245,242,234,.93);--bar-bg:rgba(0,0,0,.10);
+}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-b);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.018;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.mag-wrap{position:fixed;inset:0;overflow:hidden}
+.mag-track{display:flex;width:1000vw;height:100vh;transition:transform .82s var(--ease);will-change:transform}
+.slide{width:100vw;height:100vh;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.s-hd{flex-shrink:0;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 38px;border-bottom:1px solid var(--border);background:var(--header-bg);backdrop-filter:blur(8px);position:relative;z-index:10}
+.s-hd-label{font-family:var(--ff-u);font-size:11.5px;font-weight:600;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}
+.s-hd-r{display:flex;align-items:center;gap:10px}
+.s-hd-counter{font-family:var(--ff-m);font-size:12.5px;color:var(--accent);font-weight:600;letter-spacing:.06em}
+.s-hd-accent{position:absolute;bottom:-2px;left:38px;width:48px;height:2px;background:var(--accent)}
+.nav-contents{border:1px solid var(--border2);background:var(--s1);padding:4px 10px;font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;flex-shrink:0}
+.nav-contents:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.nav-contents.open{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav-contents svg{width:11px;height:11px;flex-shrink:0}
+.contents-panel{position:fixed;top:44px;left:0;right:0;z-index:900;background:var(--header-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:12px 38px 14px;display:flex;flex-wrap:wrap;gap:6px;transform:translateY(-110%);opacity:0;transition:transform .32s var(--ease),opacity .22s ease;pointer-events:none;box-shadow:0 8px 24px rgba(26,15,7,.08)}
+.contents-panel.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.c-item{border:1px solid var(--border);background:var(--s1);padding:5px 11px;font-family:var(--ff-u);font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px;white-space:nowrap;line-height:1}
+.c-item:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.c-item.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.c-num{font-family:var(--ff-m);font-size:10.5px;opacity:.6}
+.theme-toggle{display:inline-flex;align-items:center;border:1px solid var(--border);overflow:hidden;background:var(--s1)}
+.theme-btn{border:none;background:transparent;padding:5px 11px;font-family:var(--ff-u);font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .2s}
+.theme-btn.active{background:var(--accent);color:#fff}
+.theme-btn-sep{width:1px;height:20px;background:var(--border);flex-shrink:0}
+.s-title-bar{flex-shrink:0;padding:16px 38px 14px;border-bottom:2px solid var(--text);display:flex;align-items:baseline;gap:18px}
+.s-title{font-family:var(--ff-d);font-size:32px;font-weight:700;line-height:1;color:var(--text);letter-spacing:-.01em}
+.s-title em{font-style:italic;color:var(--accent);font-weight:400}
+.s-subtitle{font-family:var(--ff-u);font-size:12.5px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;font-weight:500;margin-top:2px;margin-left:auto}
+.s-body{flex:1;overflow-y:auto;padding:26px 38px 60px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.s-body::-webkit-scrollbar{width:4px}
+.s-body::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px}
+.nav-dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:1000;align-items:center}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--faint);cursor:pointer;transition:all .3s;border:none;padding:0}
+.nav-dot.active{width:22px;border-radius:2.5px;background:var(--accent)}
+.nav-arrow{position:fixed;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--s1);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1000;transition:all .2s;color:var(--muted)}
+.nav-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.nav-arrow.disabled{opacity:.2;pointer-events:none}@keyframes nav-ping{0%{transform:scale(1);opacity:.65}60%{opacity:.3}100%{transform:scale(2.2);opacity:0}}#nextBtn:not(.disabled):not(.pulsed)::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--accent);animation:nav-ping 1.8s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none}
+#prevBtn{left:14px}#nextBtn{right:14px}
+.hint{position:fixed;bottom:52px;left:50%;transform:translateX(-50%);font-family:var(--ff-u);font-size:11.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;z-index:1000;opacity:1;transition:opacity 1.2s;pointer-events:none}
+.hint.gone{opacity:0}
+.sec-lbl{display:block;font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.17em;color:var(--muted);text-transform:uppercase;margin:16px 0 7px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.sec-lbl:first-of-type{margin-top:0}
+.body-text{font-family:var(--ff-b);font-size:14.5px;color:var(--muted);line-height:1.65}
+.body-text strong{color:var(--text);font-weight:600}
+.win-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.win-list li{font-family:var(--ff-b);font-size:14.5px;color:var(--muted);padding-left:18px;position:relative;line-height:1.55}
+.win-list li::before{content:'↗';position:absolute;left:0;color:var(--green);font-size:12px}
+.win-list li strong{color:var(--text);font-weight:600}
+.comp-tag{font-family:var(--ff-u);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:5px}
+.comp-hed{font-family:var(--ff-d);font-size:clamp(48px,6.5vw,82px);font-weight:900;line-height:.88;color:var(--text);letter-spacing:-.03em}
+.comp-sub{font-size:14px;color:var(--muted);margin-top:8px;font-style:italic;font-family:var(--ff-b)}
+.cq{font-family:var(--ff-b);font-size:15px;font-style:italic;color:var(--text);line-height:1.5;padding:12px 16px;background:var(--s1);border-left:3px solid var(--accent);margin:6px 0 12px}
+.cq cite{display:block;font-family:var(--ff-m);font-size:11.5px;font-style:normal;color:var(--muted);margin-top:6px}
+.impl-box{margin-top:10px;padding:13px 15px;background:var(--accent-dim);border:1px solid var(--accent-border);border-left:3px solid var(--accent);font-family:var(--ff-b);font-size:14.5px;color:var(--text);line-height:1.6}
+.impl-box strong{color:var(--accent);font-weight:700}
+.impl-box em{font-style:italic}
+.danger-box{padding:14px 16px;background:rgba(176,43,26,.07);border:1px solid rgba(176,43,26,.25);border-left:3px solid var(--red);font-family:var(--ff-b);font-size:14.5px;color:var(--text);line-height:1.6;margin-top:10px}
+.danger-box strong{color:var(--red);font-weight:700}
+.price-compare{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.pc{padding:14px;border:1px solid var(--border);display:flex;flex-direction:column;gap:3px}
+.pc.red{border-color:rgba(176,43,26,.35);background:rgba(176,43,26,.06)}
+.pc.grn{border-color:rgba(31,107,62,.35);background:rgba(31,107,62,.06)}
+.pc-lbl{font-family:var(--ff-u);font-size:11.5px;color:var(--muted)}
+.pc-val{font-family:var(--ff-d);font-size:26px;font-weight:700;line-height:1}
+.pc.red .pc-val{color:var(--red)}
+.pc.grn .pc-val{color:var(--green)}
+.pc-unit{font-family:var(--ff-b);font-size:12.5px;color:var(--muted);font-style:italic}
+.tag-owner{font-family:var(--ff-m);font-size:11px;letter-spacing:.06em;padding:2px 8px;border:1px solid var(--border);background:var(--s1);color:var(--muted);display:inline-block}
+.tag-hi{font-family:var(--ff-m);font-size:11px;font-weight:600;letter-spacing:.08em;padding:2px 8px;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);margin-left:auto}
+.tag-blocker{font-family:var(--ff-m);font-size:11px;font-weight:600;letter-spacing:.08em;padding:2px 8px;background:rgba(176,43,26,.09);border:1px solid rgba(176,43,26,.3);color:var(--red);margin-left:auto}
+.tag-new{font-family:var(--ff-m);font-size:10.5px;font-weight:600;letter-spacing:.07em;padding:2px 6px;background:var(--green);color:#fff;margin-left:6px;vertical-align:middle}
+.cover-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.cover-lines{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:52px 52px;opacity:.6}
+.cover-vr{position:absolute;top:0;bottom:0;left:52%;width:1px;background:var(--border)}
+.cover-rule-h{position:absolute;left:0;right:0;top:42%;height:1px;background:var(--border)}
+.cover-circle{position:absolute;right:4%;top:50%;transform:translateY(-52%);width:380px;height:380px;opacity:.12}
+.cover-body{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 64px}
+.cover-eyebrow{font-family:var(--ff-u);font-size:11.5px;font-weight:700;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.cover-eyebrow::before{content:'';display:block;width:38px;height:2px;background:var(--accent)}
+.cover-hed{font-family:var(--ff-d);font-size:clamp(76px,9.5vw,128px);font-weight:900;line-height:.88;color:var(--text);letter-spacing:-.03em;max-width:700px}
+.cover-hed em{font-style:italic;color:var(--accent);font-weight:700}
+.cover-deck{font-family:var(--ff-d);font-size:clamp(20px,2.6vw,34px);font-weight:400;color:var(--muted);margin-top:10px;font-style:italic}
+.cover-rule{width:64px;height:2px;background:var(--text);margin:24px 0}
+.cover-scope{max-width:600px;background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--accent);padding:18px 22px}
+.scope-hd{font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.scope-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{font-family:var(--ff-m);font-size:12px;padding:3px 9px;border:1px solid var(--border);background:var(--bg);color:var(--muted);display:inline-block}
+.chip.hi{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent);font-weight:600}
+.scope-note{font-family:var(--ff-b);font-size:13px;color:var(--muted);font-style:italic;line-height:1.5}
+.cover-ft{flex-shrink:0;padding:12px 64px;border-top:1px solid var(--border);background:var(--s1);display:flex;gap:14px;align-items:center;font-family:var(--ff-m);font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+.cover-ft .sep{color:var(--faint)}
+.actions-grid{flex:1;overflow-y:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);padding-bottom:50px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.actions-grid::-webkit-scrollbar{width:4px}.actions-grid::-webkit-scrollbar-thumb{background:var(--faint)}
+.act-card{background:var(--bg);padding:22px 24px;display:flex;flex-direction:column;gap:8px;position:relative}
+.act-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.act-card.p-hi::before{background:var(--accent)}.act-card.p-blocker::before{background:var(--red)}
+.act-num{font-family:var(--ff-d);font-size:48px;font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--s3)}
+.act-card.p-hi .act-num{color:var(--accent);opacity:.55}.act-card.p-blocker .act-num{color:var(--red);opacity:.45}
+.act-title{font-family:var(--ff-u);font-size:14.5px;font-weight:700;color:var(--text);line-height:1.25}
+.act-body{font-family:var(--ff-b);font-size:14px;color:var(--muted);line-height:1.6;flex:1}
+.act-body strong{color:var(--text);font-weight:600}
+.act-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center}
+.comp-ref-body{flex:1;overflow-y:auto;padding:18px 38px 60px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.comp-ref-body::-webkit-scrollbar{width:4px}.comp-ref-body::-webkit-scrollbar-thumb{background:var(--faint)}
+.bc-table{width:100%;border-collapse:collapse}
+.bc-table thead tr{border-bottom:2px solid var(--text)}
+.bc-table th{padding:8px 10px;font-family:var(--ff-u);font-size:10px;font-weight:700;letter-spacing:.13em;color:var(--muted);text-transform:uppercase;text-align:left;white-space:nowrap}
+.bc-table tbody tr{border-bottom:1px solid var(--border)}
+.bc-table tbody tr:hover{background:var(--s1)}
+.bc-table tbody tr.row-hi{background:var(--accent-dim)}
+.bc-table td{padding:10px;font-family:var(--ff-b);font-size:13.5px;color:var(--muted);vertical-align:top;line-height:1.5}
+.bc-table td:first-child{font-family:var(--ff-u);font-size:12.5px;font-weight:700;color:var(--text);white-space:nowrap}
+.bc-table td strong{color:var(--text);font-weight:600}
+.probe-cell{font-family:var(--ff-m);font-size:12.5px;color:var(--blue);line-height:1.45;background:var(--s1);padding:6px 8px;border-left:2px solid rgba(27,79,138,.4)}
+.never-cell{color:var(--red)!important}.never-cell strong{color:var(--red)!important}
+.two-col-layout{flex:1;display:grid;grid-template-columns:1fr 1.35fr;overflow:hidden}
+.col-l,.col-r{padding:22px 28px 28px;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.col-l::-webkit-scrollbar,.col-r::-webkit-scrollbar{width:4px}
+.col-l::-webkit-scrollbar-thumb,.col-r::-webkit-scrollbar-thumb{background:var(--faint)}
+.col-l{padding-left:38px;border-right:1px solid var(--border)}.col-r{padding-right:38px}
+.two-comp{flex:1;display:grid;grid-template-columns:1fr 1px 1fr;overflow:hidden}
+.comp-col{overflow-y:auto;display:flex;flex-direction:column;padding:22px 28px 28px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.comp-col::-webkit-scrollbar{width:4px}.comp-col::-webkit-scrollbar-thumb{background:var(--faint)}
+.comp-col:first-child{padding-left:38px}.comp-col:last-child{padding-right:38px}
+.comp-divider{background:var(--border)}
+.three-col{flex:1;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden}
+.tc{border-right:1px solid var(--border);overflow-y:auto;padding:22px 24px 28px;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.tc::-webkit-scrollbar{width:4px}.tc::-webkit-scrollbar-thumb{background:var(--faint)}
+.tc:first-child{padding-left:38px}.tc:last-child{border-right:none;padding-right:38px}
+.icp-two{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.icp-col{border-right:1px solid var(--border);padding:22px 28px 28px;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.icp-col::-webkit-scrollbar{width:4px}.icp-col::-webkit-scrollbar-thumb{background:var(--faint)}
+.icp-col:first-child{padding-left:38px}.icp-col:last-child{border-right:none;padding-right:38px}
+.ciso-layout{flex:1;display:grid;grid-template-columns:1fr 1.2fr 1fr;overflow:hidden}
+.ciso-col{border-right:1px solid var(--border);padding:22px 24px 28px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.ciso-col::-webkit-scrollbar{width:4px}.ciso-col::-webkit-scrollbar-thumb{background:var(--faint)}
+.ciso-col:first-child{padding-left:38px}.ciso-col:last-child{border-right:none;padding-right:38px}
+.persona-tag{font-family:var(--ff-m);font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.1em}
+.persona-hed{font-family:var(--ff-d);font-size:clamp(20px,2.4vw,30px);font-weight:700;color:var(--text);line-height:1.1;padding-bottom:12px;border-bottom:2px solid var(--text);margin-bottom:12px}
+.resonance{font-family:var(--ff-u);font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--green);text-transform:uppercase;display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.rdot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+.obj-freq{font-family:var(--ff-m);font-size:11.5px;color:var(--muted);letter-spacing:.04em;margin-bottom:8px}
+.obj-hed{font-family:var(--ff-d);font-size:15px;font-weight:700;color:var(--text);line-height:1.3;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.talk-track{font-family:var(--ff-b);font-size:14.5px;font-style:italic;color:var(--text);line-height:1.55;padding:12px 15px;background:var(--s1);border-left:3px solid var(--accent);margin:4px 0 10px}
+.leave-behind{padding:9px 12px;background:rgba(31,107,62,.07);border:1px solid rgba(31,107,62,.28);border-left:2px solid var(--green);font-family:var(--ff-b);font-size:13px;color:var(--muted);line-height:1.5;margin-top:8px}
+.leave-behind strong{color:var(--green);font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:3px}
+.poor-response{padding:9px 12px;background:rgba(176,43,26,.06);border-left:2px solid rgba(176,43,26,.4);font-family:var(--ff-b);font-size:13px;color:var(--muted);line-height:1.5;margin-top:6px}
+.poor-response strong{color:var(--red);font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:3px}
+.wins-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;background:var(--border);overflow:hidden}
+.win-card{background:var(--bg);padding:18px 22px;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+.win-card::-webkit-scrollbar{width:4px}.win-card::-webkit-scrollbar-thumb{background:var(--faint)}
+.win-card:nth-child(1){padding-left:38px}.win-card:nth-child(2){padding-right:38px}
+.win-card:nth-child(3){padding-left:38px}.win-card:nth-child(4){padding-right:38px}
+.win-p-num{font-family:var(--ff-d);font-size:52px;font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--accent);opacity:.18}
+.win-title{font-family:var(--ff-u);font-size:13.5px;font-weight:700;color:var(--text);line-height:1.25;margin:-4px 0 6px}
+.win-source{font-family:var(--ff-m);font-size:11.5px;color:var(--muted);letter-spacing:.04em;margin-bottom:8px}
+.win-what{font-family:var(--ff-b);font-size:14px;color:var(--muted);line-height:1.6}
+.win-what strong{color:var(--text);font-weight:600}
+.win-rep{margin-top:8px;padding:10px 13px;background:rgba(31,107,62,.07);border:1px solid rgba(31,107,62,.25);border-left:2px solid var(--green)}
+.win-rep strong{font-family:var(--ff-u);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:4px}
+.win-rep p{font-family:var(--ff-b);font-size:14px;color:var(--muted);line-height:1.55}
+.win-rep p strong{color:var(--text);font-family:inherit;font-size:inherit;font-weight:600;letter-spacing:normal;text-transform:none;display:inline}
+.sc-step-num{font-family:var(--ff-d);font-size:28px;font-weight:900;line-height:1;color:var(--accent);opacity:.4;flex-shrink:0;width:24px;text-align:right}
+.sc-step-body{font-family:var(--ff-b);font-size:14px;color:var(--text);line-height:1.6}
+.sc-step-body strong{font-weight:600;color:var(--accent)}
+/* vertical table utility */
+.v-table{width:100%;border-collapse:collapse;margin-top:8px}
+.v-table thead tr{border-bottom:2px solid var(--text)}
+.v-table th{padding:7px 10px;font-family:var(--ff-u);font-size:11.5px;font-weight:700;letter-spacing:.13em;color:var(--muted);text-transform:uppercase;text-align:left}
+.v-table tbody tr{border-bottom:1px solid var(--border)}
+.v-table tbody tr:hover{background:var(--s1)}
+.v-table td{padding:9px 10px;font-family:var(--ff-b);font-size:13.5px;color:var(--muted);vertical-align:top;line-height:1.5}
+.v-table td:first-child{font-family:var(--ff-u);font-size:11px;font-weight:700;color:var(--text)}
+.v-table td strong{color:var(--text);font-weight:600}
+.row-hi-g td{background:rgba(31,107,62,.06)!important}
+  </style>
+</head>
+<body class="theme-ft">
+
+<div class="contents-panel" id="contentsPanel"></div>
+
+<div class="mag-wrap">
+  <div class="mag-track" id="track">
+
+    <!-- ═══════════════ SLIDE 01 — COVER ═══════════════ -->
+    <section class="slide" data-slide="0">
+      <div class="s-hd">
+        <span class="s-hd-label">Acme · Competitive Intelligence</span>
+        <div class="s-hd-r">
+          <div class="theme-toggle">
+            <button class="theme-btn active" onclick="setTheme('ft')">FT</button>
+            <div class="theme-btn-sep"></div>
+            <button class="theme-btn" onclick="setTheme('wsj')">WSJ</button>
+          </div>
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">01 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="cover-bg">
+        <div class="cover-lines"></div>
+        <div class="cover-vr"></div>
+        <div class="cover-rule-h"></div>
+        <svg class="cover-circle" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="190" cy="190" r="180" stroke="currentColor" stroke-width="1"/>
+          <circle cx="190" cy="190" r="140" stroke="currentColor" stroke-width="1"/>
+          <circle cx="190" cy="190" r="100" stroke="currentColor" stroke-width="1"/>
+          <circle cx="190" cy="190" r="60" stroke="currentColor" stroke-width="1"/>
+          <circle cx="190" cy="190" r="20" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="cover-body">
+        <div class="cover-eyebrow">Q1 2026 · Marketing Intelligence</div>
+        <div class="cover-hed">Marketing<br><em>CI Brief</em></div>
+        <div class="cover-deck">Competitive messaging, ICP signals &amp; content priorities</div>
+        <div class="cover-rule"></div>
+        <div class="cover-scope">
+          <div class="scope-hd">Scope — Q1 2026</div>
+          <div class="scope-chips">
+            <span class="chip hi">10 Competitive Calls</span>
+            <span class="chip">7 Prospect Companies</span>
+            <span class="chip">3 Competitors Mapped</span>
+            <span class="chip">5 Verticals</span>
+            <span class="chip">2 Closed Won</span>
+          </div>
+          <div class="scope-note">Vercel · AWS Amplify · Cloudflare Pages — ICP signals, persona messaging, competitive positioning, and content gap priorities derived from live call analysis.</div>
+        </div>
+      </div>
+      <div class="cover-ft">
+        <span>Acme Platform</span><span class="sep">·</span>
+        <span>Competitive Intelligence</span><span class="sep">·</span>
+        <span>Q1 2026</span><span class="sep">·</span>
+        <span>Internal Use Only</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 02 — TOP 5 ACTIONS ═══════════════ -->
+    <section class="slide" data-slide="1">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Top Actions</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">02 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Top 5 <em>Marketing Actions</em></h2>
+        <span class="s-subtitle">Starting This Week</span>
+      </div>
+      <div class="actions-grid">
+        <div class="act-card p-hi">
+          <div class="act-num">01</div>
+          <div class="act-title">Create "TCO Reality Check" asset — per-invocation vs. bandwidth pricing</div>
+          <div class="act-body">Vercel's per-invocation model is Acme's primary vulnerability <em>and</em> primary value driver. <strong>ZephyrMedia's $6K→$22K cost spike</strong> and Meridian's 0.5 FTE maintenance tax are repeatable playbooks. Marketing must make TCO math visible early — not leave it to closing.</div>
+          <div class="act-meta"><span class="tag-owner">PMM</span><span class="tag-owner">Content</span><span class="tag-hi">P1 · This week</span></div>
+        </div>
+        <div class="act-card p-hi">
+          <div class="act-num">02</div>
+          <div class="act-title">Build "Atomic Rollback Operational ROI" calculator + case study library</div>
+          <div class="act-body">Ironbridge's <strong>25-min rollback → 30-sec atomic rollback</strong>, and Meridian's 5-min Deploy Preview vs. 40-min staging are visceral, repeatable proof points. Create a one-pager showing error budget math + revenue impact. This is Acme's strongest competitive wedge.</div>
+          <div class="act-meta"><span class="tag-owner">PMM</span><span class="tag-owner">SE</span><span class="tag-hi">P1 · This week</span></div>
+        </div>
+        <div class="act-card">
+          <div class="act-num">03</div>
+          <div class="act-title">Develop compliance responsiveness as enterprise positioning</div>
+          <div class="act-body">Healthcare/fintech prospects (CascadeHealth, Meridian, TechFlow) expect fast, specific BAA/SOC 2 documentation. <strong>Marcus's 24-hour written answers</strong> to CISO questions shifted Meridian's decision. Position "enterprise support responsiveness" as distinct advantage vs. AWS's generic bureaucracy.</div>
+          <div class="act-meta"><span class="tag-owner">PMM</span><span class="tag-owner">Legal</span><span class="tag-hi">P1 · 2 weeks</span></div>
+        </div>
+        <div class="act-card">
+          <div class="act-num">04</div>
+          <div class="act-title">Launch "Build Speed Matters" campaign with real monorepo benchmarks</div>
+          <div class="act-body">Four calls (CascadeHealth 28–35 min, Ironbridge 25 min, Meridian 40+ min, Brightwave 30–40 min) show build time as universal pain at scale. Create benchmark data comparing <strong>Amplify/Vercel/Cloudflare across real monorepo scenarios</strong>. Shareable with engineering teams pre-sales.</div>
+          <div class="act-meta"><span class="tag-owner">PMM</span><span class="tag-owner">Eng</span><span class="tag-hi">P2 · 3 weeks</span></div>
+        </div>
+        <div class="act-card">
+          <div class="act-num">05</div>
+          <div class="act-title">Reposition "Framework-Agnostic" from weakness to strength</div>
+          <div class="act-body">Brightwave and TechFlow articulated Vercel's Next.js advantage — but it's not a product blocker. Messaging flip: <strong>"Framework expertise matters; platform lock-in matters more at scale. Your stack will evolve — you want a platform that evolves with it."</strong></div>
+          <div class="act-meta"><span class="tag-owner">PMM</span><span class="tag-hi">P2 · 1 month</span></div>
+        </div>
+        <div class="act-card" style="background:var(--s1)">
+          <div class="act-num" style="color:var(--faint)">↗</div>
+          <div class="act-title" style="color:var(--muted)">Vertical Prioritization</div>
+          <div class="act-body" style="font-size:12px">
+            <strong>1. Healthcare</strong> — compliance speed (2 Q1 examples)<br><br>
+            <strong>2. Fintech</strong> — atomic rollback ROI (1 Q1 example)<br><br>
+            <strong>3. High-Growth SaaS</strong> — per-invocation pricing pain (2 examples)<br><br>
+            <strong>4. E-commerce</strong> — edge personalization revenue impact (1 example)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 03 — ICP SIGNALS ═══════════════ -->
+    <section class="slide" data-slide="2">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · ICP Signals</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">03 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">ICP <em>Signals</em></h2>
+        <span class="s-subtitle">Who is evaluating and what tips the decision</span>
+      </div>
+      <div class="comp-ref-body">
+        <table class="bc-table">
+          <thead>
+            <tr>
+              <th>Company Profile</th>
+              <th>Champion / Role</th>
+              <th>Primary Pain</th>
+              <th>Competitor</th>
+              <th>What Tipped It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-hi">
+              <td><strong>Media/Publishing</strong><br>350M→2.4B req/mo</td>
+              <td>Cassandra Bell — VP Eng<br>Raj Patel — Staff Eng</td>
+              <td>Cost unpredictability at 8× traffic inflection</td>
+              <td>Vercel incumbent; 10% discount insufficient</td>
+              <td>Per-invocation = structural problem; Acme bandwidth model = cost certainty</td>
+            </tr>
+            <tr class="row-hi">
+              <td><strong>Healthcare IT</strong><br>240-route Next.js, SOC 2</td>
+              <td>Priya Nair — Tech Lead<br>Leo — Security Lead</td>
+              <td>Build time 28–35 min; compliance timeline</td>
+              <td>AWS Amplify incumbent</td>
+              <td>Acme specific BAA + pen test policy + 5–8 min builds &gt; Amplify's generic AWS BAA</td>
+            </tr>
+            <tr class="row-hi">
+              <td><strong>Fintech</strong><br>14 FEs, 8 sites, atomic rollback critical</td>
+              <td>Dmitri Volkov — Dir Eng<br>Samantha Cho — Platform</td>
+              <td>25-min rollbacks erode error budget; fragile observability</td>
+              <td>Amplify incumbent; Cloudflare alt</td>
+              <td>Atomic rollback ROI + native Datadog integration resolved operational skepticism</td>
+            </tr>
+            <tr>
+              <td><strong>E-commerce Platform</strong><br>Checkout optimization</td>
+              <td>Alicia Nguyen — Sr FE<br>Wei Zhang — CTO</td>
+              <td>Cloudflare Workers CPU limits block personalization</td>
+              <td>Cloudflare Pages incumbent</td>
+              <td>Edge function runtime + 12% conversion lift in trial</td>
+            </tr>
+            <tr>
+              <td><strong>SaaS, 65 engineers</strong><br>3.25× growth, staging bottleneck</td>
+              <td>Jordan Kim — EM<br>Rebecca Lam — VP Eng</td>
+              <td>30–40 min deploys, 8 FEs sharing single staging env</td>
+              <td>Vercel (unstated preference)</td>
+              <td>Deploy Previews isolate each engineer; Vercel trial still pending</td>
+            </tr>
+            <tr>
+              <td><strong>B2B SaaS Analytics</strong><br>Post-incident risk focus</td>
+              <td>Theo Marsh — FE Lead<br>Yael — CTO (absent)</td>
+              <td>Atomic rollback, risk reduction post-outage</td>
+              <td>Amplify incumbent; Cloudflare new</td>
+              <td>Rollback value clear; champion hesitant to advocate (CTO risk-averse)</td>
+            </tr>
+            <tr>
+              <td><strong>Healthcare Tech</strong><br>CISO-driven procurement</td>
+              <td>Rachel Kim — VP Eng<br>Daniel Osei — FE Lead</td>
+              <td>30+ min build cycle; enterprise compliance; CFO budget pressure</td>
+              <td>Amplify incumbent</td>
+              <td>5-min Deploy Preview demo + 0.5 FTE TCO savings + contractual SLA</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="impl-box"><strong>High-growth/scaling companies</strong> are price-sensitive at 5M+ req/month or 3×+ team growth inflection points. Per-invocation costs become visceral pain. <em>Opportunity: Position in landing pages targeting "rapid growth SaaS" with cost calculator.</em></div>
+          <div class="impl-box"><strong>Healthcare/fintech/compliance-heavy verticals</strong> weight compliance responsiveness above feature comparison. <em>Opportunity: Create vertical-specific compliance collateral; lead with support SLA clarity.</em></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 04 — PERSONA: ENG MANAGER ═══════════════ -->
+    <section class="slide" data-slide="3">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Messaging by Persona</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">04 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Persona <em>Messaging</em></h2>
+        <span class="s-subtitle">Eng Manager · Director of Engineering</span>
+      </div>
+      <div class="icp-two">
+        <div class="icp-col">
+          <div class="persona-tag">PERSONA 01 · ENGINEERING MANAGER</div>
+          <div class="persona-hed">Eng Manager &amp; Director of Eng</div>
+          <div class="resonance"><div class="rdot"></div>Release velocity · staging bottlenecks · team friction</div>
+          <span class="sec-lbl">What They Care About</span>
+          <p class="body-text">Release velocity, staging bottlenecks, team friction on shared environments. <strong>Rachel (Meridian)</strong> cited 5-min Deploy Preview vs. 40-min staging. <strong>Jordan (Brightwave)</strong> managing 8 engineers competing for a single staging environment. Build time is measured in quarters of engineering capacity.</p>
+          <span class="sec-lbl">What Resonates</span>
+          <div class="talk-track">"Your staging bottleneck costs 20–30% of your frontend team's velocity. Acme Deploy Previews isolate each engineer. Here's the math."</div>
+          <p class="body-text">TCO math that includes engineering hours. <strong>Meridian CFO</strong> moved when Rachel showed 0.5 FTE Amplify maintenance tax. <strong>ZephyrMedia VP Eng</strong> shifted when Acme quantified 50–60% cost savings.</p>
+          <span class="sec-lbl">What Falls Flat</span>
+          <div class="danger-box"><strong>Generic "better DX" claims without measurement.</strong> Brightwave's Priya acknowledged Vercel's "polished DX" but trial didn't validate Acme's alternative. Fix: Lead with specific metrics — deploy cycle time, preview isolation, rollback speed — not positioning claims.</div>
+        </div>
+        <div class="icp-col">
+          <span class="sec-lbl">Competitor Framing They Arrive With</span>
+          <div class="cq">"We're all-in on Next.js, Vercel feels natural."<cite>— Brightwave, TechFlow, Ironbridge</cite></div>
+          <div class="cq">"AWS ecosystem lock-in reduces new vendor friction."<cite>— CascadeHealth, Ironbridge</cite></div>
+          <div class="cq">"Cloudflare consolidates our network and hosting."<cite>— Ironbridge, PolarAnalytics</cite></div>
+          <span class="sec-lbl">Content Plays That Work</span>
+          <ul class="win-list">
+            <li><strong>Deploy Previews isolation calculator</strong> — 8 engineers × 1 staging = bottleneck; show velocity math per engineer</li>
+            <li><strong>Build time benchmark</strong> — real monorepo comparison (200-file codebase, Amplify vs. Acme cache hit rates)</li>
+            <li><strong>Staging environment ROI one-pager</strong> — shared staging cost: blocked PRs × hourly rate × cycle time</li>
+          </ul>
+          <span class="sec-lbl">Message Architecture</span>
+          <div class="impl-box"><strong>Lead with:</strong> Staging isolation + build time improvement<br><br><strong>Support with:</strong> TCO math (FTE hours saved on staging, deploy, observability overhead)<br><br><strong>Close with:</strong> Trial design — "Measure build time, preview stability, and rollback speed on your real codebase"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 05 — PERSONA: VP ENG / CTO ═══════════════ -->
+    <section class="slide" data-slide="4">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Messaging by Persona</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">05 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Persona <em>Messaging</em></h2>
+        <span class="s-subtitle">VP Engineering · CTO</span>
+      </div>
+      <div class="icp-two">
+        <div class="icp-col">
+          <div class="persona-tag">PERSONA 02 · VP ENG / CTO</div>
+          <div class="persona-hed">VP Engineering &amp; CTO</div>
+          <div class="resonance"><div class="rdot"></div>Operational resilience · compliance speed · platform risk</div>
+          <span class="sec-lbl">What They Care About</span>
+          <p class="body-text">Operational resilience, enterprise support clarity, compliance/procurement speed. <strong>Rachel (Meridian VP Eng)</strong> drove decision based on atomic rollback operational ROI + contractual SLA. <strong>Dmitri (Ironbridge Dir Eng)</strong> moved from skeptic to conviction when shown 25-min → 30-sec rollback impact on error budget.</p>
+          <span class="sec-lbl">What Resonates</span>
+          <div class="talk-track">"Every production incident costs. Atomic rollback cuts recovery time 50×. Here's your error budget impact."</div>
+          <p class="body-text"><strong>Risk-reduction framing, not feature innovation.</strong> PolarAnalytics' Theo was technically convinced but hesitant until Acme positioned as "incident recovery speed," removing political risk from championing change.</p>
+          <span class="sec-lbl">What Falls Flat</span>
+          <div class="danger-box"><strong>"We support all frameworks" without explaining why it matters at their scale.</strong> TechFlow's Elena — "framework-agnostic" didn't translate to a reason to switch. Fix: "Your framework choice will change in 3 years. Your platform shouldn't force that choice again."</div>
+        </div>
+        <div class="icp-col">
+          <span class="sec-lbl">Competitor Framing They Arrive With</span>
+          <div class="cq">"Atomic rollbacks and compliance SLAs are table-stakes enterprise features."<cite>— Meridian, CascadeHealth</cite></div>
+          <div class="cq">"We're concerned about vendor lock-in and framework-specific optimization."<cite>— Brightwave, TechFlow, ZephyrMedia</cite></div>
+          <span class="sec-lbl">Content Plays That Work</span>
+          <ul class="win-list">
+            <li><strong>Atomic rollback ROI calculator</strong> — input: incidents/quarter + duration + revenue impact → output: error budget preservation + SLA protection</li>
+            <li><strong>Enterprise compliance one-pager</strong> — BAA turnaround time (24 hr), SOC 2, pen test policy, named CSM — contrast with Amplify's 6-week generic process</li>
+            <li><strong>Framework-agnostic positioning doc</strong> — "Vercel optimizes for one framework; Acme lets your platform evolve with your stack choices"</li>
+          </ul>
+          <span class="sec-lbl">Message Architecture</span>
+          <div class="impl-box"><strong>Lead with:</strong> Risk reduction framing (atomic rollback + error budget math)<br><br><strong>Support with:</strong> Contractual SLA clarity + named CSM (removes procurement risk)<br><br><strong>Close with:</strong> Business case language: "risk reduction investment" not "expensive alternative" — this is how Meridian CFO approved</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 06 — PERSONA: FRONTEND + SECURITY ═══════════════ -->
+    <section class="slide" data-slide="5">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Messaging by Persona</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">06 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Persona <em>Messaging</em></h2>
+        <span class="s-subtitle">Frontend Lead · Security &amp; Compliance</span>
+      </div>
+      <div class="icp-two">
+        <div class="icp-col">
+          <div class="persona-tag">PERSONA 03 · FRONTEND LEAD / STAFF ENG</div>
+          <div class="persona-hed">Frontend Lead &amp; Staff Engineer</div>
+          <div class="resonance"><div class="rdot"></div>Build speed · edge capabilities · trial-validated proof points</div>
+          <p class="body-text" style="margin-bottom:10px"><strong>Alicia (StrataCommerce)</strong> unprompted built ROI spreadsheet when trial showed Acme edge runtime could power checkout personalization. <strong>Samantha (Ironbridge)</strong> moved to conviction when told "Acme native Datadog lets you delete custom webhook logic."</p>
+          <div class="cq">"Cloudflare's limits forced us to rewrite this server-side. Acme let us keep it at the edge."<cite>— Alicia Nguyen, StrataCommerce (Sr FE Engineer)</cite></div>
+          <span class="sec-lbl">What Resonates</span>
+          <div class="talk-track">"Run a 1-week trial on your real codebase. Measure build time, preview stability, and rollback speed. We'll show you the math."</div>
+          <span class="sec-lbl">What Falls Flat</span>
+          <div class="danger-box"><strong>"Faster than X" without context.</strong> Brightwave needs "faster deploy = unblocked engineers sharing staging," not just "5-min faster." Fix: "Your team shares one staging environment. Deploy Previews give each engineer an isolated environment per PR."</div>
+        </div>
+        <div class="icp-col">
+          <div class="persona-tag">PERSONA 04 · SECURITY / COMPLIANCE LEAD</div>
+          <div class="persona-hed">Security &amp; Compliance Lead</div>
+          <div class="resonance"><div class="rdot"></div>BAA specificity · SOC 2 speed · contractual SLA clarity</div>
+          <p class="body-text" style="margin-bottom:10px"><strong>Leo (CascadeHealth)</strong>: "Acme's BAA is better than Amplify's" after Marcus provided Amplify-specific language. <strong>Meridian CISO</strong> approved after Marcus delivered 24-hour written answers to technical security questions + explicit SLA in contract.</p>
+          <div class="cq">"Could show my CISO a contract that said here's what happens when something goes wrong."<cite>— Rachel Kim, Meridian (VP Eng)</cite></div>
+          <span class="sec-lbl">What Resonates</span>
+          <div class="talk-track">"BAA turnaround: 24 hours. SOC 2 questionnaire: 48 hours. Named CSM with escalation path. Here's the contract language."</div>
+          <div class="leave-behind"><strong>Standard Collateral Package</strong>Pre-templated BAA, SOC 2 questionnaire responses, pen-test policy — available on request, not "upon request after 6-week review." This is how Amplify loses healthcare/fintech deals.</div>
+          <span class="sec-lbl">What Falls Flat</span>
+          <div class="danger-box"><strong>Vague "enterprise support" claims or referral to "AWS enterprise support" as a safety net.</strong> Amplify's slow compliance documentation was the primary objection in two healthcare deals.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 07 — COMPETITIVE POSITIONING ═══════════════ -->
+    <section class="slide" data-slide="6">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Competitive Positioning</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">07 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Competitive Positioning <em>by Use Case</em></h2>
+        <span class="s-subtitle">Acme vs. Vercel · Amplify · Cloudflare</span>
+      </div>
+      <div class="comp-ref-body">
+        <table class="bc-table">
+          <thead>
+            <tr>
+              <th>Use Case</th>
+              <th>Their Go-To Alt</th>
+              <th>Our Winning Angle</th>
+              <th>Proof Point Needed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-hi">
+              <td>High-traffic site scaling past 5M req/mo</td>
+              <td>Vercel (per-invocation)</td>
+              <td>Bandwidth pricing predictability; 50–60% savings at scale</td>
+              <td>Real TCO comparison — ZephyrMedia: $6K→$22K Vercel vs. Acme fixed bandwidth</td>
+            </tr>
+            <tr class="row-hi">
+              <td>Healthcare/fintech compliance procurement</td>
+              <td>AWS Amplify</td>
+              <td>24-hour BAA + contractual SLA + explicit pen-test policy</td>
+              <td>Case study: Meridian 2-week approval vs. Amplify 6-week generic BAA process</td>
+            </tr>
+            <tr class="row-hi">
+              <td>Operations/SRE reducing production risk</td>
+              <td>AWS Amplify</td>
+              <td>Atomic rollback (30 sec vs. 25-min re-deploy); error budget quantified</td>
+              <td>Incident recovery simulation: RTO 30 sec vs. 25 min; cost of 25-min outage</td>
+            </tr>
+            <tr>
+              <td>Developer team productivity (staging contention)</td>
+              <td>Heroku or custom staging</td>
+              <td>Deploy Previews per PR; isolated envs; concurrent work unblocked</td>
+              <td>Brightwave: 8 engineers, 1 staging env → each engineer isolated preview (8× parallel velocity)</td>
+            </tr>
+            <tr>
+              <td>Edge compute + personalization (checkout, A/B)</td>
+              <td>Cloudflare Workers</td>
+              <td>Higher CPU/memory limits; sub-10ms cold starts; checkout personalization without rewrite</td>
+              <td>StrataCommerce trial: 12% conversion lift from edge personalization; Cloudflare forced server-side rewrite</td>
+            </tr>
+            <tr>
+              <td>Observability/monitoring at platform scale</td>
+              <td>Amplify + custom webhooks</td>
+              <td>Native Datadog integration; log drains; no custom webhook fragility</td>
+              <td>Ironbridge: custom webhooks fragile; Acme native integration "cleaner than what we've built"</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+          <div>
+            <span class="sec-lbl">Vs. Vercel</span>
+            <p class="body-text">Position as framework-agnostic: "Vercel optimizes for one framework; Acme lets your platform evolve." Lead with <strong>TCO + build time benchmarks</strong>. Per-invocation pricing becomes unpredictable at scale — ZephyrMedia $6K→$22K is the anchor story.</p>
+          </div>
+          <div>
+            <span class="sec-lbl">Vs. AWS Amplify</span>
+            <p class="body-text">Counter "generic AWS enterprise support" with <strong>24-hour compliance documentation response + named CSM</strong>. Amplify's operational pain (25–40 min builds, non-atomic rollbacks) scales with you. Acme's operational velocity doesn't.</p>
+          </div>
+          <div>
+            <span class="sec-lbl">Vs. Cloudflare Pages</span>
+            <p class="body-text">Architect as <strong>layering, not replacement</strong>: "You keep Cloudflare's network advantage; add Acme's hosting, Deploy Previews, atomic rollbacks." CPU/memory limits block personalization logic (StrataCommerce proof). Position the hidden cost of working around those limits.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 08 — MESSAGING PLAYBOOK ═══════════════ -->
+    <section class="slide" data-slide="7">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Messaging Playbook</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">08 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Messaging <em>That Moved Deals</em></h2>
+        <span class="s-subtitle">Q1 2026 — Content Templates from Live Calls</span>
+      </div>
+      <div class="wins-grid">
+        <div class="win-card">
+          <div class="win-p-num">01</div>
+          <div class="win-title">The TCO Reframe: Engineer Time &gt; Infrastructure Cost</div>
+          <div class="win-source">Meridian + ZephyrMedia · Enterprise motion</div>
+          <p class="win-what">Per-invocation pricing or "cheap at small scale" platforms create hidden TCO burden. <strong>Meridian CFO approved</strong> when Rachel showed $150K build-cycle burden on Amplify vs. Acme operational ROI — built from the prospect's own metrics.</p>
+          <div class="win-rep">
+            <strong>Replicate This</strong>
+            <p>Quantify prospect's engineering time on deploy/rollback/staging overhead. Show Acme's build caching, atomic rollback, Deploy Previews as <strong>FTE savings, not feature comparison</strong>. Flip the math: Acme at net-negative cost vs. Amplify.</p>
+          </div>
+        </div>
+        <div class="win-card">
+          <div class="win-p-num">02</div>
+          <div class="win-title">The Stability Narrative: Velocity = Risk Reduction</div>
+          <div class="win-source">PolarAnalytics + Ironbridge · Post-incident accounts</div>
+          <p class="win-what">Post-incident risk aversion is a blocker. Reframe Acme from "capability addition" to "risk reduction." <strong>Dmitri (Ironbridge)</strong> moved from skeptic to conviction when shown 25-min rollback erodes error budget math.</p>
+          <div class="win-rep">
+            <strong>Replicate This</strong>
+            <p>In post-incident or risk-averse CTO environments: <strong>"Atomic rollback is incident response insurance."</strong> Quantify: "You budget 5 incidents/quarter × 30 min each = 2.5 hrs downtime. Non-atomic rollbacks double that. Violates 99.95% SLA."</p>
+          </div>
+        </div>
+        <div class="win-card">
+          <div class="win-p-num">03</div>
+          <div class="win-title">The "Complementary, Not Competing" Architecture</div>
+          <div class="win-source">StrataCommerce · Cloudflare consolidation fear</div>
+          <p class="win-what"><strong>Wei Zhang (StrataCommerce CTO)</strong> feared vendor fragmentation. When Priya showed Acme as origin behind Cloudflare's CDN layer, he said "That changes the conversation; we can layer this instead of replace." He then approved based on Alicia's business case.</p>
+          <div class="win-rep">
+            <strong>Replicate This</strong>
+            <p>When Cloudflare consolidation concerns surface: create <strong>architecture diagram showing Acme at origin layer</strong>. "Same vendor count, Cloudflare's network advantage + Acme's Deploy Previews, observability, atomic rollbacks."</p>
+          </div>
+        </div>
+        <div class="win-card">
+          <div class="win-p-num">04</div>
+          <div class="win-title">The Build Time Reality Check: Monorepo Math</div>
+          <div class="win-source">CascadeHealth · Ironbridge · Meridian · TechFlow</div>
+          <p class="win-what">Full-stack rebuild on every deploy is Amplify's default — 25–40 minutes for a 200-file monorepo. <strong>Marcus at CascadeHealth:</strong> "Amplify rebuilds full codebase; Acme uses incremental caching." 80–85% of commits skip rebuild entirely.</p>
+          <div class="win-rep">
+            <strong>Replicate This</strong>
+            <p>Create <strong>"build time benchmark" report</strong> comparing Vercel, Amplify, Cloudflare on 200+ file monorepos. Include cache hit rates and FTE ROI: 35 engineers × 10 commits/day × 20 min saved = <strong>116 FTE-hours/week</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 09 — CONTENT GAP PRIORITIES ═══════════════ -->
+    <section class="slide" data-slide="8">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Content Gaps</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">09 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Content Gap <em>Priorities</em></h2>
+        <span class="s-subtitle">What prospects wanted to see that didn't exist — Q1 2026</span>
+      </div>
+      <div class="three-col">
+        <div class="tc">
+          <span class="sec-lbl">P1 Content — Build Now</span>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <div class="obj-hed">Build Time Benchmark Report</div>
+              <div class="obj-freq">Heard in: 4 calls · CascadeHealth, Ironbridge, Meridian, TechFlow</div>
+              <p class="body-text">Multi-vendor, multi-platform comparison across 3 monorepo sizes (50-file, 200-file, 500-file). Include cache hit rates, incremental rebuild speeds, and FTE ROI. Engineering teams want hard data, not vendor claims.</p>
+              <div class="leave-behind"><strong>Deliverable</strong>2-page technical brief with before/after metrics from real customer monorepos. Shareable with engineering teams pre-sales. Addresses 4+ Q1 calls' specific request.</div>
+            </div>
+            <div>
+              <div class="obj-hed">TCO Calculator (Infrastructure + Engineering Time)</div>
+              <div class="obj-freq">Heard in: 3 calls · ZephyrMedia, Meridian, TechFlow</div>
+              <p class="body-text">Interactive calculator: prospect inputs team size, monthly requests, current platform → projected FTE savings + 3-year cost comparison vs. Amplify/Vercel/Cloudflare. Economic buyers need math before committing.</p>
+              <div class="leave-behind"><strong>Deliverable</strong>Interactive web tool or shareable spreadsheet. "Cheap" platforms create hidden maintenance costs — TCO calculator makes this visible early, not at closing.</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc">
+          <span class="sec-lbl">P2 Content — Build This Quarter</span>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <div class="obj-hed">Compliance Responsiveness Playbook</div>
+              <div class="obj-freq">Heard in: 3 calls · CascadeHealth, Meridian, TechFlow</div>
+              <p class="body-text">Security/compliance leads want pre-written documentation, not "upon request" bureaucracy. Provide BAA template specific to hosting vendors, pre-filled SOC 2 questionnaire, explicit pen-test policy statement.</p>
+              <div class="leave-behind"><strong>Deliverable</strong>Pre-templated BAA + SOC 2 questionnaire + pen-test policy statement. Position as "24-hour turnaround" collateral. Healthcare/fintech procurement speed is competitive advantage.</div>
+            </div>
+            <div>
+              <div class="obj-hed">Atomic Rollback Operational ROI Case Study</div>
+              <div class="obj-freq">Heard in: 3 calls · Ironbridge, Meridian, PolarAnalytics</div>
+              <p class="body-text">Incident recovery and error-budget impact are quantifiable but rarely modeled. Post-incident risk focus is universal at scale — create the math that sales can hand to a CTO.</p>
+              <div class="leave-behind"><strong>Deliverable</strong>"25-min rollback window vs. 30-sec atomic. Cost of 25-min outage: $X revenue loss + Y SLA penalty + Z customer churn. Acme ROI: 4 months."</div>
+            </div>
+          </div>
+        </div>
+        <div class="tc">
+          <span class="sec-lbl">P3 Content + Competitive Messaging to Counter</span>
+          <div>
+            <div class="obj-hed">Framework-Agnostic Positioning One-Pager</div>
+            <div class="obj-freq">Heard in: 2 calls · Brightwave, TechFlow</div>
+            <p class="body-text">Vercel's "Next.js creator" narrative is sticky. Acme works equally well for Remix, Astro, SvelteKit, Nuxt.</p>
+            <div class="leave-behind"><strong>Deliverable</strong>"Vercel optimizes for Next.js; Acme optimizes for your framework choice. Your stack will change; your platform shouldn't force that decision again."</div>
+          </div>
+          <span class="sec-lbl" style="margin-top:18px">Competitor Narratives Gaining Traction</span>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+            <div style="padding:10px 12px;border:1px solid var(--border);background:var(--s1)">
+              <div class="comp-tag">Vercel</div>
+              <p class="body-text" style="font-size:12px">"We created Next.js; best-in-class DX for React/Next.js teams." Framework ownership is sticky. <strong>Counter:</strong> per-invocation pricing cliff + framework lock-in risk.</p>
+            </div>
+            <div style="padding:10px 12px;border:1px solid var(--border);background:var(--s1)">
+              <div class="comp-tag">AWS Amplify</div>
+              <p class="body-text" style="font-size:12px">"AWS-native; enterprise support from AWS." Procurement friction reduction. <strong>Counter:</strong> generic BAA vs. Acme's 24-hr specificity + operational velocity.</p>
+            </div>
+            <div style="padding:10px 12px;border:1px solid var(--border);background:var(--s1)">
+              <div class="comp-tag">Cloudflare Pages</div>
+              <p class="body-text" style="font-size:12px">"One vendor for DNS, DDoS, CDN, and hosting." <strong>Counter:</strong> CPU/memory limits + layering architecture removes consolidation fear.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SLIDE 10 — STRATEGY SUMMARY ═══════════════ -->
+    <section class="slide" data-slide="9">
+      <div class="s-hd">
+        <span class="s-hd-label">Marketing CI · Q1 Summary</span>
+        <div class="s-hd-r">
+          <button class="nav-contents" onclick="toggleContents()">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="0" y1="1.5" x2="14" y2="1.5"/><line x1="0" y1="5.5" x2="14" y2="5.5"/><line x1="0" y1="9.5" x2="14" y2="9.5"/></svg> Sections
+          </button>
+          <span class="s-hd-counter">10 / 10</span>
+        </div>
+        <div class="s-hd-accent"></div>
+      </div>
+      <div class="s-title-bar">
+        <h2 class="s-title">Q1 2026 <em>Marketing Strategy</em></h2>
+        <span class="s-subtitle">Competitive Position + 90-Day Investments</span>
+      </div>
+      <div class="two-col-layout">
+        <div class="col-l">
+          <span class="sec-lbl">Competitive Position</span>
+          <p class="body-text" style="margin-bottom:12px"><strong>Strongest:</strong> Operational velocity (build caching, atomic rollbacks, Deploy Previews) + compliance responsiveness (healthcare/fintech) + TCO models that include engineering time.</p>
+          <p class="body-text"><strong>Vulnerable:</strong> DX perception vs. Vercel (unstated preference, not tested in trials) + framework-specific optimization reputation + ecosystem consolidation appeal (Cloudflare).</p>
+
+          <span class="sec-lbl">Vertical Prioritization</span>
+          <table class="v-table">
+            <thead><tr><th>#</th><th>Vertical</th><th>Angle</th><th>Evidence</th></tr></thead>
+            <tbody>
+              <tr class="row-hi-g"><td>1</td><td><strong>Healthcare</strong></td><td>Compliance speed</td><td>2 Q1 examples, fastest advantage vs. Amplify</td></tr>
+              <tr class="row-hi-g"><td>2</td><td><strong>Fintech</strong></td><td>Atomic rollback ROI</td><td>1 Q1 example, quantified error budget math</td></tr>
+              <tr><td>3</td><td>High-Growth SaaS</td><td>TCO / pricing</td><td>2 Q1 examples, per-invocation pain at scale</td></tr>
+              <tr><td>4</td><td>E-commerce</td><td>Edge personalization</td><td>1 Q1 example, conversion revenue impact</td></tr>
+            </tbody>
+          </table>
+
+          <span class="sec-lbl">Key Insight</span>
+          <div class="impl-box"><strong>Wins are operational, not feature-based.</strong> Atomic rollback ROI, build time improvement, observability integration, and compliance responsiveness were tier-1 decision factors in won deals. Feature parity is assumed; operational philosophy is the differentiator. The strongest selling point is not "we have Deploy Previews" — it's "Deploy Previews + atomic rollback + observability means you reduce error budget erosion by 40%."</div>
+        </div>
+        <div class="col-r">
+          <span class="sec-lbl">Top Marketing Investments — Next 90 Days</span>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="padding:14px 16px;border-left:3px solid var(--accent);background:var(--accent-dim)">
+              <div style="font-family:var(--ff-u);font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">01 · Build Time Benchmark Report</div>
+              <p class="body-text" style="font-size:12.5px">Multi-vendor, monorepo-focused, FTE ROI. Shareable with prospects pre-sales; addresses 4+ Q1 calls' request for hard data.</p>
+            </div>
+            <div style="padding:14px 16px;border-left:3px solid var(--accent);background:var(--accent-dim)">
+              <div style="font-family:var(--ff-u);font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">02 · TCO Calculator (Infrastructure + FTE)</div>
+              <p class="body-text" style="font-size:12.5px">Interactive tool for economic buyers. Flips "cheap platform" narrative by quantifying hidden engineering burden.</p>
+            </div>
+            <div style="padding:14px 16px;border-left:3px solid var(--green);background:rgba(31,107,62,.06)">
+              <div style="font-family:var(--ff-u);font-size:11.5px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">03 · Compliance Responsiveness Collateral</div>
+              <p class="body-text" style="font-size:12.5px">Pre-templated BAA, SOC 2, pen-test policy. Fast-track healthcare/fintech procurement; distinct advantage vs. Amplify bureaucracy.</p>
+            </div>
+            <div style="padding:14px 16px;border-left:3px solid var(--green);background:rgba(31,107,62,.06)">
+              <div style="font-family:var(--ff-u);font-size:11.5px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">04 · Atomic Rollback ROI Case Study</div>
+              <p class="body-text" style="font-size:12.5px">Quantified incident recovery + error-budget math. Addresses post-incident risk aversion (universal at scale).</p>
+            </div>
+            <div style="padding:14px 16px;border:1px solid var(--border);background:var(--s1)">
+              <div style="font-family:var(--ff-u);font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">05 · Competitive Trial Design Guide (Internal)</div>
+              <p class="body-text" style="font-size:12.5px">Ensure comparative trials (vs. Vercel/Amplify/Cloudflare), not solo Acme trials. Prospect's DX preference should be tested, not assumed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.mag-track -->
+</div><!-- /.mag-wrap -->
+
+<nav class="nav-dots" id="dots"></nav>
+<button class="nav-arrow disabled" id="prevBtn" aria-label="Previous">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+</button>
+<button class="nav-arrow" id="nextBtn" aria-label="Next">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+</button>
+<div class="hint" id="hint">← → Arrow keys · click arrows · or use Sections menu</div>
+
+<script>
+(function(){
+  const TOTAL=10;let cur=0,startX=0,contentsOpen=false;
+  const track=document.getElementById('track'),dotsWrap=document.getElementById('dots'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),hint=document.getElementById('hint'),panel=document.getElementById('contentsPanel');
+  const SECTIONS=['Cover','Top 5 Actions','ICP Signals','Persona: Eng Manager','Persona: VP Eng / CTO','Persona: Frontend + Security','Competitive Positioning','Messaging Playbook','Content Gap Priorities','Q1 Strategy Summary'];
+  for(let i=0;i<TOTAL;i++){const d=document.createElement('button');d.className='nav-dot';d.addEventListener('click',()=>goTo(i));dotsWrap.appendChild(d);}
+  SECTIONS.forEach((name,i)=>{const btn=document.createElement('button');btn.className='c-item';btn.dataset.idx=i;btn.innerHTML=`<span class="c-num">${String(i+1).padStart(2,'0')}</span>${name}`;btn.addEventListener('click',()=>{goTo(i);closeContents();});panel.appendChild(btn);});
+  window.toggleContents=function(){contentsOpen?closeContents():openContents();};
+  function openContents(){contentsOpen=true;panel.classList.add('open');document.querySelectorAll('.nav-contents').forEach(b=>b.classList.add('open'));updateContentsActive();}
+  function closeContents(){contentsOpen=false;panel.classList.remove('open');document.querySelectorAll('.nav-contents').forEach(b=>b.classList.remove('open'));}
+  function updateContentsActive(){panel.querySelectorAll('.c-item').forEach((b,i)=>b.classList.toggle('active',i===cur));}
+  document.addEventListener('click',e=>{if(contentsOpen&&!panel.contains(e.target)&&!e.target.closest('.nav-contents'))closeContents();});
+  function goTo(n){cur=Math.max(0,Math.min(TOTAL-1,n));track.style.transform=`translateX(-${cur*100}vw)`;document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));prevBtn.classList.toggle('disabled',cur===0);nextBtn.classList.toggle('disabled',cur===TOTAL-1);if(contentsOpen)updateContentsActive();}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeContents();return;}if(e.key==='ArrowRight'||e.key==='ArrowDown')goTo(cur+1);else if(e.key==='ArrowLeft'||e.key==='ArrowUp')goTo(cur-1);});
+  prevBtn.addEventListener('click',()=>goTo(cur-1));nextBtn.addEventListener('click',()=>goTo(cur+1));[prevBtn,nextBtn].forEach(b=>b.addEventListener('click',()=>nextBtn.classList.add('pulsed'),{once:true}));
+  track.addEventListener('mousedown',e=>{startX=e.clientX;});track.addEventListener('mouseup',e=>{const dx=e.clientX-startX;if(dx<-65)goTo(cur+1);else if(dx>65)goTo(cur-1);});
+  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;},{passive:true});track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX;if(dx<-65)goTo(cur+1);else if(dx>65)goTo(cur-1);},{passive:true});
+  window.setTheme=function(t){document.body.className='theme-'+t;document.querySelectorAll('.theme-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim()===t.toUpperCase());});};
+  setTimeout(()=>hint.classList.add('gone'),4000);
+  goTo(0);
+})();
+</script>
+</body>
+</html>

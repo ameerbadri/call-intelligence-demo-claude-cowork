@@ -1,0 +1,9 @@
+.DS_Store
+*.tmp
+*.~lock.*
+__pycache__/
+*.pyc
+.env
+!outputs/calls/.gitkeep
+!outputs/competitive-intelligence/.gitkeep
+!outputs/hosting/.gitkeep

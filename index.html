@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Intelligence — Powered by Claude Cowork</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFF1E5;
+      --s1: #F8E6D4;
+      --s2: #F0D8C2;
+      --text: #1A0F07;
+      --muted: #5C4430;
+      --faint: #C4AE99;
+      --accent: #990000;
+      --accent-dim: rgba(153,0,0,.09);
+      --accent-border: rgba(153,0,0,.28);
+      --green: #1F6B3E;
+      --border: rgba(26,15,7,.10);
+      --ff-d: 'Playfair Display', Georgia, serif;
+      --ff-b: 'Source Serif 4', Georgia, serif;
+      --ff-u: 'DM Sans', system-ui, sans-serif;
+      --ff-m: 'IBM Plex Mono', monospace;
+    }
+    html { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-b);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Noise overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .016;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,241,229,.93);
+      backdrop-filter: blur(8px);
+      padding: 0 48px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-label {
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .site-label span { color: var(--accent); }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .header-link {
+      font-family: var(--ff-u);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .header-link:hover { color: var(--accent); }
+    .header-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 6px 14px;
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .header-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 8px 48px 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .eyebrow {
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--accent); }
+    .hero-hed {
+      font-family: var(--ff-d);
+      font-size: clamp(22px, 2.5vw, 36px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hero-hed em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .hero-scenario {
+      font-family: var(--ff-u);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-left: 2px solid var(--accent-border);
+      background: var(--accent-dim);
+      max-width: 680px;
+      border-radius: 0 3px 3px 0;
+    }
+    .hero-scenario strong { color: var(--text); font-weight: 600; }
+    .hero-scenario em { font-style: italic; }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .chip {
+      font-family: var(--ff-m);
+      font-size: 12px;
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      background: var(--s1);
+      color: var(--muted);
+    }
+    .chip.hi {
+      background: var(--accent-dim);
+      border-color: var(--accent-border);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── VALUE PROP ── */
+    .vp-section {
+      padding: 8px 48px;
+      border-bottom: 1px solid var(--border);
+      flex: 0 0 auto;
+    }
+    .vp-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .vp-inner { grid-template-columns: 1fr; } }
+    .vp-eyebrow {
+      font-family: var(--ff-u);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .vp-eyebrow::before { content: ''; display: block; width: 22px; height: 2px; background: var(--accent); }
+    .vp-hed {
+      font-family: var(--ff-d);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .vp-hed em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .vp-body {
+      font-family: var(--ff-b);
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.62;
+      margin-bottom: 7px;
+    }
+    .vp-body strong { color: var(--text); font-weight: 600; }
+    .vp-body em { font-style: italic; color: var(--text); }
+    .vp-note {
+      font-family: var(--ff-m);
+      font-size: 11.5px;
+      color: var(--faint);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    /* contrast grid */
+    .vp-contrast {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .vp-col {
+      background: var(--bg);
+      padding: 10px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .vp-col.vp-bad { background: var(--bg); }
+    .vp-col.vp-good { background: var(--s1); }
+    .vp-col-label {
+      font-family: var(--ff-u);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+    .vp-bad .vp-col-label { color: var(--muted); border-color: var(--border); }
+    .vp-good .vp-col-label { color: var(--accent); border-color: var(--accent); }
+    .vp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .vp-list li {
+      font-family: var(--ff-b);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+      padding-left: 16px;
+      position: relative;
+    }
+    .vp-bad .vp-list li::before { content: '–'; position: absolute; left: 0; color: var(--faint); }
+    .vp-good .vp-list li::before { content: '↗'; position: absolute; left: 0; color: var(--green); font-size: 11px; }
+    .vp-good .vp-list li { color: var(--text); }
+    .vp-good .vp-list li:last-child { color: var(--accent); font-weight: 600; }
+
+    /* ── SECTION HEADERS ── */
+    .section-wrap { padding: 6px 48px; border-bottom: 1px solid var(--border); flex: 0 0 auto; min-height: 0; }
+    .section-wrap:last-child { border-bottom: none; }
+    .section-arch { flex: 1 !important; overflow: hidden; }
+    .section-eyebrow {
+      font-family: var(--ff-u);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-family: var(--ff-d);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--text);
+      margin-bottom: 8px;
+    }
+    .section-title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+    /* ── CI CARD GRID ── */
+    .ci-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    @media (max-width: 900px) { .ci-grid { grid-template-columns: 1fr; } }
+    .ci-card {
+      background: var(--bg);
+      padding: 7px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s;
+      position: relative;
+    }
+    .ci-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--border);
+      transition: background .2s;
+    }
+    .ci-card:hover { background: var(--s1); }
+    .ci-card:hover::before { background: var(--accent); }
+    .ci-card-label {
+      font-family: var(--ff-u);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .ci-card-title {
+      font-family: var(--ff-d);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .ci-card-title em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .ci-card-body {
+      font-family: var(--ff-b);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .ci-card-body strong { color: var(--text); font-weight: 600; }
+    .ci-card-tags { display: none; }
+    .ci-card-arrow {
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 3px;
+    }
+
+    /* ── BRIEFS GRID ── */
+    .briefs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    @media (max-width: 900px) { .briefs-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .briefs-grid { grid-template-columns: 1fr; } }
+    .brief-card {
+      background: var(--bg);
+      padding: 5px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s;
+    }
+    .brief-card:hover { background: var(--s1); }
+    .brief-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brief-stage {
+      font-family: var(--ff-m);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--s1);
+    }
+    .brief-stage.won { border-color: rgba(31,107,62,.4); color: var(--green); background: rgba(31,107,62,.07); }
+    .brief-stage.risk { border-color: rgba(153,0,0,.3); color: var(--accent); background: var(--accent-dim); }
+    .brief-date {
+      font-family: var(--ff-m);
+      font-size: 11.5px;
+      color: var(--faint);
+    }
+    .brief-company {
+      font-family: var(--ff-d);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .brief-desc { display: none; }
+    .brief-health {
+      font-family: var(--ff-m);
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+    .brief-health strong { color: var(--accent); }
+
+    /* ── FUNCTIONAL FLOW DIAGRAM ── */
+    .flow-diagram {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      background: var(--border);
+      margin-bottom: 4px;
+    }
+    @media (max-width: 900px) {
+      .flow-diagram { flex-direction: column; }
+      .flow-connector { display: none; }
+    }
+    .flow-node {
+      flex: 1;
+      background: var(--bg);
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+    .flow-node:nth-child(odd) { background: var(--bg); }
+    .flow-node:nth-child(even) { background: var(--s1); }
+    .flow-node-accent { background: var(--accent-dim) !important; }
+    .flow-node::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--border);
+    }
+    .flow-node-accent::before { background: var(--accent) !important; }
+    .flow-icon {
+      font-size: 13px;
+      line-height: 1;
+      margin-bottom: 1px;
+    }
+    .flow-node-label {
+      font-family: var(--ff-u);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: .04em;
+    }
+    .flow-node-accent .flow-node-label { color: var(--accent); }
+    .flow-node-desc {
+      font-family: var(--ff-b);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .flow-connector {
+      flex-shrink: 0;
+      width: 1px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .flow-connector::after {
+      content: '›';
+      position: absolute;
+      font-family: var(--ff-u);
+      font-size: 18px;
+      color: var(--accent);
+      background: var(--bg);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding-left: 2px;
+    }
+    .flow-stakeholders {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 3px;
+    }
+    .flow-stakeholder {
+      font-family: var(--ff-m);
+      font-size: 11px;
+      padding: 2px 7px;
+      border: 1px solid var(--accent-border);
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── HOW IT WORKS ── */
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--s1);
+      border-top: 1px solid var(--border);
+      padding: 4px 48px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .about-left { flex: 1; min-width: 200px; }
+    .about-hed {
+      font-family: var(--ff-d);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+    .about-body { display: block; font-family: var(--ff-b); font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 3px; }
+    .about-body strong { color: var(--text); font-weight: 600; }
+    .about-desc {
+      font-family: var(--ff-b);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 3px;
+    }
+    .about-desc strong { color: var(--text); font-weight: 600; }
+    .about-cta {
+      display: inline-block;
+      margin-top: 4px;
+      background: var(--accent);
+      color: #fff;
+      padding: 5px 12px;
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .about-cta:hover { opacity: .85; }
+    /* ── FOOTER ── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: var(--s1);
+      padding: 7px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-note {
+      font-family: var(--ff-m);
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      font-family: var(--ff-u);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-link:hover { color: var(--accent); }
+
+    /* ── MD MODAL ── */
+    .md-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(26,15,7,.55);
+      backdrop-filter: blur(4px);
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 24px;
+      overflow-y: auto;
+    }
+    .md-overlay.open { display: flex; }
+    .md-modal {
+      background: var(--bg);
+      width: 100%;
+      max-width: 1040px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .md-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--s1);
+    }
+    .md-modal-title {
+      font-family: var(--ff-m);
+      font-size: 12.5px;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .md-modal-close {
+      font-family: var(--ff-u);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+    }
+    .md-modal-close:hover { color: var(--accent); }
+    .md-modal-body {
+      padding: 24px 32px;
+    }
+    /* ── RENDERED MARKDOWN ── */
+    .md-body { font-family: var(--ff-b); font-size: 14px; line-height: 1.7; color: var(--text); }
+    .md-body h1 { font-family: var(--ff-d); font-size: 22px; font-weight: 900; margin: 0 0 12px; border-bottom: 2px solid var(--text); padding-bottom: 6px; }
+    .md-body h2 { font-family: var(--ff-d); font-size: 17px; font-weight: 700; margin: 20px 0 6px; color: var(--accent); }
+    .md-body h3 { font-family: var(--ff-u); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 16px 0 4px; color: var(--muted); }
+    .md-body p { margin: 0 0 10px; }
+    .md-body strong { font-weight: 600; color: var(--text); }
+    .md-body em { font-style: italic; }
+    .md-body code { font-family: var(--ff-m); font-size: 13px; background: var(--s2); padding: 1px 5px; }
+    .md-body pre { background: var(--s2); padding: 12px 16px; overflow-x: auto; margin: 10px 0; }
+    .md-body pre code { background: none; padding: 0; font-size: 12px; }
+    .md-body ul, .md-body ol { padding-left: 20px; margin: 0 0 10px; }
+    .md-body li { margin-bottom: 3px; }
+    .md-body table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; table-layout: fixed; }
+    .md-body th { font-family: var(--ff-u); font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--s1); padding: 6px 10px; text-align: left; border: 1px solid var(--border); }
+    .md-body th:first-child, .md-body td:first-child { width: 160px; }
+    .md-body th:nth-child(2), .md-body td:nth-child(2) { width: 100px; }
+    .md-body td { padding: 6px 10px; border: 1px solid var(--border); vertical-align: top; word-wrap: break-word; }
+    .md-body tr:nth-child(even) td { background: var(--s1); }
+    .md-body blockquote { border-left: 3px solid var(--accent); padding: 4px 12px; margin: 10px 0; color: var(--muted); font-style: italic; }
+    .md-body hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .md-error { font-family: var(--ff-m); font-size: 12px; color: var(--accent); padding: 20px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-label">Call Intelligence Powered by Claude Cowork <span>·</span> Built by Ameer Badri, GTM &amp; AI Advisor</div>
+  <div class="header-right">
+    <a href="https://github.com/ameerbadri/call-intelligence-demo-claude-cowork" class="header-link" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/ameer" class="header-cta" target="_blank">Connect on LinkedIn →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-hed">Call <em>Intelligence</em> System</div>
+    <p class="hero-scenario">
+      <strong>Demo scenario:</strong> <em>Acme</em> is a fictional web development and hosting platform — think managed deployment, edge delivery, and CI/CD for modern web teams. Its competitors in this demo are Vercel, AWS Amplify, and Cloudflare Pages. All transcripts and intelligence briefs below are synthetic and generated for illustration purposes only.
+    </p>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="vp-section">
+  <div class="vp-inner">
+    <div class="vp-left">
+      <div class="vp-eyebrow">Why Build This</div>
+      <div class="vp-hed">What traditional call analytics <em>can't tell you</em></div>
+      <p class="vp-body">
+        Gong gives you the talk ratio. Chorus flags the keyword. Neither tells you <em>why</em> the deal
+        stalled — which objection ended the eval, what feature gap cost you the win, or which message
+        lands with a VP Eng versus a CISO. By the time any of that surfaces, the moment has passed.
+      </p>
+    </div>
+    <div class="vp-right">
+      <div class="vp-contrast">
+        <div class="vp-col vp-bad">
+          <div class="vp-col-label">Traditional Analytics</div>
+          <ul class="vp-list">
+            <li>Talk ratio: 72% rep / 28% prospect</li>
+            <li>Keywords flagged: pricing, timeline, budget</li>
+            <li>Stage updated: Discovery → Qualifying</li>
+            <li>Delivered: next-day dashboard</li>
+          </ul>
+        </div>
+        <div class="vp-col vp-good">
+          <div class="vp-col-label">This Approach</div>
+          <ul class="vp-list">
+            <li>AE skipped economic impact — SPICED discovery gap</li>
+            <li>No EB access in 3 consecutive calls — deal at risk</li>
+            <li>Vercel pricing fear is your strongest entry wedge</li>
+            <li>Delivered: minutes after the call, per stakeholder</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CI PRESENTATIONS -->
+<section class="section-wrap">
+  <div class="section-eyebrow">Competitive Intelligence · Q1 2026</div>
+  <div class="section-title">Interactive <em>CI Presentations</em></div>
+  <div class="ci-grid">
+    <a class="ci-card" href="outputs/competitive-intelligence/q1-2026-CI-sales.html">
+      <div class="ci-card-label">Sales</div>
+      <div class="ci-card-title">Sales <em>Battlecard</em></div>
+      <div class="ci-card-body">
+        Competitor profiles for Vercel, AWS Amplify, and Cloudflare Pages.
+        <strong>Win patterns from Q1 closed deals.</strong>
+        Objection handling, training scenarios, and a quick reference table with pricing probes.
+      </div>
+      <div class="ci-card-arrow">Open Battlecard →</div>
+    </a>
+    <a class="ci-card" href="outputs/competitive-intelligence/q1-2026-CI-marketing.html">
+      <div class="ci-card-label">Marketing</div>
+      <div class="ci-card-title">Marketing <em>CI Brief</em></div>
+      <div class="ci-card-body">
+        ICP signals from competitive calls — who's buying and why.
+        <strong>Persona messaging playbooks</strong> for Eng Manager, VP Eng, and Frontend Lead.
+        Content gap priorities ranked by deal frequency.
+      </div>
+      <div class="ci-card-arrow">Open Marketing Brief →</div>
+    </a>
+    <a class="ci-card" href="outputs/competitive-intelligence/q1-2026-CI-product.html">
+      <div class="ci-card-label">Product</div>
+      <div class="ci-card-title">Product <em>Intelligence</em></div>
+      <div class="ci-card-body">
+        Feature gaps surfaced in competitive deals — ranked by deal impact and frequency.
+        <strong>Voice of prospect quotes</strong> direct from evaluation calls.
+        Prioritization framework for product investment decisions.
+      </div>
+      <div class="ci-card-arrow">Open Product Intelligence →</div>
+    </a>
+  </div>
+</section>
+
+<!-- INTELLIGENCE BRIEFS -->
+<section class="section-wrap">
+  <div class="section-eyebrow">Per-Call Intelligence Briefs</div>
+  <div class="section-title">Five <em>Sample Calls</em> · Q1 2026</div>
+  <div class="briefs-grid">
+    <a class="brief-card" href="outputs/calls/ZephyrMedia-2026-01-08.md">
+      <div class="brief-meta">
+        <span class="brief-stage">Discovery</span>
+        <span class="brief-date">Jan 8, 2026</span>
+      </div>
+      <div class="brief-company">Zephyr Media</div>
+      <div class="brief-desc">Two Vercel pricing spikes — 140% overage — drove CFO alarm. AE uncovers structural cost problem. Hard Feb deadline. Technical champion identified.</div>
+      <div class="brief-health">Deal Health: <strong>78/100</strong> · vs Vercel</div>
+    </a>
+    <a class="brief-card" href="outputs/calls/Ironbridge-2026-01-27.md">
+      <div class="brief-meta">
+        <span class="brief-stage">Champion Building</span>
+        <span class="brief-date">Jan 27, 2026</span>
+      </div>
+      <div class="brief-company">Ironbridge</div>
+      <div class="brief-desc">Infrastructure team preference for Cloudflare Pages creating internal friction. Champion skeptical on Cloudflare maturity — AE needs to convert that doubt into exec alignment.</div>
+      <div class="brief-health">Deal Health: <strong>75/100</strong> · vs Cloudflare</div>
+    </a>
+    <a class="brief-card" href="outputs/calls/PolarAnalytics-2026-02-11.md">
+      <div class="brief-meta">
+        <span class="brief-stage risk">At Risk</span>
+        <span class="brief-date">Feb 11, 2026</span>
+      </div>
+      <div class="brief-company">Polar Analytics</div>
+      <div class="brief-desc">Champion couldn't bring to CTO after production incident consumed leadership attention for two weeks. Classic mid-funnel stall. AWS Amplify + Cloudflare circling.</div>
+      <div class="brief-health">Deal Health: <strong>52/100</strong> · vs Amplify + Cloudflare</div>
+    </a>
+    <a class="brief-card" href="outputs/calls/TechFlow-2026-03-15.md">
+      <div class="brief-meta">
+        <span class="brief-stage">Technical Eval</span>
+        <span class="brief-date">Mar 15, 2026</span>
+      </div>
+      <div class="brief-company">TechFlow</div>
+      <div class="brief-desc">Exceptional SE performance — live Edge Function demo, honest Vercel comparison, security questions answered without deflection. CTO not yet engaged with 10 days to decision.</div>
+      <div class="brief-health">Deal Health: <strong>78/100</strong> · vs Vercel + Amplify</div>
+    </a>
+    <a class="brief-card" href="outputs/calls/Meridian-2026-03-28.md" style="grid-column: span 2;">
+      <div class="brief-meta">
+        <span class="brief-stage won">Closed Won ✓</span>
+        <span class="brief-date">Mar 28, 2026</span>
+      </div>
+      <div class="brief-company">Meridian Health Tech</div>
+      <div class="brief-desc">Won deal debrief. Two things decided it: a 5-minute Deploy Preview loop that made the Amplify comparison visceral, and compliance documentation that converted the CISO. The ROI model flipped the CFO conversation — "maintenance cost on Amplify exceeded Acme enterprise pricing." Contains the exact win pattern to replicate against AWS Amplify.</div>
+      <div class="brief-health">Deal Health: <strong>95/100</strong> · Displaced AWS Amplify</div>
+    </a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-wrap section-arch">
+  <div class="section-eyebrow">Architecture</div>
+  <div class="section-title">How It <em>Works</em></div>
+
+  <!-- Functional flow -->
+  <div class="flow-diagram">
+    <div class="flow-node">
+      <div class="flow-icon">📞</div>
+      <div class="flow-node-label">Sales Call</div>
+      <div class="flow-node-desc">Any speaker-labeled transcript — Fireflies, Gong, Chorus, Otter, or manual notes</div>
+    </div>
+    <div class="flow-connector"></div>
+    <div class="flow-node">
+      <div class="flow-icon">⚡</div>
+      <div class="flow-node-label">Deep Call Analysis</div>
+      <div class="flow-node-desc">MEDDPICC qualification, SPICED discovery scoring, and behavioral dynamics — run in a dedicated subagent per transcript</div>
+    </div>
+    <div class="flow-connector"></div>
+    <div class="flow-node">
+      <div class="flow-icon">📋</div>
+      <div class="flow-node-label">Intelligence Brief</div>
+      <div class="flow-node-desc">One structured brief per call — deal health, AE &amp; SE coaching, risk signals, product signals, and competitive context</div>
+    </div>
+    <div class="flow-connector"></div>
+    <div class="flow-node flow-node-accent">
+      <div class="flow-icon">💡</div>
+      <div class="flow-node-label">Next Actions</div>
+      <div class="flow-node-desc">Evidence-backed, deal-stage-aware. Ready while the conversation is still fresh — not three days later in a dashboard</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-note">
+    Transcripts are synthetic and created for demonstration purposes.
+    They do not represent real conversations or employees of any organization named.
+  </div>
+</footer>
+
+<!-- MD VIEWER MODAL -->
+<div class="md-overlay" id="mdOverlay">
+  <div class="md-modal">
+    <div class="md-modal-bar">
+      <span class="md-modal-title" id="mdModalTitle"></span>
+      <button class="md-modal-close" id="mdClose">✕ Close</button>
+    </div>
+    <div class="md-modal-body">
+      <div id="mdContent" class="md-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const BRIEFS = {
+    "outputs/calls/Ironbridge-2026-01-27.md": "---\ncall_date: 2026-01-27\ncompany: Ironbridge Financial\nduration_minutes: 44\ncall_type: champion_building\nparticipants:\n  - name: Sarah Chen\n    role: Acme AE\n    seller: true\n  - name: Marcus Webb\n    role: Acme SE\n    seller: true\n  - name: Dmitri Volkov\n    role: Director of Engineering\n    seller: false\n  - name: Yuki Tanaka\n    role: Frontend Lead\n    seller: false\n  - name: Samantha Cho\n    role: Head of Platform Engineering\n    seller: false\n\ndeal_health_score: 75\ndeal_health_label: \"Moderate-to-Strong\"\n\nae_value_articulation_score: 4\nae_multithreading_score: 5\nae_next_step_score: 5\n\nse_technical_depth_score: 5\nse_demo_effectiveness_score: 5\nse_objection_handling_score: 5\nse_next_step_quality_score: 4\n\ntrust_trajectory: Improving\nchampion_health: Strong\nemotional_mismatch: false\n\nred_flags:\n  - competitor_threat\n  - vendor_risk_gating\n\nkey_insights:\n  - dmitri_position_shift: \"Skeptic to conviction on operational pain (25-min rollback \u2192 30-sec)\"\n  - samantha_conversion: \"Technical skepticism to buy-in ('cleaner than what we built')\"\n  - champion_validation: \"Yuki no longer alone; Dmitri + Samantha actively supporting\"\n  - competitive_pressure: \"Cloudflare Pages real but not locked (infrastructure team preference; Samantha skeptical on maturity)\"\n  - gating_items: \"Change-of-control clause + fintech reference required before pricing\"\n\nproducts_mentioned:\n  - Deploy Previews: high_signal\n  - Atomic Rollbacks: high_signal\n  - Datadog Integration: high_signal\n\ncompetitive_intel:\n  - Cloudflare Pages: infrastructure_team_preference_but_samantha_skeptical\n  - Vercel: positioned_as_most_comparable_enterprise_alternative\n  - AWS Amplify: incumbent_with_25_minute_rollback_pain\n---\n\n# Ironbridge Financial \u2014 Intelligence Brief\n**Date:** 2026-01-27 | **Duration:** 44 min | **Type:** Champion Building  \n**Deal Health:** 75/100 \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c | **Momentum:** Improving\n\n---\n\n## Deal Summary\n\nIronbridge Financial (14 FEs, 8 sites, fintech profile) has moved from evaluation to near-decision. Dmitri Volkov (Director Eng) entered skeptical on vendor risk and switching cost; the demo moved him on operational pain (25-min rollbacks today). Samantha Cho (Head Platform) converted from \"prepared to be skeptical\" to actively engaged on observability (Datadog native integration, no custom webhooks). Yuki Tanaka (Frontend Lead, original champion) now has explicit backing. Three gating items locked: fintech reference (2+ years), change-of-control clause, phased migration plan. Reconvene Thursday next week.\n\n---\n\n## AE Performance: Sarah Chen\n\n| Dimension | Score | Evidence |\n|-----------|-------|----------|\n| **Value Articulation** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Opens with multithreading intent, routes SE to technical angles, captures decision criteria (fintech ref, change-of-control, migration plan), commits to deliverables with dates. **Gap:** Doesn't own technical narrative; Marcus articulates atomic rollback ROI (25 min \u2192 30 sec). Sarah's value play is \"we can meet those needs,\" not \"here's why we're strategically different.\" |\n| **Multithreading** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Brings Dmitri (technical buyer), Samantha (operational champion), Yuki (product champion). Routes conversation to ensure air time for each role. Proactively checks Dmitri's position shift + Samantha's take. Maps decision criteria across three stakeholders. |\n| **Next-Step Commitment** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Dmitri identifies three needs (fintech ref by Wed, change-of-control in term sheet by end of week, migration plan). Sarah commits with clarity, owner assignment (Marcus = migration doc), and reconvene date (Thursday next week). No weasel language. |\n\n**Coaching Spotlight:**  \n*Strength:* Multithreading mastery \u2014 you orchestrated three stakeholders with different concerns, ensured each had voice, and locked specific next steps. No wasted time.  \n*Gap:* Own more of the technical value narrative. When Dmitri's pain point becomes quantifiable (25-min rollbacks), that's your moment to articulate why Acme's atomic deploy + Datadog native integration is not just a feature match but a strategic operational advantage over Amplify.\n\n---\n\n## SE Performance: Marcus Webb\n\n| Dimension | Score | Evidence |\n|-----------|-------|----------|\n| **Technical Depth** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Understands Samantha's observability setup deeply (Datadog monitoring, deploy frequency/duration/error rates, custom webhook fragility). Recognizes pain immediately; offers two solutions (webhook system + log drains). Addresses vendor risk directly (open-source portability, change-of-control clause, reference customers). Explains atomic deploy architecture (immutable artifacts vs. re-deploy). Samantha validates: \"cleaner than what we've built.\" |\n| **Demo Effectiveness** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Deploy Preview walkthrough (stable URL, no deploy step, URL updates without breaking reviewer tab) resonates with Yuki: \"exactly what I showed Dmitri in my trial.\" Atomic rollback story with concrete ROI (30 sec vs. 25 min) moves Dmitri. Datadog integration demo (webhooks, log drains) converts Samantha from skeptical to convinced. Each feature demo includes operational impact. |\n| **Objection Handling** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Vendor risk (Dmitri): Doesn't deflect; directly addresses acquisition, financial health, offers concrete mitigations (open-source portability, change-of-control, reference customers). Competitive positioning (Vercel vs. Cloudflare): Honest assessment; acknowledges Vercel as most comparable enterprise-grade alternative, Cloudflare less mature on dev experience. Validates Samantha's skepticism (\"network company adding hosting vs. hosting with network\") and explains why it matters. Objections become trust moments, not obstacles. |\n| **Next-Step Quality** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Commits to migration plan specificity (start with lowest-risk site, internal tool, one sprint). Promises Datadog integration guide (15-minute setup). **Gap:** Doesn't independently own gating items; Sarah owns fintech ref, change-of-control, term sheet. SE execution strong but tethered to AE closure. |\n\n**Coaching Spotlight:**  \n*Strength:* Objection handling + demo impact are flawless. You addressed vendor risk head-on without deflection, converted Samantha from skeptical to engaged through technical depth, and showed atomic rollbacks with concrete ROI that moved the skeptic in the room.  \n*Gap:* None material this call. This is a 5/5 SE performance.\n\n---\n\n## The Unsaid \u2014 Behavioral Dynamics\n\n**Trust Trajectory:** Improving  \n**Champion Health:** Strong  \n**Emotional Mismatch:** False\n\nDmitri enters as skeptic/risk officer (vendor health, switching cost). By 20:40, he's committing to next steps. The inflection point: when Marcus quantifies the operational cost of non-atomic deploys (25-minute rollbacks = eroded error budget, real recovery window). Dmitri moves from \"I need to understand failure modes\" to \"that's a real operational risk we have today that I hadn't fully quantified.\" This is conviction, not just interest.\n\nSamantha similarly shifts from \"prepared to be skeptical\" to \"the observability integration is better than I expected.\" Her moment: when Marcus shows that Acme has designed native Datadog integration (webhook system + log drains) vs. the fragile custom webhooks Ironbridge has built. Samantha's reaction \u2014 \"That's cleaner...I wouldn't be rebuilding the integration, I'd be deleting it\" \u2014 signals she's moved from evaluation to operational buy-in. She's not just evaluating features; she's mentally replacing her current infrastructure.\n\nYuki's role as champion is now validated. He's no longer alone driving this. Dmitri and Samantha have independently arrived at the same conclusion: Acme solves real operational pain that Amplify doesn't. The buying group is aligned.\n\nThe Cloudflare threat is real (infrastructure team already interested, \"one throat to choke\"), but it's not locked. Samantha's technical skepticism (\"network company adding hosting vs. hosting with network\") creates an opening. She understands the product positioning difference and is skeptical of Cloudflare's hosting maturity. This is not a competitor-locked deal.\n\n---\n\n## Deal Health: 75/100\n\n**Positive Signals (baseline 60+):**\n- Multi-threaded buying group: 3 key stakeholders (Dmitri, Samantha, Yuki) with different concerns mapped\n- Champion in place and validated: Yuki persistent; now has explicit Dmitri + Samantha backing\n- Pain quantified: 25-minute rollbacks = material operational risk; 14 engineers = material team size\n- Skeptics converted in real time: Samantha moves from \"prepared to be skeptical\" to \"less skeptical now\"\n- Technical fit validated: Atomic rollbacks + Datadog integration solve specific problems\n- Clear next steps: All three gating items identified (fintech ref, change-of-control, migration plan), owners assigned, dates committed\n\n**Risk Signals (reduce from 80+):**\n- Cloudflare competitive threat is real: Infrastructure team already interested, cost-sensitive (\"one throat to choke\")\n- Vendor risk still gating: Change-of-control clause required before pricing discussion\n- No financial commitment yet: Still in evaluation of decision criteria, not commitment\n- Reference customer may have lead time: Fintech, 2+ years \u2014 availability unknown\n- Switching cost not fully quantified: 8 sites on Amplify today; migration approach mitigates but adds timeline complexity\n\n**Rationale:** Strong AE/SE execution, champion + multi-threaded buying group, demonstrable operational pain, skeptics converting. But Cloudflare competitive pressure + vendor gating items + timeline to reference/term sheet require active de-risking. This is a healthy deal with clear path to next stage, not a locked deal.\n\n---\n\n## Risk & Momentum\n\n| Signal | Severity | Context |\n|--------|----------|---------|\n| **Cloudflare Pages competitive threat** | \ud83d\udfe1 Watch | Infrastructure team preference (\"one throat to choke\"); Samantha skeptical on product maturity but not decision-maker. Not locked, but real alternative in prospect's mind. |\n| **Vendor risk gating** | \ud83d\udfe1 Watch | Dmitri requires change-of-control clause in writing before pricing. Credibility item for enterprise contracts; routine to deliver, but must not miss. |\n| **Reference customer availability** | \ud83d\udfe1 Watch | Sarah commits fintech reference (2+ years) by Wednesday. If unavailable, credibility gap on vendor health claims. Have backup ready. |\n\n---\n\n## Product Signals\n\n| Product | Signal Strength | Evidence |\n|---------|-----------------|----------|\n| **Deploy Previews** | High | Yuki champion validation (\"this is exactly what I showed Dmitri in my trial\"); demo centerpiece; team waiting for feature walkthrough |\n| **Atomic Rollbacks** | High | 25-min \u2192 30-sec ROI quantified; Dmitri moves based on this; \"real cost of a non-atomic system\" validates operational pain |\n| **Datadog Integration** (webhooks + log drains) | High | Samantha conversion moment (\"cleaner than what we've built; I'd be deleting it\"); solves real fragility in current custom webhooks |\n\n---\n\n## Competitive Intelligence\n\n**Cloudflare Pages:**\n- Positioning: Infrastructure team preference for vendor consolidation (\"one throat to choke\")\n- Weakness (per Samantha): Product immaturity; network company adding hosting layer, not hosting company with network capability\n- Gap vs. Acme: Deploy preview environments, CI/CD integration, dev experience less mature\n- Price advantage: Generous free tier, less defined enterprise offering\n- Status: Real alternative in conversation; not locked by cost or architecture; vulnerable on enterprise workflow tooling\n\n**Vercel:**\n- Positioned by Marcus as most comparable enterprise-grade alternative\n- Not actively discussed by Ironbridge team; not top-of-mind in this call\n- Potential risk if discovery focuses on feature parity with market leader\n\n**AWS Amplify (incumbent):**\n- Pain point: 25-minute rollbacks (re-run build on every rollback)\n- Custom monitoring: Fragile webhook infrastructure into Datadog\n- Switching cost: 8 sites on Amplify; mitigated by phased migration approach (start with internal tool, one sprint)\n\n---\n\n## Coaching Spotlight\n\n**Sarah Chen (AE):**  \n*Strength:* Multithreading mastery \u2014 you mapped three stakeholders with distinct concerns (Dmitri: risk + cost, Samantha: ops + observability, Yuki: dev experience), routed conversation to ensure air time for each, and locked three specific next steps with owners and dates. Execution is clean.  \n*Gap:* Own more of the value narrative. When Marcus articulates atomic rollbacks (25 min \u2192 30 sec), that's your moment to tie it back to Dmitri's original pain statement (\"risk \u2014 changing our deployment platform is not a trivial decision\"). Make the connection explicit: \"That 25-minute rollback window is exactly the kind of failure mode you said you needed to understand. Atomic deploys eliminate that risk.\"\n\n**Marcus Webb (SE):**  \n*Strength:* Objection handling + demo impact. You addressed vendor risk head-on without deflection, validated Samantha's skepticism about Cloudflare (and explained why it matters), and showed atomic rollbacks with concrete operational ROI that moved the skeptic in the room from \"prepared to be skeptical\" to \"less skeptical now.\"  \n*Gap:* None material this call. This is a 5/5 performance.\n\n---\n\n## Next Steps\n\n| Item | Owner | Commitment | Status |\n|------|-------|------------|--------|\n| **Fintech reference customer** (2+ years, similar profile) | Sarah Chen | Wednesday, 2026-01-29 | Locked \u2713 |\n| **Change-of-control clause** (in term sheet, pre-pricing) | Sarah Chen | End of week, 2026-01-31 | Locked \u2713 |\n| **Phased migration plan** (start low-risk site, internal tool, one sprint, documented) | Marcus Webb | End of week, 2026-01-31 | Locked \u2713 |\n| **Reconvene** (review fintech ref, term sheet, migration plan) | Both | Thursday, 2026-02-02 | Locked \u2713 |\n\n---\n\n## Action Items for Acme\n\n1. **Sarah:** Confirm fintech reference availability by EOD Tuesday. If primary unavailable, activate backup reference.\n2. **Sarah:** Draft change-of-control clause language for term sheet; coordinate with legal if needed. Flag to Dmitri by EOW.\n3. **Marcus:** Document phased migration plan (8 sites, start with internal tool, 1-sprint cadence). Include rollback procedures + Datadog webhook setup steps. Deliver EOW.\n4. **Marcus:** Prepare Datadog integration guide (webhook setup, log drain configuration, 15-min setup expectation). Deliver before Thursday call.\n5. **Sarah:** Prepare comparative cost analysis for proposal (14 FEs, 8 sites, Business/Enterprise plan positioning vs. Cloudflare Pages). Have pricing ready for Thursday call.\n\n---\n\n## Summary for Leadership\n\n**AE Manager:** Sarah executed multithreading flawlessly \u2014 3 stakeholders, distinct concerns mapped, clear next steps. One coaching gap: own more of the value narrative when technical pain becomes quantifiable. Otherwise, strong execution.\n\n**SE Lead:** Marcus delivered 5/5 performance \u2014 technical depth, objection handling (especially on vendor risk), demo effectiveness. Skeptics converted in real time. No gaps.\n\n**Product Lead:** Deploy Previews, Atomic Rollbacks, and Datadog Integration are all high-signal with this prospect. Atomic rollbacks in particular: the 25-min \u2192 30-sec ROI is a powerful competitive differentiator vs. Amplify. Fintech compliance profile is a good reference use case if deal closes.\n\n**Executive:** Deal is at inflection. Dmitri moved from skeptic to commitment. Cloudflare is a real competitive threat but not locked (Samantha skeptical on maturity). Three gating items to clear by EOW (fintech ref, change-of-control, migration plan). Thursday reconvene is decision gate. Strong execution this week = high probability of moving to proposal by early Feb.\n\n",
+    "outputs/calls/Meridian-2026-03-28.md": "---\ncompany: Meridian Health Tech\ndate: 2026-03-28\nae_name: Sarah Chen\nse_name: Marcus Webb\ndeal_stage: closed_won\ndeal_health: 100\ndeal_outcome: won\ncall_purpose: relationship_checkin\nnext_step_quality: 5\ndiscovery_quality: null\nae_discovery_score: null\nae_multithreading_score: null\nae_objection_handling_score: null\nae_value_articulation_score: null\nae_next_step_score: null\nse_technical_depth_score: null\nse_demo_effectiveness_score: null\nse_discovery_contribution_score: null\nse_objection_handling_score: null\nmeddpicc_metrics: identified\nmeddpicc_economic_buyer: identified\nmeddpicc_decision_criteria: identified\nmeddpicc_decision_process: identified\nmeddpicc_paper_process: identified\nmeddpicc_identified_pain: identified\nmeddpicc_champion: identified\nmeddpicc_competition: identified\nmeddpicc_notes: \"M: 0.5 FTE saved on Amplify maintenance + 30+ min build cycle elimination = negative net cost vs. Amplify | E: Rachel Kim (VP Eng) + CFO signed off after TCO model showed engineering time savings | DC: Deploy Previews demo experience, compliance documentation quality, enterprise support SLA explicitly defined in contract | DP: VP Eng + Frontend Lead + security team + CFO; formal evaluation with staged decision gates | PP: Security questionnaire, SOC 2 review, contract negotiation with named CSM + SLA commitments | IP: Amplify maintenance overhead (0.5 FTE), 30+ min staging cycles, compliance documentation gaps | Ch: Daniel Osei (Frontend Platform Lead) \u2014 showed Rachel Deploy Previews demo, drove internal advocacy | Co: AWS Amplify (incumbent with inertia); perceived cost advantage overcome by TCO model\"\nspiced_situation: null\nspiced_pain: null\nspiced_impact: null\nspiced_critical_event: null\nspiced_decision: null\ntension_flag: false\nbehavioral_trust_trajectory: Improving\nbehavioral_emotional_mismatch: false\nbehavioral_champion_health: Strong\ntalk_ratio_seller: 35\ntalk_ratio_prospect: 65\ncompetitive_mentions: [\"AWS Amplify\"]\nproduct_signals: [\"Deploy Previews\", \"Acme Edge Functions\", \"Acme Connect\"]\nred_flags: []\nduration_minutes: 35\n---\n\n# Meridian Health Tech \u2014 2026-03-28\n\n> **Post-Close Debrief & CSM Handoff** \u00b7 35 min \u00b7 Deal Health: **100/100**\n\n| | |\n|---|---|\n| **Seller Team** | Sarah Chen (AE), Marcus Webb (SE), Alex Torres (CSM) |\n| **Prospect** | Meridian Health Tech \u2014 Rachel Kim (VP Eng), Daniel Osei (Frontend Platform Lead) |\n| **Deal Stage** | Closed Won |\n| **Call Purpose** | \ud83c\udfaf Relationship Checkin \u2014 Win retrospective + onboarding kickoff |\n| **Next-Step Grade** | \ud83d\udfe2 Crisp: migration path locked, technical sync scheduled, CSM committed to proactive monitoring |\n\n---\n\n## Deal Summary\n\nMeridian Health Tech (healthcare-adjacent, CISO-driven procurement) chose Acme over incumbent AWS Amplify. The win hinged on two consecutive moments: Daniel's Deploy Previews demo showing 5-minute review cycles vs. 30+ minutes on Amplify, and Marcus's security responsiveness + explicit enterprise SLA in the contract (mitigating Rachel's peer-warning about Acme support). Cost wasn't the initial driver, but a TCO model showing 0.5 FTE saved on Amplify maintenance shifted the CFO conversation from \"Acme is expensive\" to \"Amplify is expensive.\" Rachel's leadership team signed off in one meeting after the math shifted.\n\n---\n\n## Win Analysis\n\n### What Actually Mattered (Ranked by Influence)\n\n| Factor | Impact | Why It Won |\n|--------|--------|-----------|\n| \ud83d\udd34 **Deploy Previews UX Demo** | Decisive moment | Daniel showed Rachel a design system change on her phone in 5 minutes; Amplify equivalent took 40+ minutes with staging cycles. Visceral, repeatable, task-relevant. The contrast was \"stark in a way a feature comparison table doesn't convey.\" |\n| \ud83d\udd34 **TCO Model + Engineering Cost** | Deal direction flip | Half an FTE spent on Amplify maintenance + debugging = more expensive than Acme enterprise pricing. CFO signed off in one meeting once Rachel walked in with the number, not a pitch. |\n| \ud83d\udfe1 **Security Documentation & Marcus's Responsiveness** | Blocking risk \u2192 resolved | Rachel's CISO required SOC 2, pre-filled security questionnaire, and data residency answers. Marcus delivered written answers in 24 hours. \"The comparison to how Amplify handles enterprise questions is... not favorable to them.\" |\n| \ud83d\udfe1 **Enterprise Support SLA in Contract** | Trust recovery | Rachel's peer had complained about Acme enterprise support (vague, no escalation path). Alex's explicit commitment in the MSA \u2014 named CSM, response times, escalation path \u2014 flipped the risk. \"I could show my CISO a contract that said here's what happens when something goes wrong.\" |\n\n---\n\n## The Unsaid\n\nRachel's initial skepticism came from a peer's secondhand account of poor enterprise support at Acme. Rather than dismiss her concern, the team documented the support promise in the contract with SLA specifics and a named CSM. That contractual clarity \u2014 not a demo or feature pitch \u2014 closed the gap. She was buying **accountable partnership**, not just a platform.\n\n---\n\n## Coaching Spotlight\n\n**Sarah Chen \u2014 Strength:** Debrief discipline. Sarah owned the retrospective conversation and explicitly asked \"what changed the evaluation?\" and \"was there a moment we almost lost you?\" rather than taking the signed contract as closure. This created space for Rachel to surface the peer-support concern, which Sarah solved by changing the contract, not the pitch.\n\n**Sarah Chen \u2014 Gap:** None evident on this call. Post-close positioning was textbook: get the win analysis, lock the onboarding, and position the CSM as the new relationship owner.\n\n**Marcus Webb \u2014 Strength:** Compliance responsiveness. Marcus answered Rachel's CISO's technical security questions (data residency, build artifact storage) within 24 hours with written detail. This built trust with the actual approval stakeholder (CISO) and differentiated Acme from Amplify's slower, vaguer process.\n\n**Marcus Webb \u2014 Gap:** None evident. Marcus pivoted smoothly from presales support to technical onboarding ownership, including planned technical syncs on Edge Functions caching behavior and Connect invalidation patterns.\n\n**Alex Torres \u2014 Strength:** SLA clarity as risk mitigation. Rather than promising \"we're responsive,\" Alex spelled out response times, escalation paths, and proactive monitoring in the contract. This converted a peer-referenced concern into a contractual guarantee \u2014 a much higher bar.\n\n---\n\n## Product Signals\n\n| Product | Intensity | Prospect Context |\n|---|---|---|\n| **Deploy Previews** | \ud83d\udd34 High \u2014 decisive | Daniel's phone demo (5-min cycle vs. 40+ min on Amplify) was the turning-point moment. Healthcare/compliance workflows benefit from async review; this demo made that tangible. |\n| **Acme Edge Functions** | \ud83d\udfe1 Medium \u2014 planned Q1 | Personalization use case (patient vs. clinical admin content switching). Daniel wants to move server-side logic to edge for latency. Scoped for first 90 days; planned starting simple (single function, user-role rewrites). |\n| **Acme Connect** | \ud83d\udfe1 Medium \u2014 planned Q1 | Contentful integration; current state has hours of content propagation delay. Health tech context makes time-sensitive content updates critical. Daniel flagged caching behavior concerns (cache stampede on high-traffic pages); Marcus will cover in first technical sync. |\n\n---\n\n## Competitive Intelligence (AWS Amplify Displacement \u2014 Health Tech)\n\n### Pattern Recognition for Future Amplify Deals\n\n**The phone-based review demo is a health tech killer.** Rachel's approval loop was async (she reviews on phone before PR merge). Amplify's staging-wait-iterate cycle doesn't map to modern team workflows. Deploy Previews demo should lead every Amplify competitive conversation in healthcare/healthcare-adjacent.\n\n**TCO model must include engineering overhead.** Amplify wins on perceived hosting cost; it loses on build maintenance (configuration, environment variable sprawl, debugging broken deploys across 8 environments). A half-FTE tax is credible, quantifiable, and flips the budget conversation. Bring engineering time into the TCO in the first commercial call, not late.\n\n**Enterprise support SLA is table stakes for CISO-driven sales.** Compliance buyers (CISO, security team) don't evaluate support on demo quality \u2014 they evaluate on contract guarantees. Named CSM, response time SLA, escalation path, proactive monitoring \u2014 all in writing. If Amplify doesn't offer this level of contractual clarity, we win the CISO conversation before technical evaluation finishes.\n\n**Word-of-mouth about support quality is a deal risk.** Rachel's peer's complaint almost became a veto. Surface the concern early (\"I may hear concerns about X \u2014 here's what changed\") and resolve it contractually, not verbally.\n\n---\n\n## Next Steps\n\n1. **Alex Torres (CSM):** Run first migration sync Tuesday (docs.meridianhealth.com launch as confidence-building win). Proactive monitoring active; cell number shared for production incidents with guaranteed 1-hour response SLA.\n\n2. **Marcus Webb (SE):** Technical sync on Edge Functions personalization pattern (simple user-role function) + Acme Connect caching behavior (staggered invalidation for high-traffic pages). Timeline: before end of first sprint.\n\n3. **Sarah Chen (AE):** Soft ask for testimonial/case study after 90 days if deployment matches promised experience. Rachel flagged willingness to take reference calls from other healthcare tech companies evaluating platforms.\n\n---\n\n## Competitive Displacement Playbook (Acme vs. Amplify \u2014 Health Tech)\n\n**Lead with:** Deploy Previews phone demo (5-min review cycle)  \n**Bring early:** TCO model including 0.5+ FTE Amplify maintenance tax  \n**Resolve contractually:** Enterprise support SLA with named CSM + proactive monitoring  \n**Differentiate with:** Security documentation responsiveness (24-hour written answers to CISO questions)  \n**Close with:** Explicit contract language on response times + escalation path (surfaces support quality difference early, prevents late-stage peer-reference risks)\n\n",
+    "outputs/calls/PolarAnalytics-2026-02-11.md": "---\ndeal_id: \"polar-analytics-20260211\"\ncompany: \"Polar Analytics\"\ncall_date: \"2026-02-11\"\nduration_minutes: 32\nparticipants:\n  - name: \"Jordan Reeves\"\n    role: \"AE\"\n    team: \"Acme\"\n  - name: \"Priya Nair\"\n    role: \"SE\"\n    team: \"Acme\"\n  - name: \"Theo Marsh\"\n    role: \"Frontend Engineering Lead\"\n    team: \"Polar Analytics\"\n    champion: true\n\ndeal_stage: \"Technical Evaluation\"\ncall_purpose: \"champion_building\"\ndeal_health_score: 52\ndeal_health_label: \"At Risk\"\n\nae_value_articulation_score: 5\nae_multithreading_score: 2\nae_next_step_score: 4\nse_technical_depth_score: 4\nse_discovery_contribution_score: 5\nse_next_step_quality_score: 5\n\nmeddpicc:\n  metrics: \"identified\"\n  economic_buyer: \"not_addressed\"\n  decision_criteria: \"partially\"\n  decision_process: \"partially\"\n  paper_process: \"not_addressed\"\n  identified_pain: \"identified\"\n  identified_champion: \"identified\"\n  competitor: \"identified\"\n\ntrust_trajectory: \"Stable\"\nchampion_health: \"Moderate\"\nemotional_mismatch: false\n\nred_flags:\n  - \"champion_risk\"\n  - \"no_multithreading\"\n  - \"competitor_threat\"\n  - \"no_urgency\"\n\ncompetitive_mentions:\n  - name: \"AWS Amplify\"\n    context: \"current_platform\"\n    threat_level: \"high\"\n  - name: \"Cloudflare Pages\"\n    context: \"new_entrant_cto_initiated\"\n    threat_level: \"medium\"\n\n---\n\n# Polar Analytics \u2014 Champion at Risk | 2026-02-11\n\n## Deal Summary\n\nPolar Analytics (11 frontend engineers, 3 external + 2 internal sites on Amplify) stalled after a production database incident shifted the CTO's mindset to \"stability focus.\" Theo Marsh (Frontend Engineering Lead, champion) remains technically convinced but politically hesitant \u2014 unwilling to advocate for a new vendor when leadership is risk-averse. Jordan executed exceptional messaging coaching: reframing Acme from *capability addition* to *risk reduction* (35-min rollback \u2192 30-sec atomic), anchored to a $8\u201310K incident cost. Deal health is **52/100 \u2014 At Risk** \u2014 path forward exists only if Theo builds confidence to present, and only if Cloudflare Pages doesn't accelerate first.\n\n---\n\n## AE Performance: Jordan Reeves\n\n| Metric | Score | Evidence |\n|--------|-------|----------|\n| **Value Articulation** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Mid-call reframe from velocity \u2192 resilience. Velocity was rejected (wrong frame for CTO in stability posture). Resilience aligned with leadership intent. $8\u201310K incident cost (Dec deploy, 35-min rollback) became the anchor. Execution was contextually expert. |\n| **Multithreading** | \ud83d\udfe9\ud83d\udfe9\u2b1c\u2b1c\u2b1c | Only Theo engaged. No path established to Yael (CTO, actual economic buyer). No mention of other stakeholders, parallel relationships, or fallback contacts. Single-thread = single point of failure. |\n| **Next-Step Commitment** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c | Two deliverables locked for Thursday: one-pager (Priya) + pricing estimate (Jordan). Feb 21 check-in scheduled. Weakness: next action depends entirely on Theo's confidence to present \u2014 no fallback if he stalls. |\n\n**Summary:** Jordan's coaching was textbook-excellent \u2014 messaging discipline saved this deal from stalling further. But zero relationship air cover. Theo is the only bridge to Yael; if he doesn't present, deal goes dormant.\n\n---\n\n## SE Performance: Priya Nair\n\n| Metric | Score | Evidence |\n|--------|-------|----------|\n| **Technical Depth** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c | Rollback comparison (25\u201330 min Amplify vs. 30 sec Acme), atomic deployment architecture, incident recovery scenario. Credibly positioned Cloudflare Pages as technically behind (dev experience, Previews, CI/CD integrations, enterprise tooling weaker). Strong but not exploratory. |\n| **Discovery Contribution** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Surfaced Theo's Dec incident: 35-min rollback, customer-facing dashboard down 40 min, $8\u201310K lost trial conversions. Turned pain \u2192 quantified business case. This was discovery-grade, not validation. |\n| **Next-Step Quality** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Committed to two-page technical comparison (no marketing language, resilience focus, rollback scenarios, phased migration, pricing). Positioned for Theo to hand to Yael internally. Exact asset needed. |\n\n**Summary:** Priya was the amplifier \u2014 took Jordan's reframe and gave it technical teeth. Cloudflare comparison was credible and disarming (acknowledged consolidation logic, countered with \"vendor value > vendor count\").\n\n---\n\n## MEDDPICC Framework\n\n| Component | Status | Evidence |\n|-----------|--------|----------|\n| **M \u2014 Metrics** | \u2705 Identified | $8\u201310K incident cost (Dec deploy, 35-min rollback). 11 engineers, 5 sites in scope. Rollback time reduction (35 min \u2192 30 sec). Clear economic signal. |\n| **E \u2014 Economic Buyer** | \u274c Not Addressed | Yael (CTO) never met. Deal depends on Theo's ability to present, not on direct relationship or Yael's conviction. Critical gap. |\n| **DC \u2014 Decision Criteria** | \ud83d\udfe1 Partially | Theo's implied criteria: resilience, incident recovery speed, rollback atomicity, no new workarounds. Yael's criteria unknown \u2014 she may weight consolidation (Cloudflare) vs. technical fit differently. |\n| **DP \u2014 Decision Process** | \ud83d\udfe1 Partially | Theo says Yael will give 15 min if well-presented. Check-in Feb 21. But formal approval post-presentation undefined \u2014 who else approves? Decision timeline? |\n| **PP \u2014 Paper Process** | \u274c Not Addressed | No mention of contract, legal review, SOC 2, procurement, or enterprise agreement terms. |\n| **IP \u2014 Identified Pain** | \u2705 Identified | Fragile Amplify setup, slow rollback, deployment-caused customer impact, platform brittleness during incidents. Clear and quantified. |\n| **Ch \u2014 Identified Champion** | \u2705 Identified | Theo motivated, technically credible. But politically hesitant (\"optics matter\"). His advocacy necessary but uncertain. |\n| **Co \u2014 Competition** | \u2705 Identified | Amplify (incumbent, fragile). Cloudflare Pages (new, CTO-seeded, consolidation appeal, technically behind). Cloudflare threat is live. |\n\n---\n\n## Risk & Momentum\n\n| Signal | Severity | Context |\n|--------|----------|---------|\n| \ud83d\udd34 **Champion Hesitation** | Critical | Theo: \"I don't want to be the person pushing something new when she's asking for stability.\" Political risk to himself outweighs technical conviction. If Yael signals skepticism, Theo likely withdraws. |\n| \ud83d\udfe1 **CTO Not Engaged** | High | Yael (decision-maker) has not heard from deal team. She's in \"stability mindset,\" hasn't been exposed to risk-reduction framing, just flagged Cloudflare. First impression shaped by Theo's frame, not Acme's. |\n| \ud83d\udfe1 **Cloudflare Pages Threat** | High | CTO-initiated, consolidation appeal, network synergy. Not in active eval yet, but positioned as \"standard option\" vs. Acme's \"additional vendor.\" Priya's technical comparison buys time; narrative risk remains real. |\n\n---\n\n## The Unsaid\n\nTheo's hesitation is not about technical fit or priority \u2014 he's convinced of both. It's about **personal political risk**: presenting a new vendor to a risk-averse leader after a major incident carries reputational cost if perceived as self-serving (pushing a preferred tool) vs. genuinely defensive (reducing incident blast radius). Jordan's coaching mitigated this by giving Theo a frame aligned with leadership intent \u2014 \"risk reduction\" not \"new capability\" \u2014 but Theo still needs confidence that Yael will receive it as defense, not vendor-push. The unspoken question: *Will Yael believe I'm advocating for resilience, or will she think I'm just trying to justify my tool preference?*\n\n---\n\n## Coaching Spotlight\n\n**Jordan Reeves (AE)**\n- **Strength:** Expert contextual framing. Pivoted from velocity \u2192 resilience mid-call, anchored to quantified incident cost. Coached Theo on political positioning without pushing. This conversation saved the deal from further stalling.\n- **Gap:** Zero multithreading strategy. No plan to build relationship with Yael or hedge if Theo stalls. One contact = one point of failure.\n\n**Priya Nair (SE)**\n- **Strength:** Technical credibility + discovery contribution. Surfaced incident recovery scenario, quantified business case, delivered balanced Cloudflare comparison. Exactly what Theo needed to present with confidence.\n- **Gap:** None material \u2014 high execution throughout.\n\n**Theo Marsh (Champion)**\n- **Strength:** Intellectually aligned, technically credible, quick to adopt risk-reduction frame, recognized Yael communication strategy.\n- **Gap:** Political hesitation will likely limit his ability to be a pusher. Needs air cover (peer validation, CTO pre-frame, or executive sponsorship) to advocate confidently.\n\n---\n\n## Product Signals\n\n| Product | Intensity | Context |\n|---------|-----------|---------|\n| **Atomic Rollback / Acme Functions** | \ud83d\udd34 High | 30-second rollback is the deal anchor. Every risk conversation points here. This is what Theo will lead with. |\n| **Deploy Previews** | \ud83d\udfe1 Medium | Comparison point vs. Cloudflare Pages (Cloudflare feature less mature). Acme strength implied. |\n| **Phased Migration** | \ud83d\udfe1 Medium | \"Starting with one low-risk site\" \u2014 proof of cautious approach, de-risks the deal. Implies Acme Sites flexibility. |\n\n---\n\n## Next Steps\n\n1. **Thursday (by Feb 13):** Priya delivers two-page \"Deployment Resilience\" one-pager. No marketing language. Rollback comparison, incident recovery scenario, pricing for 11 engineers + 5 sites. Theo hands to Yael internally.\n\n2. **By Feb 20:** Theo presents to Yael using resilience frame (incident cost \u2192 rollback atomicity \u2192 phased migration = risk reduction, not new capability).\n\n3. **Feb 21 Check-in:** Debrief with Theo on Yael's response. Clarify next action: (a) Yael green-lights pilot, (b) Yael defers, (c) Yael asks for Cloudflare comparison, (d) Yael signals no bandwidth.\n\n**Risk Mitigation if Step 2 Stalls:** Activate fallback \u2014 e.g., Acme VP Product reaches out to Yael peer-to-peer on rollback resilience, or Acme provides limited Cloudflare Pages technical brief to neutralize consolidation narrative.\n\n---\n\n## For AE: Next Actions\n\n- **Immediate:** Confirm Theo's Feb 20 presentation date. Probe for hesitation signals in tone/language.\n- **By Feb 13:** Validate Priya's one-pager will be exactly what Theo needs (not sales-y, internal-ready, pricing clear).\n- **Feb 21:** Get Yael's actual objections, not Theo's interpretation. Plan next contact strategy: direct to Yael, second champion cultivation, or deferred reset.\n\n**Confidence Level:** 52/100 \u2014 Deal has a clear path forward, but depends entirely on champion execution and Cloudflare threat containment. Jordan's coaching was exceptional; Theo's political hesitation is the fulcrum.\n\n",
+    "outputs/calls/TechFlow-2026-03-15.md": "---\ndeal_name: TechFlow\ncall_date: 2026-03-15\ncall_type: technical_evaluation\nparticipants:\n  - Marcus Webb (Acme SE)\n  - Jordan Reeves (Acme AE)\n  - Elena Vasquez (Principal Engineer, Prospect)\n  - David Park (Security Engineer, Prospect)\nduration_minutes: 52\ndeal_stage: Technical Evaluation (Late Discovery)\ndeal_health_score: 70\ndeal_health_category: Moderate\ncompetitive_finalists:\n  - Vercel (primary)\n  - AWS Amplify (incumbent)\ntrust_trajectory: Improving\nchampion_health: Moderate\nemotional_mismatch: false\nred_flags:\n  - economic_buyer_absent\n  - competitor_threat\nmeddpicc_coverage:\n  - Metrics: partially\n  - Economic Buyer: not_addressed\n  - Decision Criteria: identified\n  - Decision Process: identified\n  - Paper Process: identified\n  - Identified Pain: identified\n  - Champion: identified (Elena Vasquez)\n  - Competition: identified (Vercel)\n---\n\n# TechFlow \u2014 Intelligence Brief\n**Date:** 2026-03-15 | **Duration:** 52 min | **Stage:** Technical Evaluation\n\n## Deal Summary\n\nTechFlow (2M req/mo, 15% MoM growth) is evaluating infrastructure platforms to replace AWS Amplify. Elena Vasquez (Principal Engineer) and David Park (Security) represent the technical team; final decision authority rests with Raj Kumar (CTO), who hasn't yet been engaged. Build time, preview environments, edge A/B testing, and SOC 2 compliance are the four drivers. Vercel is the competing finalist, but TechFlow surfaced pricing unpredictability as a concern \u2014 an opening for Acme's bandwidth-based model. **Health: 70/100 \u2014 Strong technical momentum offset by absent economic buyer and compressed decision window (26 Mar).**\n\n---\n\n## AE Performance (Jordan Reeves)\n\n| Dimension | Score | Evidence |\n|-----------|-------|----------|\n| **Next-Step Quality** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Clear commitments: cost model by Mon, POC encouragement, Monday call to review before Thu working group. Linked to CTO decision timeline. |\n| **Value Articulation** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Connected Acme's bandwidth pricing to Vercel's per-invocation surprise charges. Positioned POC as risk-reduction for Raj Kumar. Could have leaned harder on migration simplicity (0.5-day effort) as risk mitigation. |\n\n**Coaching Spotlight:**\n- **Strength:** Jordan owned the commercial narrative, connected technical gaps to business value (pricing unpredictability \u2192 Acme's model), and locked in the critical Monday checkpoint before the working group review. Rare sales discipline in a technical call.\n- **Gap:** Jordan has *not* met or scheduled a call with Raj Kumar (the economic buyer who makes the final call). With a 26 Mar deadline, this is the #1 priority before Monday. Elena explicitly said Raj is \"risk-averse\" \u2014 he needs to hear reassurance on migration risk and timeline directly.\n\n---\n\n## SE Performance (Marcus Webb)\n\n| Dimension | Score | Evidence |\n|-----------|-------|----------|\n| **Technical Depth** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Diagnosed root cause of long build times (no incremental builds on Amplify), explained edge function isolation model, tied LaunchDarkly integration to their existing vendor. Delivered confidence on all four pain points. |\n| **Demo Effectiveness** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Showed live Edge Function A/B testing code (15 lines). Powerful proof point. Could have done a quick POC deployment live to validate build caching claims in real time. |\n| **Discovery Contribution** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Uncovered monorepo build-on-every-commit as hidden efficiency drain (80-85% of commits wouldn't trigger rebuild with Acme). Discovered reference customer request. Minor: didn't probe whether they'd validated the 35-40 min build claim recently. |\n| **Objection Handling** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c (4/5) | Answered David Park's security isolation and RBAC questions directly. Honest on Vercel vs. Acme build caching trade-offs (\"both will be faster than Amplify, trial needed to know which for your app\"). Strengthened trust. |\n| **Next-Step Quality** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 (5/5) | Sent follow-ups: migration checklist, reference call (pending), monorepo guide, quickstart. POC recommendation with justification (\"stronger input than our claims\"). All concrete, staged for Monday.  |\n\n**Coaching Spotlight:**\n- **Strength:** Marcus flipped the competitive dynamic by positioning a POC as the decision-maker's tool (\"Raj can validate build time claims firsthand\") rather than a vendor demo. He earned trust by admitting Vercel's Next.js integration advantage, then reclaimed the deal by highlighting Acme's framework-agnostic approach and pricing predictability.\n- **Gap:** Marcus didn't offer to run the POC *with* Elena this week (time-boxing it to <1 hr, scheduling a joint validation call Fri/Sat). This leaves Elena unspported in a high-value ask and increases risk she doesn't complete it before the working group review.\n\n---\n\n## MEDDPICC Coverage\n\n| Component | Status | Evidence / Notes |\n|-----------|--------|------------------|\n| **M \u2014 Metrics** | Partially | 2M req/mo, 15% MoM growth established. Build time metric (35-40 min \u2192 6-8 min projected) stated. Missing: preview environment cost/time impact, A/B testing conversion lift expectations. |\n| **E \u2014 Economic Buyer** | **Not Addressed** | \ud83d\udd34 **CRITICAL GAP.** Raj Kumar (CTO) is the final decision-maker. Risk-averse on infrastructure changes. Not present in call; AE hasn't scheduled engagement. Decision by end of March; window closing fast. |\n| **DC \u2014 Decision Criteria** | Identified | Build time, preview environment UX, edge A/B testing ease, SOC 2 Type II compliance, pricing predictability (Vercel concern surfaced). All four technical pain points addressed. |\n| **DP \u2014 Decision Process** | Identified | Working group review Thursday (26 Mar), Raj Kumar makes final call after that, deployment target before late April Q2 heat. Clear staging post. |\n| **PP \u2014 Paper Process** | Identified | SOC 2 NDA initiated (Jordan sending today). Vendor questionnaire expected from David Park. Security review cycle aligned. |\n| **IP \u2014 Identified Pain** | Identified | Build time (35-40 min), no preview environments (designers stopped using), Lambda@Edge complexity shelved a project, SOC 2 documentation sparse. All customer-articulated. |\n| **Ch \u2014 Champion** | Identified | Elena Vasquez (Principal Engineer) owns technical recommendation and presentation to Raj. Strong credibility, engaged throughout. David Park (Security) is champion for compliance layer. |\n| **Co \u2014 Competition** | Identified | Vercel is the direct finalist. Already had technical session with them. Pricing surprise (unexpected per-invocation charges) is Acme's opening. Mentioned but not deeply explored: what Vercel's response would be to Acme's offer. |\n\n---\n\n## Risk & Momentum\n\n| Signal | Severity | Context |\n|--------|----------|---------|\n| **Economic Buyer Absent** | \ud83d\udd34 High | Raj Kumar (CTO, risk-averse, final decision) has not been engaged. With working group review in 11 days, this is the bottleneck. If Raj hears only Elena's recommendation + a Vercel conversation, Acme lacks the EB relationship to counter Vercel's \"we own Next.js\" narrative. |\n| **Compressed Timeline** | \ud83d\udfe1 Medium | Working group review 26 Mar, decision target end of March. POC needs to happen this week (by Fri); Monday cost model review is the final checkpoint before working group. If POC doesn't validate build time claims, recommendation flips. |\n| **Competitor's Framework Ownership** | \ud83d\udfe1 Medium | Vercel's \"Next.js creator\" advantage was mentioned by Marcus but not countered directly in call. If Vercel's technical session positioned them as the \"native\" choice, they start Thursday with momentum. Acme's honesty (\"both will be faster, trial needed\") is credible but less sticky. |\n\n---\n\n## The Unsaid\n\nElena described Vercel's concern as pricing unpredictability\u2014a calculated reveal. She's already comparing numbers internally and has likely seen Vercel's per-invocation surprise. By flagging it to Jordan, she signaled: *\"We like Vercel technically, but the cost model scares us.\"* Acme's bandwidth-based pricing is the value driver here, not the technology. Raj Kumar's risk-aversion will amplify this: he'll want predictability and lower operational surprise more than cutting-edge feature parity. The working group review is a *presentation to equals* (David + Elena to broader org), not a consensus-building conversation\u2014which means Raj will see Acme and Vercel as pre-vetted technical options and will decide on business/risk criteria. Jordan needs to ensure Acme's cost model and migration risk profile reach Raj before that review.\n\n---\n\n## Product Signals\n\n| Product / Feature | Intensity | Notes |\n|---|---|---|\n| **Acme Edge Functions + A/B Testing** | High | Core differentiator for this customer. LaunchDarkly integration, sub-millisecond cold starts, deno runtime simplicity resonated. Marcus's live code demo (15 lines) was credible proof point. This is the \"wow\" feature driving technical recommendation. |\n| **Build Caching & Monorepo Support** | High | 35-40 min \u2192 6-10 min is the pain-killer. Monorepo-aware CI/CD (only rebuild when packages/web changes) is the hidden efficiency unlock. Marcus's reference customer claim (40 min \u2192 7 min) needs validation but is the deal mover. |\n| **Deploy Previews** | Medium | Mentioned as missing from Amplify (designers stopped using due to 35-40 min build time). Not deeply explored. Will become high-value once build times drop and PR preview windows close below 10 min. |\n| **SOC 2 Type II Compliance** | Medium | David Park's requirement; Acme satisfies (NDA + vendor questionnaire path clear). Not a differentiator vs. Vercel or Amplify (all three likely have SOC 2), but table-stakes for TechFlow's compliance workstream. |\n\n---\n\n## Coaching Spotlight (Summary)\n\n**Jordan Reeves (AE):**\n- *Strength:* Disciplined commercial timing \u2014 cost model delivery, Monday review checkpoint, working group deadline awareness. Linked pricing concern to Vercel's weakness, positioning Acme's model as the risk-reduction lever.\n- *Gap:* **Raj Kumar engagement is the #1 priority before Monday.** Without the EB's voice in the room, the working group review becomes a technical recommendation without business context. Schedule a 20-min call with Raj this week to frame Acme as the \"lower operational risk, predictable cost\" choice\u2014a CTO language. Make it about infrastructure confidence, not features.\n\n**Marcus Webb (SE):**\n- *Strength:* Exceptional technical credibility. Diagnosed root causes, admitted Vercel's Next.js advantages, positioned POC as Raj's decision tool (not a vendor demo). Delivered on all four pain points with evidence.\n- *Gap:* *Don't leave Elena to do the POC alone.* Offer a 1-hour joint validation session this Fri or Sat AM (time-box it, show her exactly where to look for build time improvement in Acme's dashboard). This removes friction, increases confidence, and ensures the POC data is crystal-clear before Monday.\n\n---\n\n## Next Steps\n\n1. **[Jordan \u2014 This Week]** Schedule a 20-min call with Raj Kumar (CTO) to frame Acme as \"lower operational risk, predictable cost infrastructure.\" Lead with: (a) migration effort is 0.5 days, not weeks; (b) bandwidth pricing removes per-invocation surprises; (c) reference customer validation. Goal: Raj is informed and not defaulting to Vercel's \"framework ownership\" narrative by Thursday.\n\n2. **[Marcus \u2014 By EOD Today]** Send Elena: migration checklist, quickstart guide, and a clear offer to co-run the POC validation this Fri AM (1 hour max, validate build caching in Acme's dashboard with her app). Include the reference customer contact info (or case study) for the monorepo claim.\n\n3. **[Jordan \u2014 By Monday AM]** Deliver cost model (12-month projection for Acme and estimated Vercel based on 2M req/mo + 15% growth). Include a risk-weighted TCO comparison: Acme's predictable model vs. Vercel's variable per-invocation layer. Use this in Monday review to anchor Raj's business case before the working group.\n\n---\n\n## Deal Health Summary\n\n**Score: 70/100 (Moderate)**\n\n**What's working:**\n- Strong technical fit and discovery (all four pain points addressed)\n- Champion (Elena) is engaged and credible\n- Next-step staging is clear (POC \u2192 Monday review \u2192 Thursday working group)\n- Pricing concern at Vercel opens a wedge for Acme's business model\n\n**What's at risk:**\n- Economic buyer (Raj Kumar) hasn't been engaged; risk-averse on infrastructure. Window closing fast.\n- POC completion is not guaranteed (left to Elena's solo effort)\n- Compressed timeline (11 days to working group, 16 days to decision)\n- Vercel's \"framework ownership\" narrative is sticky for a Next.js shop\n\n**Next move:** Get Raj Kumar in the room this week and ensure the POC delivers clear data. These two moves unlock the deal.\n\n",
+    "outputs/calls/ZephyrMedia-2026-01-08.md": "---\ncompany: ZephyrMedia\ndate: 2026-01-08\nae_name: Jordan Reeves\nse_name: null\ndeal_stage: discovery\ndeal_health: 78\ndeal_outcome: active\ncall_purpose: discovery\nnext_step_quality: 5\ndiscovery_quality: 5\nae_discovery_score: 5\nae_multithreading_score: 4\nae_objection_handling_score: 5\nae_value_articulation_score: 4\nae_next_step_score: 5\nse_technical_depth_score: null\nse_demo_effectiveness_score: null\nse_discovery_contribution_score: null\nse_objection_handling_score: null\nmeddpicc_metrics: identified\nmeddpicc_economic_buyer: partially\nmeddpicc_decision_criteria: identified\nmeddpicc_decision_process: identified\nmeddpicc_paper_process: not_addressed\nmeddpicc_identified_pain: identified\nmeddpicc_champion: identified\nmeddpicc_competition: identified\nmeddpicc_notes: \"M:$6K\u2192$22K (3.67x spike), 350M\u21922.4B requests, 50-60% cost reduction projected|E:Cassandra owns decision; CFO aware but not buyer|DC:ISR stability under load, pricing predictability, build efficiency|DP:Technical deep-dive (Raj+Marcus Thu), cost model (Jordan by end week), decision Friday with both inputs, Feb deadline hard gate|PP:Not discussed|IP:Per-invocation pricing unpredictable at scale, middleware invocations spike with traffic, can't explain to CFO|Ch:Raj (technical veto), Cassandra (exec/decision)|Co:Vercel (incumbent), offered 10% discount, doesn't solve structural problem\"\nspiced_situation: 5\nspiced_pain: 5\nspiced_impact: 4\nspiced_critical_event: 5\nspiced_decision: 5\ntension_flag: false\nbehavioral_trust_trajectory: Improving\nbehavioral_emotional_mismatch: false\nbehavioral_champion_health: Strong\ntalk_ratio_seller: 40\ntalk_ratio_prospect: 60\ncompetitive_mentions: [\"Vercel\"]\nproduct_signals: [\"Acme Functions (bandwidth model for middleware/ISR; Vercel per-invocation cost pain)\", \"Acme Connect + Sanity integration (granular invalidation; Vercel full-rebuild pain)\", \"Deploy Previews (not mentioned)\"]\nred_flags: [\"no_paper_process\", \"economic_buyer_absent\", \"competitor_threat\"]\nduration_minutes: 42\n---\n\n# ZephyrMedia \u2014 2026-01-08\n\n> **Discovery Call \u2013 Vercel Displacement** \u00b7 42 min \u00b7 Deal Health: **78/100**\n\n| | |\n|---|---|\n| **Seller Team** | Jordan Reeves (AE) |\n| **Prospect** | ZephyrMedia \u2014 Cassandra Bell (VP Engineering), Raj Patel (Staff Engineer) |\n| **Deal Stage** | Discovery |\n| **Call Purpose** | \ud83d\udd0d Pricing Model Evaluation |\n| **Next-Step Grade** | \ud83d\udfe2 Excellent \u2014 Dual-track validation (technical + commercial) with hard deadline |\n\n---\n\n## Deal Summary\n\nZephyrMedia is evaluating Acme as a Vercel replacement driven by pricing unpredictability, not product gaps. Cassandra Bell faced two major cost surprises in the past six months ($6K \u2192 $22K in Q4 from an 8x traffic spike), caused by Vercel's per-invocation pricing model for middleware. Vercel's renewal is March; decision required by mid-February to migrate before auto-renewal. Raj Patel has positioned ISR stability under load as a technical veto gate, creating a high-rigor validation path that favors Acme's implementation depth.\n\n---\n\n## Scores\n\n### AE \u2014 Jordan Reeves\n| Dimension | Score | Evidence |\n|---|---|---|\n| **Discovery** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Situation fully mapped (architecture, traffic, deploys, current spend). Pain quantified ($6K baseline, $22K spike, 350M\u21922.4B requests). Impact organizational (CFO scrutiny on budget predictability). Urgency explicit (March renewal, Feb decision gate). Decision process and criteria both surfaced without leading. |\n| **Multithreading** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c | Engaged both Cassandra (business context, CFO relationship, strategy) and Raj (technical deep-dive, proof-of-concept design). CFO mentioned but not directly contacted; no other stakeholders (product, devops, procurement) identified or engaged. |\n| **Objection Handling** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Raj raised ISR concern (\"that's the part I'm most worried about\"); Jordan acknowledged Vercel's advantage, positioned Acme as honest validator, scoped technical deep-dive to test edge cases. Also reframed Vercel's 10% discount offer as structurally insufficient. No dodging, clear trade-off language. Cassandra response: \"The honesty matters.\" |\n| **Value Articulation** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\u2b1c | Positioned bandwidth vs. per-invocation model (50-60% projected savings), ISR support with Sanity integration for granular page-level invalidation, phased migration approach to reduce risk. Could have unified value narrative: structural predictability + operational efficiency gains (fewer full-site rebuilds) + cost reduction. |\n| **Next-Step Commitment** | \ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9\ud83d\udfe9 | Dual workstreams with clear owners (Marcus/Raj technical Thursday, Jordan cost model by end of week), deliverables defined (ISR test results, cost model), follow-up scheduled (Friday decision meeting), hard constraint (Feb deadline) reinforced. Calendar invite committed. |\n\n---\n\n## MEDDPICC\n\n**M:** $6K typical \u2192 $22K spike (3.67x), 8x traffic multiple, 350M\u21922.4B requests/month quantified. 50-60% cost reduction projected. \u2713 **Identified**\n\n**E:** Cassandra owns decision (\"really my call with Raj's technical sign-off\"); CFO aware and asking questions but not in vendor selection. Economic buyer not clearly identified \u2014 Cassandra may be decision-maker, not budget authority. \u26a0 **Partially**\n\n**DC:** ISR revalidation behavior under load (Raj veto gate), pricing predictability vs. Vercel model, build efficiency gains (granular invalidation). \u2713 **Identified**\n\n**DP:** Technical deep-dive this week (Raj+Marcus Thursday), cost model by end of week (Jordan), decision meeting Friday with both inputs. March renewal = hard deadline, decision by mid-February required. \u2713 **Identified**\n\n**PP:** Zero mention of procurement, legal, contract timelines, approval gates, or ACV. \u2717 **Not Addressed**\n\n**IP:** Pricing surprises unexplainable to CFO, per-invocation model unpredictable at media scale, middleware invocations multiply with traffic spikes, Vercel's 10% discount doesn't fix structural problem. \u2713 **Identified**\n\n**Ch:** Raj (technical champion, has veto over migration decision) + Cassandra (executive champion, owns renewal decision). Both aligned and collaborative. \u2713 **Identified**\n\n**Co:** Vercel named as incumbent. Vercel offered 10% discount to retain; Cassandra notes it's structurally inadequate. No mention of Amplify, Cloudflare, or other alternatives. \u2713 **Identified**\n\n---\n\n## Risk & Momentum\n\n| Severity | Signal | Detail |\n|---|---|---|\n| \ud83d\udd34 **High** | ISR edge-case failure risk | Raj positioned ISR stability under load as deal veto: \"If that breaks, the migration doesn't happen regardless of pricing.\" High-frequency revalidation patterns could expose gaps in Acme's implementation. Marcus must validate rigorously. |\n| \ud83d\udfe1 **Medium** | Economic buyer absent from decision thread | CFO is cost-aware but not in vendor selection. If cost model is wrong or savings fall short, could stall at approval stage. Cassandra's credibility with CFO at risk if projection vs. actual diverges. |\n| \ud83d\udfe1 **Medium** | Migration complexity + compressed timeline | 6-week decision window, phased approach (2 smaller brands first) reduces risk but first-brand validation could hit blockers (ISR edge cases, Sanity integration gaps, deploy pipeline compatibility). |\n\n---\n\n## The Unsaid\n\nCassandra is under CFO pressure \u2014 she mentioned budget unpredictability to the finance team twice, and the CFO's skepticism is real. She's trading away the comfort of Vercel's market leadership (safe, stable, Next.js creators) for budget predictability, which suggests internal trust is fragile. Raj's insistence on technical validation first signals he's more concerned about engineering disruption than feature gaps; his confidence in the phased approach and willingness to test ISR at scale suggests he's expecting to find and solve problems, not find dealbreakers.\n\n---\n\n## Coaching Spotlight\n\n**Jordan Reeves \u2014 Strength:** Exceptional discovery execution and objection handling. Jordan mapped the entire business context (article volume, deploys, traffic patterns) in a few minutes, quantified the pain precisely, and when Raj voiced concern about ISR, responded with honesty instead of sales promises. The reframe of Vercel's discount offer as structurally inadequate showed commercial acumen.\n\n**Jordan Reeves \u2014 Gap:** Value articulation could be more holistic. Jordan positioned individual benefits (bandwidth model, Sanity integration, phased approach) but didn't unify them into a single business narrative (e.g., \"Acme replaces Vercel's unpredictable per-invocation model with bandwidth pricing that scales linearly, and our Sanity integration cuts your rebuild overhead by 60%\u2014meaning you get budget certainty AND operational efficiency\"). Next time, connect technical wins to business outcomes explicitly.\n\n---\n\n## Product Signals\n\n| Product | Intensity | Prospect Context |\n|---|---|---|\n| **Acme Functions** | \ud83d\udd34 High | Core to value prop. Middleware and ISR support directly address pain (Vercel's per-invocation cost model). Bandwidth pricing model is structural differentiator. |\n| **Acme Connect + Sanity** | \ud83d\udfe1 Medium | Secondary benefit, positioned as efficiency gain. Granular page-level invalidation could reduce build load (\"We're spending more in build minutes than expected on Vercel\"). Not a deal driver but valuable if migration succeeds. |\n| **Deploy Previews** | \u2b1c Not Mentioned | \u2014 |\n\n---\n\n## Next Steps\n\n1. **Marcus Webb (SE):** Technical deep-dive with Raj on Thursday afternoon \u2014 scope to ISR revalidation behavior under load and middleware performance. Design proof-of-concept that tests Acme's implementation against Zephyr's real traffic patterns. Surface gaps honestly; don't oversell.\n\n2. **Jordan Reeves (AE):** Build cost model using Zephyr's actual request volume (350M typical, 2.4B spike month) comparing Vercel per-invocation pricing vs. Acme bandwidth model. Deliver model + Raj's technical findings to Cassandra by Friday for decision meeting.\n\n3. **Jordan Reeves (AE):** Friday decision meeting with Cassandra to review both inputs (technical validation + cost model). Get yes/no on proceeding with phased migration, or surface blockers for remedy. Confirm Feb 15 migration start date if moving forward.\n\n",
+  };
+  
+  const overlay  = document.getElementById('mdOverlay');
+  const content  = document.getElementById('mdContent');
+  const titleEl  = document.getElementById('mdModalTitle');
+  const closeBtn = document.getElementById('mdClose');
+  
+  document.querySelectorAll('a.brief-card[href$=".md"]').forEach(card => {
+    card.addEventListener('click', async e => {
+      e.preventDefault();
+      const src = card.getAttribute('href');
+      titleEl.textContent = src.split('/').pop();
+      content.innerHTML = '<span class="md-error">Loading…</span>';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+  
+      try {
+        let text = BRIEFS[src];
+        if (!text) {
+          const res = await fetch(src);
+          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+          const raw = await res.text();
+          text = raw.replace(/^---[\s\S]*?---\n?/, '');
+        } else {
+          text = text.replace(/^---[\s\S]*?---\n?/, '');
+        }
+        content.innerHTML = marked.parse(text);
+      } catch (err) {
+        content.innerHTML = `<span class="md-error">Could not load file: ${err.message}</span>`;
+      }
+    });
+  });
+  
+  closeBtn.addEventListener('click', closeMd);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeMd(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMd(); });
+  
+  function closeMd() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    content.innerHTML = '';
+  }
+</script>
+
+</body>
+</html>

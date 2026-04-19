@@ -1,0 +1,86 @@
+<svg width="1040" height="460" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 460">
+
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 Z" fill="#5C4430" opacity="0.5"/>
+    </marker>
+  </defs>
+<rect width="1040" height="460" fill="#FFF1E5"/>
+<rect x="0" y="0" width="1040" height="44" fill="#F8E6D4"/>
+<line x1="0" y1="44" x2="1040" y2="44" stroke="#DDD0C3" stroke-width="1"/>
+<text x="24" y="17" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1.5">REPOSITORY ARCHITECTURE</text>
+<text x="24" y="32" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Three layers: Configure · Analyze · Output</text>
+<text x="1024" y="26" font-family="Courier New, Courier, monospace" font-size="9" fill="#5C4430" text-anchor="end" letter-spacing="0.8">Call Intelligence Demo</text>
+<rect x="20" y="60" width="324" height="360" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="20" y="60" width="324" height="4" fill="#990000"/>
+<text x="32" y="80" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1.5">CONFIGURE</text>
+<rect x="263" y="70" width="75" height="14" fill="#990000" opacity="0.12" rx="2"/>
+<text x="267" y="80" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#990000" font-weight="bold">You Edit This</text>
+<text x="32" y="97" font-family="Georgia, serif" font-size="13.5" font-weight="bold" fill="#1A0F07">Customize for Your Company</text>
+<text x="32" y="113" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#5C4430">Only 2 files to edit — everything else is generic</text>
+<line x1="32" y1="122" x2="332" y2="122" stroke="#DDD0C3" stroke-width="1"/>
+<text x="32" y="136" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#990000">reference/product-context.md </text>
+<text x="328" y="136" font-family="Courier New, Courier, monospace" font-size="9" fill="#990000">*</text>
+<text x="38" y="152" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Your products and value props</text>
+<text x="38" y="168" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Competitive landscape</text>
+<text x="38" y="184" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Buyer personas</text>
+<text x="38" y="200" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Team roster (speaker detection)</text>
+<text x="32" y="224" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#990000">reference/qualification-criteria.md</text>
+<text x="38" y="240" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Deal stage definitions</text>
+<text x="38" y="256" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Qualification standards</text>
+<text x="38" y="272" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Pipeline motion (ENT / MM / PLG)</text>
+<line x1="20" y1="398" x2="344" y2="398" stroke="#DDD0C3" stroke-width="1"/>
+<text x="32" y="406" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#C4AE99">All other reference files work as-is</text>
+<rect x="358" y="60" width="324" height="360" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="358" y="60" width="324" height="4" fill="#5C4430"/>
+<text x="370" y="80" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#5C4430" letter-spacing="1.5">ANALYZE</text>
+<rect x="631" y="70" width="45" height="14" fill="#5C4430" opacity="0.12" rx="2"/>
+<text x="635" y="80" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#5C4430" font-weight="bold">Generic</text>
+<text x="370" y="97" font-family="Georgia, serif" font-size="13.5" font-weight="bold" fill="#1A0F07">Analytical Engine</text>
+<text x="370" y="113" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#5C4430">Generic frameworks — no edits needed</text>
+<line x1="370" y1="122" x2="670" y2="122" stroke="#DDD0C3" stroke-width="1"/>
+<text x="370" y="136" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#5C4430">MEDDPICC</text>
+<text x="376" y="152" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· 8-component deal qualification</text>
+<text x="376" y="168" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· identified / partially / not_addressed</text>
+<text x="376" y="184" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· ref: meddpicc-reference.md</text>
+<text x="370" y="208" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#5C4430">SPICED</text>
+<text x="376" y="224" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Discovery quality scoring (1-5)</text>
+<text x="376" y="240" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Situation, Pain, Impact, CE, Decision</text>
+<text x="376" y="256" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· ref: spiced-reference.md</text>
+<text x="370" y="280" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#5C4430">Behavioral Dynamics</text>
+<text x="376" y="296" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Trust trajectory, emotional mismatch</text>
+<text x="376" y="312" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Champion health from verbal patterns</text>
+<text x="376" y="328" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· ref: behavioral-dynamics-reference.md</text>
+<text x="370" y="352" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#5C4430">Output Templates</text>
+<text x="376" y="368" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· YAML frontmatter schema</text>
+<text x="376" y="384" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Markdown visual format (emoji scores)</text>
+<text x="376" y="400" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· ref: output-templates.md</text>
+<line x1="358" y1="398" x2="682" y2="398" stroke="#DDD0C3" stroke-width="1"/>
+<text x="370" y="406" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#C4AE99">Runs inside Claude subagents — context isolated</text>
+<rect x="696" y="60" width="330" height="360" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="696" y="60" width="330" height="4" fill="#1F6B3E"/>
+<text x="708" y="80" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#1F6B3E" letter-spacing="1.5">OUTPUT</text>
+<rect x="940" y="70" width="80" height="14" fill="#1F6B3E" opacity="0.12" rx="2"/>
+<text x="944" y="80" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#1F6B3E" font-weight="bold">Auto-Generated</text>
+<text x="708" y="97" font-family="Georgia, serif" font-size="13.5" font-weight="bold" fill="#1A0F07">Generated Intelligence</text>
+<text x="708" y="113" font-family="Georgia, serif" font-size="10" font-style="italic" fill="#5C4430">Written automatically — one file per call</text>
+<line x1="708" y1="122" x2="1014" y2="122" stroke="#DDD0C3" stroke-width="1"/>
+<text x="708" y="136" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#1F6B3E">outputs/calls/  (per-call briefs)</text>
+<text x="714" y="152" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Deal health score (0-100)</text>
+<text x="714" y="168" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· AE + SE scores (SPICED-based)</text>
+<text x="714" y="184" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· MEDDPICC component coverage</text>
+<text x="714" y="200" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Risk and momentum signals</text>
+<text x="714" y="216" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· The Unsaid — behavioral read</text>
+<text x="714" y="232" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Coaching spotlight (2 pts each)</text>
+<text x="714" y="248" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· Next steps (3 max)</text>
+<text x="708" y="272" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#1F6B3E">outputs/competitive-intelligence/</text>
+<text x="714" y="288" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· CI Sales — battlecard + HTML</text>
+<text x="714" y="304" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· CI Marketing — ICP brief + HTML</text>
+<text x="714" y="320" font-family="Georgia, serif" font-size="10.5" fill="#5C4430">· CI Product — feature gaps + HTML</text>
+<line x1="696" y1="398" x2="1026" y2="398" stroke="#DDD0C3" stroke-width="1"/>
+<text x="708" y="406" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#C4AE99">One .md + one FT-style .html per CI report</text>
+<line x1="345" y1="240" x2="356" y2="240" stroke="#5C4430" stroke-width="1.5" opacity="0.4" marker-end="url(#arr2)"/>
+<line x1="683" y1="240" x2="694" y2="240" stroke="#5C4430" stroke-width="1.5" opacity="0.4" marker-end="url(#arr2)"/>
+<text x="520" y="448" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#C4AE99" text-anchor="middle">skills/ contains the Cowork entry-point prompts (analyze-calls.md, competitive-intelligence.md) · CLAUDE.md defines pipeline rules</text>
+</svg>

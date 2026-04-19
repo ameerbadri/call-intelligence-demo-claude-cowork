@@ -1,0 +1,83 @@
+<svg width="1040" height="390" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 390">
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 Z" fill="#5C4430" opacity="0.7"/>
+    </marker>
+  </defs>
+<rect width="1040" height="390" fill="#FFF1E5"/>
+<rect x="0" y="0" width="1040" height="44" fill="#F8E6D4"/>
+<line x1="0" y1="44" x2="1040" y2="44" stroke="#DDD0C3" stroke-width="1"/>
+<text x="24" y="17" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1.5">PROCESSING PIPELINE</text>
+<text x="24" y="32" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Transcript to Subagent Analysis to Intelligence Report</text>
+<text x="1024" y="26" font-family="Courier New, Courier, monospace" font-size="9" fill="#5C4430" text-anchor="end" letter-spacing="0.8">Claude Cowork Pipeline</text>
+<rect x="20" y="68" width="172" height="240" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="20" y="68" width="172" height="3" fill="#990000" opacity="0.25"/>
+<text x="30" y="88" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1">01 — INPUT</text>
+<text x="30" y="108" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Transcripts</text>
+<text x="30" y="124" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#5C4430">Any speaker-labeled format</text>
+<line x1="30" y1="145" x2="182" y2="145" stroke="#DDD0C3" stroke-width="1"/>
+<text x="30" y="158" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#990000">transcripts/</text>
+<text x="30" y="172" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Brightwave-2026-03-10.md</text>
+<text x="30" y="189" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">TechFlow-2026-03-15.md</text>
+<text x="30" y="206" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">GlobalRetail-2026-03-18.md</text>
+<text x="30" y="223" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">DataStack-2026-03-22.md</text>
+<text x="30" y="240" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Meridian-2026-03-28.md</text>
+<text x="30" y="257" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">+ 5 more ...</text>
+<rect x="216" y="68" width="172" height="240" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="216" y="68" width="172" height="3" fill="#990000" opacity="0.25"/>
+<text x="226" y="88" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1">02 — CONTEXT</text>
+<text x="226" y="108" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Reference Files</text>
+<text x="226" y="124" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#5C4430">Framework definitions</text>
+<line x1="226" y1="145" x2="378" y2="145" stroke="#DDD0C3" stroke-width="1"/>
+<text x="226" y="158" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#990000">reference/</text>
+<text x="226" y="172" font-family="Courier New, Courier, monospace" font-size="10" fill="#990000">product-context.md</text>
+<text x="372" y="172" font-family="Courier New, Courier, monospace" font-size="9" fill="#990000">*</text>
+<text x="226" y="189" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">qualification-criteria.md</text>
+<text x="226" y="206" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">meddpicc-reference.md</text>
+<text x="226" y="223" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">spiced-reference.md</text>
+<text x="226" y="240" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">behavioral-dynamics.md</text>
+<text x="226" y="257" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">output-templates.md</text>
+<rect x="412" y="128" width="184" height="124" fill="#990000" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="412" y="128" width="184" height="3" fill="#ffffff" opacity="0.3"/>
+<text x="422" y="148" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="rgba(255,255,255,0.7)" letter-spacing="1">03 — COORDINATE</text>
+<text x="422" y="168" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#FFFFFF">Claude Cowork</text>
+<text x="422" y="184" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="rgba(255,255,255,0.72)">Reads refs · lists files</text>
+<text x="422" y="199" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="rgba(255,255,255,0.72)">Launches subagents</text>
+<line x1="422" y1="220" x2="586" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+<rect x="624" y="68" width="172" height="240" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="624" y="68" width="172" height="3" fill="#990000" opacity="0.25"/>
+<text x="634" y="88" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1">04 — ANALYZE</text>
+<text x="634" y="108" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Parallel Subagents</text>
+<text x="634" y="124" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#5C4430">Up to 5 simultaneously</text>
+<line x1="634" y1="145" x2="786" y2="145" stroke="#DDD0C3" stroke-width="1"/>
+<text x="634" y="159" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Agent 1 — Brightwave</text>
+<text x="634" y="176" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Agent 2 — TechFlow</text>
+<text x="634" y="193" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Agent 3 — GlobalRetail</text>
+<text x="634" y="210" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Agent 4 — DataStack</text>
+<text x="634" y="227" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">Agent 5 — Meridian</text>
+<rect x="824" y="68" width="196" height="240" fill="#F8E6D4" stroke="#DDD0C3" stroke-width="1"/>
+<rect x="824" y="68" width="196" height="3" fill="#990000" opacity="0.25"/>
+<text x="834" y="88" font-family="Courier New, Courier, monospace" font-size="9" font-weight="bold" fill="#990000" letter-spacing="1">05 — OUTPUT</text>
+<text x="834" y="108" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#1A0F07">Intelligence Reports</text>
+<text x="834" y="124" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#5C4430">Structured and actionable</text>
+<line x1="834" y1="145" x2="1010" y2="145" stroke="#DDD0C3" stroke-width="1"/>
+<text x="834" y="158" font-family="Courier New, Courier, monospace" font-size="9.5" font-weight="bold" fill="#990000">outputs/</text>
+<text x="834" y="172" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">calls/Brightwave.md</text>
+<text x="834" y="189" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">calls/TechFlow.md</text>
+<text x="834" y="206" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">calls/GlobalRetail.md</text>
+<text x="834" y="223" font-family="Courier New, Courier, monospace" font-size="9" fill="#C4AE99">-- -- -- -- --</text>
+<text x="834" y="240" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">CI/q1-sales.html</text>
+<text x="834" y="257" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">CI/q1-marketing.html</text>
+<text x="834" y="274" font-family="Courier New, Courier, monospace" font-size="10" fill="#5C4430">CI/q1-product.html</text>
+<path d="M 192 188 C 312.0 188, 292.0 190, 412 190" fill="none" stroke="#5C4430" stroke-width="1.5" opacity="0.45" marker-end="url(#arr)"/>
+<path d="M 388 188 C 410.0 188, 390.0 190, 412 190" fill="none" stroke="#5C4430" stroke-width="1.5" opacity="0.45" marker-end="url(#arr)"/>
+<line x1="596" y1="190" x2="616" y2="190" stroke="#5C4430" stroke-width="1.5" opacity="0.55" marker-end="url(#arr)"/>
+<line x1="796" y1="188" x2="816" y2="188" stroke="#5C4430" stroke-width="1.5" opacity="0.55" marker-end="url(#arr)"/>
+<text x="302" y="326" font-family="Courier New, Courier, monospace" font-size="9" fill="#990000" text-anchor="middle" font-weight="bold">* Customize these two files</text>
+<text x="302" y="339" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#5C4430" text-anchor="middle">Everything else is generic</text>
+<text x="106" y="326" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#5C4430" text-anchor="middle">Drop any .md or .txt file</text>
+<text x="922" y="326" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#1F6B3E" text-anchor="middle" font-weight="bold">Auto-generated</text>
+<text x="520" y="382" font-family="Courier New, Courier, monospace" font-size="8.5" fill="#C4AE99" text-anchor="middle">Context isolation: parent conversation never reads transcript files — each subagent context is discarded after writing its output</text>
+</svg>
