@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Call Intelligence">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#990000"/>
+      <stop offset="1" stop-color="#1A0F07"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <path fill="#FFF1E5" d="M20.5 28.2c0-2.4 1.9-4.3 4.3-4.3h14.4c2.4 0 4.3 1.9 4.3 4.3v9.6c0 2.4-1.9 4.3-4.3 4.3h-8.9l-6.8 4.2c-.7.4-1.6-.1-1.6-1V42h-1.4c-2.4 0-4.3-1.9-4.3-4.3v-9.5z"/>
+  <path fill="#990000" opacity=".35" d="M27.2 31.6h9.6c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5h-9.6c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5zm0-5h14.4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5H27.2c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5z"/>
+</svg>
