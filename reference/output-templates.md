@@ -21,8 +21,8 @@ All templates follow the **Compact Intelligence Rule:**
    - Risk & Momentum: 3 rows max, 1 sentence per row
    - The Unsaid: 2 sentences MAX
    - Coaching Spotlight: 1 point per participant, 1 sentence each
-   - Product Signals: 3 rows max, 1 sentence per row
-   - Next Steps: 3 items max, 1 line each (Owner + action + date)
+   - Product Signals: 3 rows max, 1 sentence per row — columns MUST be: Product | Intensity | Context
+   - Next Steps: 3 rows max, 1 line each — columns MUST be: Owner | Date | Action
 7. **No extra sections.** Do NOT add "Competitive Intelligence," "Summary for Leadership," or any section not in this template. Every insight must fit inside the defined sections.
 
 ---
@@ -119,9 +119,43 @@ Each brief opens with a header block (call metadata, deal stage, next-step grade
 | **The Unsaid** | Behavioral read — what the prospect signaled but didn't say | 2 sentences max |
 | **Coaching Spotlight** | One strength + one gap per participant | 1 sentence each |
 | **Product Signals** | Features/products that came up, at what intensity, in what context | 3 rows max |
-| **Next Steps** | Owned actions with dates | 3 items max |
+| **Next Steps** | Owned actions with owner and date | 3 rows max |
 
 The section mix is call-purpose-aware — a discovery call leads with qualification gaps and SPICED execution; a post-close debrief leads with win drivers and handoff clarity. See the stage-and-purpose weighting table below.
+
+---
+
+### Required Table Column Orders (ENFORCED)
+
+Subagents MUST use exactly these column sequences — no reordering, no substitutions.
+
+**Product Signals:**
+```
+| Product | Intensity | Context |
+|---------|-----------|---------|
+| [feature name] | 🔴 High / 🟡 Secondary / 🟢 Low | [one-sentence context] |
+```
+
+**Next Steps:**
+```
+| Owner | Date | Action |
+|-------|------|--------|
+| [Name (Role)] | [Day or date] | [Specific action] |
+```
+
+**Risk & Momentum:**
+```
+| Signal | Status | Implication |
+|--------|--------|-------------|
+| [signal name] | 🔴 / 🟡 / 🟢 | [one-sentence implication] |
+```
+
+**AE / SE Scores:**
+```
+| Dimension | Score | Evidence |
+|-----------|-------|----------|
+| [dimension] | 🟩🟩🟩🟩⬜ | [one sentence] |
+```
 
 ---
 

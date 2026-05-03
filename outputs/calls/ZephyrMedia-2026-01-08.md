@@ -115,8 +115,8 @@ Cassandra's comment "The honesty matters" signals past vendor disappointment—s
 
 ## Next Steps
 
-| Owner | Action | Date |
-|-------|--------|------|
-| **Jordan + Marcus (SE)** | Technical deep-dive: ISR revalidation + middleware under Zephyr's real traffic load. | Thursday |
-| **Jordan (AE)** | Cost model: Vercel bill vs. Acme estimate using 350M typical / 2.4B spike requests. | Friday |
-| **Cassandra + Jordan (AE)** | Decision call: review technical findings + cost model; confirm migration timeline. | Friday |
+| Owner | Date | Action |
+|-------|------|--------|
+| **Jordan + Marcus (SE)** | Thursday | Technical deep-dive: ISR revalidation + middleware under Zephyr's real traffic load. |
+| **Jordan (AE)** | Friday | Cost model: Vercel bill vs. Acme estimate using 350M typical / 2.4B spike requests. |
+| **Cassandra + Jordan (AE)** | Friday | Decision call: review technical findings + cost model; confirm migration timeline. |
