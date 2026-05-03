@@ -1,136 +1,110 @@
 ---
 company: Brightwave
-call_date: 2026-03-10
-call_duration_minutes: 38
-participants:
-  - name: Sarah Chen
-    role: AE (Acme)
-    seat: sales
-  - name: Jordan Kim
-    role: Engineering Manager
-    seat: prospect
-  - name: Priya Patel
-    role: Senior Frontend Engineer
-    seat: prospect
-call_purpose: discovery
+date: 2026-03-10
+ae_name: Sarah Chen
+se_name: null
 deal_stage: discovery
-deal_health_score: 65
-deal_health_status: moderate
-frameworks:
-  meddpicc:
-    M: identified
-    E: identified
-    DC: partially
-    DP: identified
-    PP: not_addressed
-    IP: identified
-    Ch: identified
-    Co: partially
-  spiced_composite: 4
-  spiced_breakdown:
-    S: 5
-    P: 5
-    I: 4
-    C: 5
-    D: 4
-ae_scores:
-  ae_name: Sarah Chen
-  spiced_discovery: 4
-  multithreading: 3
-  next_step_commitment: 5
-  objection_handling: 4
-  commercial_progression: 3
-behavioral_dynamics:
-  trust_trajectory: improving
-  champion_health: moderate
-  emotional_mismatch: false
-se_scores: null
-red_flags:
-  - no_multithreading
-  - competitor_threat
-  - incomplete_discovery
-product_signals:
-  - product: Deploy Previews
-    intensity: high
-    evidence: Staging conflict is primary pain; 8 frontend engineers competing for shared staging
-  - product: Acme Sites (build system)
-    intensity: high
-    evidence: 18-22 min Next.js builds critical bottleneck; build optimization is deal-make factor
-  - product: Acme Functions
-    intensity: low
-    evidence: Not mentioned; all backend on AWS ECS
+deal_health: 82
+deal_outcome: active
+call_purpose: discovery
+next_step_quality: 5
+discovery_quality: 5
+ae_discovery_score: 5
+ae_multithreading_score: 4
+ae_objection_handling_score: 5
+ae_value_articulation_score: 5
+ae_next_step_score: 5
+se_technical_depth_score: null
+se_demo_effectiveness_score: null
+se_discovery_contribution_score: null
+se_objection_handling_score: null
+meddpicc_metrics: identified
+meddpicc_economic_buyer: partially
+meddpicc_decision_criteria: partially
+meddpicc_decision_process: identified
+meddpicc_paper_process: not_addressed
+meddpicc_identified_pain: identified
+meddpicc_champion: identified
+meddpicc_competition: partially
+meddpicc_notes: "M: Deploy 25-45min, 25-30% eng time on deployment maintenance | E: Jordan has $2K/mo budget, VP Eng Rebecca as approver but not engaged | DC: Build perf + framework support mentioned, no formal scorecard | DP: Clear timeline (mid-April go-live), stakeholders mapped, trial + tech session planned | PP: SOC 2 mentioned but no procurement process explored | IP: Staging bottleneck 6mo, missed customer commitments ($renewal impact), specific business consequence | Ch: Jordan showing internal advocacy, credibility, committed to trial | Co: Vercel evaluated, no others mentioned"
+spiced_situation: 5
+spiced_pain: 5
+spiced_impact: 5
+spiced_critical_event: 5
+spiced_decision: 5
+tension_flag: false
+behavioral_trust_trajectory: Improving
+behavioral_emotional_mismatch: false
+behavioral_champion_health: Strong
+talk_ratio_seller: 45
+talk_ratio_prospect: 55
+competitive_mentions: ["Vercel"]
+product_signals: ["Next.js 14 App Router", "Deploy Previews", "Build optimization", "TypeScript"]
+red_flags: []
+duration_minutes: 38
+---
+
+# Brightwave — Discovery Brief
+
+**Deal Health: 82/100** | **Stage: Discovery → Technical Eval** | **Next Steps Quality: 5/5**
+
+Brightwave (65 engineers, growing 3x in 18 months) is outgrowing Heroku's frontend deployment pipeline. Current bottlenecks: 30-40 minute deploys + staging environment conflicts are consuming 25-30% of Priya's and one other engineer's time. Jordan Kim (Eng Manager, champion) has quantified the business impact — two product feature commitments missed last quarter due to deployment overhead; one customer renewal delayed, revenue held flat. Hard go-live deadline: mid-April, before Q2 product launch in May. Budget available: $2K/month discretionary (current Heroku spend: $800/mo). VP Engineering Rebecca Lam will approve but isn't yet involved. Next.js 14 stack, backend on AWS, looking at Vercel as primary alternative but open to framework-agnostic solution with better economics.
 
 ---
 
-# Brightwave — 2026-03-10
-
-> **Discovery** · 38 min · Deal Health: **65/100**
-
-| | |
-|---|---|
-| **Seller Team** | Sarah Chen (AE) |
-| **Prospect** | Jordan Kim (Engineering Manager), Priya Patel (Senior Frontend Engineer) |
-| **Deal Stage** | Discovery |
-| **Next-Step Grade** | 🟢 Trial, technical session, and EB conversation all scheduled |
-
----
-
-## Deal Summary
-
-Brightwave (65 engineers, Next.js on Heroku) is spending 25-30% of engineering time on deployment maintenance — 30-40 min deploys and a staging environment overloaded by 8 frontend engineers competing for one shared slot. Q2 product launch is locked for May; platform must be live by mid-April. Budget exists ($2k/month discretionary), but Vercel is actively in consideration and the economic buyer (Rebecca Lam, VP Eng) has not been engaged.
-
----
-
-## Scores
-
-### AE — Sarah Chen
+## Scores — AE (Sarah Chen)
 
 | Dimension | Score | Evidence |
-|---|---|---|
-| **Discovery** | 🟩🟩🟩🟩⬜ | Mapped situation → pain → impact → timeline in proper sequence; quantified 25-30% eng time and 18-22 min build cycles without leading. |
-| **Objection Handling** | 🟩🟩🟩🟩⬜ | Acknowledged Vercel's Next.js DX as "genuinely strong" rather than dismissing it — builds credibility for a nuanced competitive play. |
-| **Next-Step Commitment** | 🟩🟩🟩🟩🟩 | Trial (EOW), technical session with Marcus (Tue Mar 17), business-case call with Rebecca — all locked with owners and dates. |
+|-----------|-------|----------|
+| **Discovery Quality** | 🟩🟩🟩🟩🟩 | Mapped situation (Heroku, team growth, current stack), probed pain layering (staging conflicts, eng time cost, business impact), quantified urgency (mid-April deadline), confirmed decision process and stakeholders |
+| **Objection Handling** | 🟩🟩🟩🟩🟩 | Addressed Vercel head-on with honest differentiation: framework-agnostic + predictable pricing long-term beats Next.js-first approach |
+| **Multithreading** | 🟩🟩🟩🟩⬜ | Engaged Jordan (champion) + Priya (technical), identified Rebecca (approver) but didn't map Rebecca's specific concerns or criteria |
+| **Value Articulation** | 🟩🟩🟩🟩🟩 | Positioned Acme within Brightwave's context (Next.js parity + team-scale economics) rather than generic feature tour |
 
-### MEDDPICC
+---
 
-**M:** 25-30% eng time on maintenance; 18-22 min builds; 2 missed customer commitments · **E:** Rebecca Lam (VP Eng) — $2k/month discretionary; not yet engaged · **DC:** Build time optimization, Deploy Preview staging fix — pricing model not yet discussed · **DP:** Jordan owns eval → Rebecca approves; hard deadline mid-April · **PP:** Not discussed · **IP:** Staging conflict (8 engineers, 1 environment) + 30-40 min deploys + 25-30% eng time bleed · **Ch:** Jordan Kim (strong, owns decision) + Priya Patel (moderate — Vercel preference is a risk) · **Co:** Vercel in active consideration; Priya leans toward it on DX; no trial yet
+## MEDDPICC
+
+**M:** Deploy time quantified (25-45 min), engineering cost quantified (25-30% time allocation) | **E:** Jordan has $2K/mo authority; Rebecca Lam (VP Eng) final approver but not yet engaged | **DC:** Build performance + framework support mentioned; no formal scorecard or RFP | **DP:** Stakeholders clear (Jordan, Priya, Rebecca), process mapped (trial → technical deep-dive → recommendation), timeline firm (mid-April) | **PP:** Not addressed (premature for discovery) | **IP:** Staging conflict (6 months), missed customer commitments, renewal impact ($2-3K delayed revenue) | **Ch:** Jordan showing internal advocacy and credibility | **Co:** Vercel active alternative, no others mentioned
 
 ---
 
 ## Risk & Momentum
 
-| Severity | Signal | Detail |
-|---|---|---|
-| 🔴 | **Vercel preference + no competitive trial** | Priya controls the trial outcome; if she's already decided Vercel's DX is superior, trial defaults to "Vercel is great." Trial must be reframed as head-to-head, not solo validation. |
-| 🟡 | **Economic buyer not engaged** | Rebecca Lam hasn't been in any conversation; if she has pricing or ROI questions, deal stalls after trial results come back. |
-| 🟡 | **Pricing not discussed** | If Acme's pricing at Brightwave's scale is materially higher than Vercel, the deal ends. Sarah needs a payback calculation before trial. |
+| Signal | Severity | Implication |
+|--------|----------|------------|
+| **Vercel preference in technical layer (Priya)** | 🟡 | Priya stated preference for Vercel's Next.js DX; trial must demonstrate equivalent developer experience + build speed advantage to shift preference |
+| **Economic buyer not yet engaged** | 🟡 | Rebecca hasn't evaluated alternatives; Jordan's weight as champion is high but EB sign-off required before close — plan intro before end of March |
+| **Tight timeline creates momentum** | 🟢 | 6-week window to go-live pressures prospect to move decisively; vendor who ships trial proof fastest wins |
 
 ---
 
 ## The Unsaid
 
-Neither Jordan nor Rebecca has been sold on the business case — they see the pain but haven't had the ROI story made explicit. If Sarah can show Acme cuts 15+ min off build time and solves the staging conflict, engineering time savings alone justify the switch; but that math needs to be built and presented to Rebecca before she sees trial results, not after.
+Jordan framed this as exploratory evaluation, but his specificity on business impact (quantified missed commitments), engineering cost, and internal stakeholder awareness suggests he's already building the business case internally for Rebecca. If the trial shows equivalent performance + better long-term economics, this moves fast.
 
 ---
 
 ## Coaching Spotlight
 
-**Sarah Chen:** Strength: Structured discovery with credibility-first competitive positioning — quantified pain without pitching, and acknowledged Vercel's DX strength rather than dismissing it. Gap: Engage Rebecca before trial results arrive and reframe the trial as a head-to-head comparison — otherwise Priya's Vercel preference becomes the default outcome.
+**Sarah Chen — Strength:** Opened with permission-based discovery and systematically layered pain before positioning, building trust visibly. **Gap:** Didn't explicitly map Rebecca Lam's decision criteria or concerns — plan a brief intro call with her in the technical eval phase to confirm alignment on the evaluation framework.
 
 ---
 
 ## Product Signals
 
-| Product | Intensity | Prospect Context |
-|---|---|---|
-| **Deploy Previews** | 🔴 High | Staging conflict is the #1 pain — 8 engineers sharing one environment. Deal-make feature. |
-| **Acme Sites (build system)** | 🔴 High | 18-22 min builds are unacceptable; build optimization is critical to trial outcome. |
-| **Acme Functions** | ⬜ Not mentioned | Backend is AWS ECS — not in scope. |
+| Signal | Intensity | Context |
+|--------|-----------|---------|
+| **Next.js 14 App Router** | High | Core framework; Acme's Next.js parity + framework-agnostic long-term positioning is core differentiation vs. Vercel |
+| **Deploy Previews** | High | Direct pain point — staging conflict solution is top value driver; must demo live in trial |
+| **Build optimization** | High | 18-22 minute builds growing slower; Marcus's Next.js caching expertise is critical next-step differentiator |
 
 ---
 
 ## Next Steps
 
-1. **Priya Patel (Prospect):** Deploy feature branch to Acme, test Deploy Preview + build time vs. Heroku — by EOW Mar 13
-2. **Sarah + Marcus (AE/SE):** Technical session with Jordan/Priya — Next.js build caching, Deploy Previews, SOC 2 — Tue Mar 17
-3. **Sarah (AE):** Business-case call with Rebecca Lam — quantify engineering time ROI (~$80K/yr saved) before trial results — before Mar 20
+| Owner | Action | Target Date |
+|-------|--------|------------|
+| Priya Patel | Deploy feature branch to Acme, test preview experience + compare build times vs. Heroku | Fri, 2026-03-15 |
+| Sarah Chen + Marcus Webb | Technical session: Next.js App Router deep-dive, build optimization, security posture | Tue, 2026-03-18, 10am PT |
+| Jordan Kim | Present trial results + recommendations to Rebecca Lam | Before Fri, 2026-03-28 |

@@ -6,7 +6,7 @@
   <title>Marketing CI Brief — Q1 2026 · Acme</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400;1,8..60,600&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden}
@@ -22,10 +22,12 @@ html,body{width:100%;height:100%;overflow:hidden}
   --ease:cubic-bezier(.77,0,.18,1);
 }
 body.theme-wsj{
-  --bg:#F5F2EA;--s1:#EDEAE0;--s2:#E5E1D6;--s3:#D8D4C8;--text:#0D0B08;--muted:#4A4840;--faint:#B6B2A8;
-  --accent:#C01515;--accent-dim:rgba(192,21,21,.08);--accent-border:rgba(192,21,21,.30);
-  --green:#1A5C30;--red:#C01515;--blue:#0F3E7A;--border:rgba(0,0,0,.12);--border2:rgba(0,0,0,.055);
-  --header-bg:rgba(245,242,234,.93);--bar-bg:rgba(0,0,0,.10);
+  --bg:#FFFFFF;--s1:#F4F4F4;--s2:#E8E8E8;--s3:#CECECE;--text:#0A0A0A;--muted:#3A3A3A;--faint:#939393;
+  --accent:#E31A1C;--accent-dim:rgba(227,26,28,.07);--accent-border:rgba(227,26,28,.28);
+  --green:#1A6B2A;--red:#E31A1C;--blue:#0A3D7A;--border:rgba(0,0,0,.16);--border2:rgba(0,0,0,.09);
+  --header-bg:rgba(255,255,255,.96);--bar-bg:rgba(0,0,0,.13);
+  --ff-d:'Libre Baskerville',Georgia,serif;--ff-b:'Merriweather',Georgia,serif;
+  --ff-u:'Inter',system-ui,sans-serif;
 }
 body{background:var(--bg);color:var(--text);font-family:var(--ff-b);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.018;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
@@ -202,9 +204,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .v-table td:first-child{font-family:var(--ff-u);font-size:11px;font-weight:700;color:var(--text)}
 .v-table td strong{color:var(--text);font-weight:600}
 .row-hi-g td{background:rgba(31,107,62,.06)!important}
+/* ── BACK TO HOME ── */
+.back-home{position:fixed;top:8px;left:14px;z-index:1001;font-family:var(--ff-u);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--border);background:var(--s1);transition:all .2s}
+.back-home:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
   </style>
 </head>
 <body class="theme-ft">
+<a href="../../index.html" class="back-home">← Home</a>
 
 <div class="contents-panel" id="contentsPanel"></div>
 

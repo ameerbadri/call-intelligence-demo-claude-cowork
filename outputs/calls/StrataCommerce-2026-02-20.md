@@ -1,131 +1,131 @@
 ---
-date: "2026-02-20"
-company: "Strata Commerce"
-deal_stage: "closed_won"
-call_purpose: "relationship_checkin"
-deal_outcome: "closed_won"
+company: Strata Commerce
+date: 2026-02-20
+ae_name: Sarah Chen
+se_name: Priya Nair
+deal_stage: closed_won
 deal_health: 100
-
-# Core Outcomes
-contract_value: "unknown"
-revenue_impact_claimed: "12% checkout completion lift (GMV multiplier)"
-champion: "Alicia Nguyen (Senior Frontend Engineer)"
-economic_buyer: "Wei Zhang (CTO)"
-decision_driver: "Trial-validated business ROI + developer experience conviction"
-
-# Competitor Intelligence
+deal_outcome: won
+call_purpose: relationship_checkin
+next_step_quality: 5
+discovery_quality: 5
+ae_discovery_score: 5
+ae_multithreading_score: 5
+ae_objection_handling_score: 5
+ae_value_articulation_score: 4
+ae_next_step_score: 5
+se_technical_depth_score: 5
+se_demo_effectiveness_score: 5
+se_discovery_contribution_score: 5
+se_objection_handling_score: 4
+meddpicc_metrics: identified
+meddpicc_economic_buyer: identified
+meddpicc_decision_criteria: identified
+meddpicc_decision_process: identified
+meddpicc_paper_process: partially
+meddpicc_identified_pain: identified
+meddpicc_champion: identified
+meddpicc_competition: identified
+meddpicc_notes: "M: 12% checkout completion lift, 2-week engineer time savings on personalization|E: Wei Zhang (CTO) drove final decision with revenue analysis|DC: Technical performance + business ROI + developer experience|DP: Alicia (technical champion) validated; Wei (economic buyer) approved; trial methodology designed by SE|PP: Post-signature, CSM handoff in progress|IP: Cloudflare Workers runtime limits; workaround overhead (3 weeks on CF vs 4 days on Acme)|Ch: Alicia Nguyen — initiated eval, built PoC, quantified ROI independently|Co: Cloudflare Pages (displaced); Cloudflare network (retained)"
+spiced_situation: 5
+spiced_pain: 5
+spiced_impact: 5
+spiced_critical_event: 4
+spiced_decision: 5
+tension_flag: false
+behavioral_trust_trajectory: Improving
+behavioral_emotional_mismatch: false
+behavioral_champion_health: Strong
+talk_ratio_seller: 35
+talk_ratio_prospect: 65
 competitive_mentions:
-  - "Cloudflare Pages"
-displaced_incumbent: "Cloudflare Pages"
-displacement_reason: "Edge runtime limitations (CPU/memory) blocking checkout personalization; DX friction on local development"
-
-# MEDDPICC Reconstruction (inferred from win debrief)
-meddpicc:
-  metrics: "identified"
-  metrics_evidence: "12% checkout completion lift over 2 weeks on 20% trial traffic; engineer time savings quantified (3 weeks → 4 days on one feature)"
-  economic_buyer: "identified"
-  economic_buyer_evidence: "Wei Zhang approved spend after trial ROI trumped pricing objection"
-  decision_criteria: "identified"
-  decision_criteria_evidence: "Business ROI (checkout lift) > DX improvement > cost; ecosystem separation concern resolved"
-  decision_process: "identified"
-  decision_process_evidence: "Trial on 20% traffic for 2 weeks → real revenue data → approval"
-  paper_process: "partially"
-  paper_process_evidence: "No procurement friction mentioned; contract signed but no detail on MSA/negotiation"
-  identified_pain: "identified"
-  identified_pain_evidence: "Cloudflare Workers CPU limits (10ms free/50ms paid) blocking complex edge logic; checkout personalization workarounds; local dev testing friction"
-  champion: "identified"
-  champion_evidence: "Alicia Nguyen built ROI spreadsheet unprompted; drove technical trial; advocated for engineer-led evaluation"
-  competition: "identified"
-  competition_evidence: "Cloudflare Pages (pricing, ecosystem stickiness); Priya's 'complementary not competitive' framing resolved ecosystem concern"
-
-# Behavioral Dynamics
-trust_trajectory: "improving"
-champion_health: "strong"
-economic_buyer_sentiment: "strong"
-emotional_mismatch: false
-red_flags: []
-
-# Sales Team Scoring (N/A — post-close retrospective)
-ae_discovery_quality: null
-ae_multithreading: null
-ae_objection_handling: null
-se_technical_depth: null
-se_demo_effectiveness: null
-discovery_quality: null
-
-# CSM Handoff Risks
-csm_risk_flag: "load_test_validation_pending"
-csm_risk_detail: "Seasonal peak traffic (spring sale late March) not load-tested on Edge Functions; peak CPU behavior unvalidated before promotional event"
-csm_success_milestone: "load_test_completion_before_march_spring_sale"
+  - Cloudflare Pages
+  - Cloudflare Workers
+product_signals:
+  - Acme Edge Functions
+  - Acme Dev Server
+  - Acme A/B testing
+red_flags:
+  - peak_load_scenario_unvalidated
+duration_minutes: 30
 ---
 
-# Strata Commerce — 2026-02-20
+# Strata Commerce — Win Debrief & Handoff
 
-> **Closed Won — Win Debrief** · 30 min · Deal Health: **100/100**
-
-| | |
-|---|---|
-| **Seller Team** | Sarah Chen (AE), Priya Nair (SE) |
-| **Prospect** | Wei Zhang (CTO), Alicia Nguyen (Senior Frontend Engineer) |
-| **Deal Stage** | Closed Won — Cloudflare Pages displacement |
-| **Next-Step Grade** | 🟢 CSM handoff locked; load test before spring sale scheduled |
+**Stage:** Closed Won | **Health:** 100/100 | **Risk:** Timing on load test validation
 
 ---
 
 ## Deal Summary
 
-Strata Commerce migrated from Cloudflare Pages to Acme after a 2-week trial on 20% traffic validated a 12% checkout completion lift using Edge Functions for personalization. The win turned on revenue data, not technical benchmarks — Wei approved after Alicia built an unprompted ROI spreadsheet combining checkout lift with engineer time savings (3 weeks of Cloudflare workarounds → 4 days on Acme). One open risk: Edge Functions not yet load-tested at 3x peak traffic ahead of the late-March spring sale.
+Strata Commerce (e-commerce platform) signed with Acme after a 2-week trial demonstrating 12% checkout completion lift via Edge Functions. Cloudflare Pages displacement driven by technical friction (runtime limits, workaround overhead) + quantified business ROI. Joint decision: Alicia (technical champion) validated capability; Wei (CTO/EB) approved economics. Clean sale.
 
 ---
 
-## Win Drivers
+## MEDDPICC — Win Drivers
 
-| Factor | What Moved the Deal |
-|---|---|
-| **Revenue-focused trial** | 20% traffic A/B on checkout proved a 12% lift — Wei moved on dollars, not demos |
-| **Champion as internal CFO** | Alicia built the ROI spreadsheet unprompted; her math flipped Wei's pricing objection |
-| **Ecosystem separation framing** | Priya's "Acme behind Cloudflare's CDN" answer resolved Wei's stickiness concern without displacing Cloudflare's network |
-
-### MEDDPICC
-
-**M:** 12% checkout lift (2-week trial); 3 weeks → 4 days engineer time savings · **E:** Wei Zhang (CTO) approved after trial ROI exceeded pricing objection · **DC:** Business ROI > DX improvement > cost · **DP:** 20% trial → real revenue data → CTO approval · **PP:** Contract signed; no MSA friction noted · **IP:** Cloudflare Workers CPU limits blocking checkout personalization; local dev friction · **Ch:** Alicia — drove trial and built ROI spreadsheet without prompting · **Co:** Cloudflare Pages; resolved via complementary positioning
+| Component | Status | Signal |
+|-----------|--------|--------|
+| **Metrics** | Identified | 12% checkout completion rate lift from trial; 2 weeks engineer time saved on single feature |
+| **Economic Buyer** | Identified | Wei Zhang (CTO) — made final call; driven by revenue impact vs. price difference |
+| **Decision Criteria** | Identified | (1) Business revenue impact, (2) developer experience, (3) technical capability at scale |
+| **Decision Process** | Identified | Technical proof (Alicia) + economic analysis (Wei) + trial design (Priya) → mutual sign-off |
+| **Champion** | Identified | Alicia Nguyen — initiated eval, built PoC independently, quantified ROI ("she's the senior engineer") |
+| **Competition** | Identified | Cloudflare Pages: "pricing was cheaper on our scale" but displaced by checkout revenue lift. Cloudflare network retained. |
 
 ---
 
-## Risk & Momentum
+## Momentum & Risk
 
-| Severity | Signal | Detail |
-|---|---|---|
-| 🟡 | **Load test pending** | Edge Functions not validated at 3x peak traffic; spring sale late March is the first real production stress test — load test by early March is critical path. |
-| 🟢 | **Champion + EB aligned** | Wei and Alicia are fully aligned; Alicia is the driving force and should be included in all Edge Functions strategy conversations going forward. |
+| Signal | Severity | Implication |
+|--------|----------|-------------|
+| **Peak load validation gap** | 🟡 | Alicia flagged edge function behavior unvalidated at seasonal peak traffic (spring sale, late March). Mitigated: Priya scheduled load test March 5. Tight but addressable. |
+| **Strong champion continuity** | 🟢 | Alicia remains engaged on post-sale validation; knows load test scope; no disengagement signals. |
+| **CSM handoff clarity** | 🟢 | Sarah driving formal handoff to Alex Torres; Wei/Alicia expect continuity of proactive support model they experienced during sales. |
 
 ---
 
 ## The Unsaid
 
-Wei's pricing objection evaporated the moment ROI was quantified — the trial was engineered to convert technical preference into economic approval, and it worked. Cloudflare ecosystem "stickiness" was FUD, not architecture; the complementary positioning framing is directly repeatable for future Cloudflare displacement deals.
+Wei's comment — "that's the kind of proactive support that made me comfortable signing before completing that validation" — signals the sale wasn't driven by feature completeness alone but by trust in post-sale partnership. Alicia's independent ROI calculation (without being asked) reveals a champion who thinks like an economic stakeholder, not just a technician. This dynamic requires maintaining the high-touch model through implementation.
+
+---
+
+## Participant Dynamics
+
+| Participant | Arc | Key Moment |
+|-------------|-----|-----------|
+| Wei Zhang (CTO/EB) | Stable → Improving | Resolved own framework confusion ("conflating two separate things") with SE input; made deliberate tradeoff (price vs. revenue lift) |
+| Alicia Nguyen (Sr. Engineer/Champion) | Improving | Built PoC independently; quantified ROI proactively; flagged unvalidated load scenario; remains driving validation |
+
+**Tension:** None. Wei deferred to Alicia on technical merit; Alicia recognized Wei's economic analysis as necessary to the decision. Clear role separation.
 
 ---
 
 ## Coaching Spotlight
 
-**Priya Nair:** Strength: "Acme as origin behind Cloudflare's CDN" reframe resolved the ecosystem concern that was Wei's real hesitation — a tactical architecture answer that closed a business objection. Gap: None this call.
+**Sarah Chen (AE):** Exceptional post-sale debrief structure — opened with learning intent ("for our own learning"), extracted specific decision drivers, validated next-phase ownership. Set the tone for partnership continuity.
 
-**Sarah Chen:** Strength: Structured the debrief to extract repeatable competitive intelligence rather than just celebrate the close — surfaced the trial design insight and the ecosystem FUD pattern. Gap: None this call.
+**Priya Nair (SE):** Strong technical positioning on Cloudflare coexistence model ("complementary, not competitive"), and proactive scoping of load test (timeline, scope, pre-event positioning) removed a genuine concern before signature.
+
+**Alicia Nguyen (Champion):** Outstanding technical conviction + economic thinking. Built PoC and ROI spreadsheet independently; flagged unvalidated edge case honestly. This is champion behavior at its best.
 
 ---
 
 ## Product Signals
 
-| Product | Intensity | Prospect Context |
-|---|---|---|
-| **Acme Edge Functions** | 🔴 High | Core win driver — checkout personalization trial proved 12% conversion lift vs. Cloudflare's CPU-limited Workers. |
-| **Deploy Previews / Dev Server** | 🟡 Moderate | Resolved persistent DX friction on Cloudflare local dev; not the primary decision driver. |
+| Product | Intensity | Context |
+|---------|-----------|---------|
+| **Acme Edge Functions** | Critical | Checkout personalization performance — core win driver (12% lift); fewer workarounds than Cloudflare Workers |
+| **Acme Dev Server** | High | DX advantage over Cloudflare Workers local testing; mentioned as quality-of-life improvement |
+| **Acme A/B Testing** | Moderate | Used in trial design (20% traffic split for Edge Function A/B) — enabled business validation in production |
 
 ---
 
 ## Next Steps
 
-1. **Priya/Marcus (SE):** Load test Edge Functions at 3x peak traffic before spring sale — Mar 5 session agreed with Alicia
-2. **Alex (CSM):** Confirm spring sale feature scope in production; proactive monitoring active — before late March
-3. **Sarah (AE):** Monthly business review cadence — track checkout completion, revenue lift, engineer velocity over first 90 days
+| Owner | Action | Date |
+|-------|--------|------|
+| **Priya Nair** | Load test on checkout flow edge functions at 3x peak traffic estimate; validate behavior before spring sale | March 5 |
+| **Sarah Chen** | Formal CSM handoff to Alex Torres; ensure continuity on proactive support model Wei/Alicia expect | Before Feb 28 |
+| **Alicia Nguyen + Priya** | Confirm load test is scheduled and on team calendars; align on pre-promotional-event readiness | Ongoing |

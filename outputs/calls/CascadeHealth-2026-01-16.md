@@ -4,125 +4,125 @@ date: 2026-01-16
 ae_name: Jordan Reeves
 se_name: Marcus Webb
 deal_stage: technical_eval
-deal_health: 72
+deal_health: 75
 deal_outcome: active
 call_purpose: technical_scoping
 next_step_quality: 5
-discovery_quality: null
-ae_discovery_score: null
-ae_multithreading_score: null
-ae_objection_handling_score: null
-ae_value_articulation_score: null
-ae_partnership_facilitation_score: 5
+discovery_quality: 4
+ae_discovery_score: 4
+ae_multithreading_score: 4
+ae_objection_handling_score: 4
+ae_value_articulation_score: 4
 ae_next_step_score: 5
 se_technical_depth_score: 5
-se_demo_effectiveness_score: 4
+se_demo_effectiveness_score: 5
 se_discovery_contribution_score: 5
 se_objection_handling_score: 5
-meddpicc_metrics: not_addressed
+meddpicc_metrics: identified
 meddpicc_economic_buyer: partially
-meddpicc_decision_criteria: identified
+meddpicc_decision_criteria: partially
 meddpicc_decision_process: identified
-meddpicc_paper_process: identified
+meddpicc_paper_process: partially
 meddpicc_identified_pain: identified
-meddpicc_champion: partially
+meddpicc_champion: identified
 meddpicc_competition: identified
-meddpicc_notes: "M:Not mentioned|E:Priya implied economic authority but no budget/approval stated|DC:Build performance, security compliance (SOC 2, BAA, pen test policy), data residency|DP:Security review (Leo/CISO) is gating path; trial Friday, CISO review Jan 20-30, contract decision by end Jan|PP:BAA template, SOC 2 docs, pen test policy, security questionnaire being sent today|IP:Build times 28-35min → target 5-8min; HIPAA review scrutiny on vendor relationships; marketing content CMS bottleneck|Ch:Leo (security champion) strong, Priya (technical/economic champion) engaged but no CISO relationship mapped|Co:Amplify (incumbent, slow builds, poor docs, generic BAA) vs Acme (incremental caching, specific BAA, documented pen test policy)"
-spiced_situation: null
-spiced_pain: null
-spiced_impact: null
-spiced_critical_event: null
-spiced_decision: null
+meddpicc_notes: "M:28-35min builds,240 routes,8-10 deploys/wk|E:CISO controls security gate, budget authority TBD|DC:SOC2/BAA/data residency/pen test required|DP:Trial Fri+security review+contract by Jan22|PP:BAA template to follow, legal process TBD|IP:Build time bottleneck (4hrs/wk overhead), marketing content blocked by 30min manual loop, HIPAA compliance review Q2|Ch:Priya Das (Snr Platform Engr) driving PoC, internal advocate|Co:AWS Amplify incumbent, no formal competitive eval"
+spiced_situation: 5
+spiced_pain: 5
+spiced_impact: 4
+spiced_critical_event: 5
+spiced_decision: 4
 tension_flag: false
-behavioral_trust_trajectory: improving
+behavioral_trust_trajectory: Improving
 behavioral_emotional_mismatch: false
-behavioral_champion_health: moderate
-talk_ratio_seller: 62
-talk_ratio_prospect: 38
-competitive_mentions: ["AWS Amplify"]
-product_signals: ["Acme Sites (hosting+CDN)", "Acme Connect (CMS integration, Contentful)"]
-red_flags: ["economic_buyer_absent", "no_multithreading"]
+behavioral_champion_health: Strong
+talk_ratio_seller: 52
+talk_ratio_prospect: 48
+competitive_mentions:
+  - AWS Amplify
+product_signals:
+  - Acme Sites (build caching)
+  - Acme Connect (Contentful integration)
+  - Data residency (US-only builds)
+  - BAA (Business Associate Agreement)
+red_flags: []
 duration_minutes: 55
 ---
 
-# CascadeHealth — 2026-01-16
-
-> **Technical Scoping** · 55 min · Deal Health: **72/100**
-
-| | |
-|---|---|
-| **Seller Team** | Jordan Reeves (AE), Marcus Webb (SE) |
-| **Prospect** | Priya Okafor (Technical Lead), Leo Nguyen (Security) |
-| **Deal Stage** | Technical Evaluation |
-| **Next-Step Grade** | 🟢 Trial Fri, CISO checkpoint Jan 20, contract target Jan 31 |
-
----
+# CascadeHealth — Technical Validation + Security Clearance
 
 ## Deal Summary
 
-Cascade Health (healthcare IT, Next.js on AWS Amplify) faces degrading build times (28-35 min) and active HIPAA vendor scrutiny. Security gating (SOC 2, BAA, pen test policy) is a constraint, not an objection — Leo shifted from skeptical to validating in real time, noting Acme's documentation was "better than Amplify" on both BAA and pen test. Trial is Friday; CISO review is the critical path to a Jan 31 close.
+Cascade Health (healthcare software for hospital systems) is evaluating Acme to replace AWS Amplify — driven by two discrete pains: build times degrading (28-35 min for 240-route Next.js app, 8-10 deploys/week = ~4 hours/week waste) and HIPAA compliance friction (CISO flagged Amplify's documentation gaps). Security review is the critical path (CISO approval needed by Jan 30); technical trial Friday validates build performance and Contentful integration. **Deal health: 75/100 — Strong momentum, but CISO gate and Jan 31 decision date create schedule risk.**
 
 ---
 
-## Scores
-
-### AE — Jordan Reeves
+## Scores — SE
 
 | Dimension | Score | Evidence |
-|---|---|---|
-| **Facilitation** | 🟩🟩🟩🟩🟩 | Stayed silent through 8+ minutes of security Q&A, re-engaged only at milestones to push on timeline and lock the Jan 20 CISO checkpoint. |
-| **Next-Step Commitment** | 🟩🟩🟩🟩🟩 | Trial Fri, security materials same-day, Jan 20 CISO checkpoint, Jan 31 contract discussion — locked with no ambiguity remaining. |
+|-----------|-------|----------|
+| **Technical Depth** | 🟩🟩🟩🟩🟩 | Marcus mapped architecture (PHI backend, frontend shell), dependency caching logic, ISR vs SSR patterns, US-region data residency constraints — no confusion, all specifics confirmed with Priya. |
+| **Demo Effectiveness** | 🟩🟩🟩🟩🟩 | Walked acme.toml build config with real numbers: 28-35 min → 5-8 min (10-15% changes), 15-18 min (major releases); tied to Priya's actual deploy frequency. |
+| **Objection Handling** | 🟩🟩🟩🟩🟩 | Leo's pen test concern met with written policy + Amplify comparison; data residency objection solved with specific config (US-only builds, global CDN). Prospect gave "cleaner than Amplify." |
 
-### SE — Marcus Webb
+---
+
+## Scores — AE
 
 | Dimension | Score | Evidence |
-|---|---|---|
-| **Technical Depth** | 🟩🟩🟩🟩🟩 | Caught critical PHI placement question, mapped three data residency options, delivered SOC 2/BAA/pen-test answers without hedging. Leo: "That's better than Amplify." |
-| **Discovery Contribution** | 🟩🟩🟩🟩🟩 | Asked "how does a marketing content update reach production?" — surfaced a 30-min manual Contentful bottleneck nobody had mentioned. |
-| **Objection Handling** | 🟩🟩🟩🟩🟩 | Treated every security question as a documentation task, converted scrutiny into competitive differentiation point-by-point. |
-| **Demo Effectiveness** | 🟩🟩🟩🟩⬜ | acme.toml walkthrough was clear but abstract — no live build or Amplify side-by-side comparison to make the speed tangible. |
+|-----------|-------|----------|
+| **Multithreading** | 🟩🟩🟩🟩⬜ | Identified Priya (technical champion), Leo (security gate), CISO (sponsor); created parallel workstreams (trial + security review), but economic buyer not yet engaged directly. |
+| **Next Step Quality** | 🟩🟩🟩🟩🟩 | Four mutual next steps: (1) Jordan sends security materials today; (2) Marcus + Priya trial Friday; (3) Leo flags blockers by Jan 20; (4) contract discussions Jan 22. Each owned, dated, committed. |
 
-### MEDDPICC
+---
 
-**M:** Build time 28-35 → 5-8 min stated; no ROI/productivity model · **E:** Priya implied authority; no budget or approver confirmed · **DC:** Build speed, SOC 2/BAA/pen-test compliance, data residency, Contentful integration · **DP:** Trial Fri → CISO review Jan 20-30 → contract Jan 31 · **PP:** BAA template + SOC 2 + pen test policy sent today · **IP:** Build degradation + HIPAA scrutiny + 30-min content publishing loop · **Ch:** Leo (security) strong; Priya (technical) engaged — no CISO relationship mapped · **Co:** Amplify (generic BAA, no pen test policy) → Acme differentiated on both
+## MEDDPICC Snapshot
+
+- **Metrics:** Build time (28-35 min), deploy frequency (8-10/week), trial target (5-8 min for typical changes)
+- **Champion:** Priya Das — driving trial scope, internal advocate, technical credibility
+- **Decision Process:** Security review (2 weeks) → trial Friday → contract Jan 22 → decision by Jan 31
+- **Critical Risk:** CISO review is external bottleneck; Jan 20 midpoint check-in prevents late surprises
+- **Competition:** AWS Amplify incumbent; implicit differentiation (BAA responsiveness, pen test policy clarity)
 
 ---
 
 ## Risk & Momentum
 
-| Severity | Signal | Detail |
-|---|---|---|
-| 🟡 | **CISO gating** | Leo runs security review Jan 20-30; any undiscovered compliance gap stalls the deal — Jan 20 checkpoint is the early-warning valve. |
-| 🟡 | **Economic buyer unconfirmed** | Priya said "end of January" but no budget authority, procurement path, or approver has been confirmed. |
-| 🟢 | **Trial as de-risking** | Friday trial on actual codebase — if Marcus delivers 5-8 min, Priya's confidence and momentum both jump heading into CISO review. |
+| Signal | Severity | Implication |
+|--------|----------|-------------|
+| **CISO review (2 weeks) is critical path** | 🔴 | If Cascade's CISO raises new concerns after receiving materials today, only 10 days remain to resolve before Jan 20 check-in. Jordan's midpoint check-in mitigates but doesn't eliminate. |
+| **Trial scope is specific and real** | 🟢 | Marcus running trial on actual Cascade app Friday, not a representative app. Caching behavior depends on dependency graph — real numbers by Monday validates promise. |
+| **Security objections turning into validation gates** | 🟢 | Leo started skeptical ("documentation gaps"), is ending engaged ("cleaner than Amplify"). SOC 2, BAA, pen test policy materials send today; Leo's tone suggests he's looking for reasons to say yes, not no. |
 
 ---
 
 ## The Unsaid
 
-Leo's shift from skeptical to validating is strong signal, but the unspoken risk is a CISO raising a compliance concern Leo didn't anticipate — at which point he becomes a liability rather than a champion. Priya is technically enthusiastic but hasn't surfaced ROI, budget, or team impact; if security review drags into Q2, deal collapses despite the technical fit.
+Leo's caution about CISO veto is genuine but not blocking — his questions (SOC 2, BAA, data residency) were answered clearly and specifically, which Amplify didn't do. The real momentum is that Priya owns the technical decision and is ready to validate build performance Friday; if that trial delivers (5-8 min builds), Leo's security review becomes procedural rubber-stamp rather than a genuine gate. The tightness of the Jan 31 decision date suggests internal urgency — likely a Q1 budget cycle or migration window.
 
 ---
 
 ## Coaching Spotlight
 
-**Marcus Webb:** Strength: "What does your CISO need specifically?" — forced precision before answering, built trust with the gatekeeper when the CISO wasn't even in the room. Gap: The acme.toml walkthrough was clear but abstract; a short recorded Contentful webhook → page-rebuild demo before Friday would make the speed delta visceral, not theoretical.
+**Marcus:** Exceptional discovery + technical translation. Asked clarifying questions before proposing (PHI storage, ISR usage), validated architecture assumptions, then showed impact with specific numbers tied to Cascade's actual workload. Strength: thinking like a partner, not a vendor.
 
-**Jordan Reeves:** Strength: Reset the timeline cadence when Leo surfaced CISO review as the long pole — prevented a silent drift past Jan 31. Gap: "End of January" from Priya should have triggered "who approves vendor decisions?" — economic buyer is still unconfirmed.
+**Jordan:** Strong facilitation and gate-keeping. Identified the critical path (CISO review), built in midpoint check-in to prevent surprise blockers, and staged parallel workstreams. One gap: didn't probe economic buyer/budget authority yet — wait for after trial success.
 
 ---
 
 ## Product Signals
 
-| Product | Intensity | Prospect Context |
-|---|---|---|
-| **Acme Sites** | 🔴 High | Build time is the primary pain — core trial scope for Friday. |
-| **Acme Connect (Contentful)** | 🟡 Moderate | Solves 30-min content bottleneck discovered mid-call; Priya asked to add to trial scope. |
+| Product | Intensity | Context |
+|---------|-----------|---------|
+| **Build Caching** | High | Core pain driver: 28-35 min builds → 5-8 min for typical deploys. Directly tied to deploy frequency (8-10/week). |
+| **Acme Connect (Contentful)** | Medium | Secondary pain: marketing content publishing bottleneck (30+ min manual loop). Trial scope includes automated flow demo. |
+| **Data Residency (US-only)** | High | Security-specific requirement; CISO concern; Marcus's ability to configure US-region builds is table-stakes for healthcare. |
 
 ---
 
 ## Next Steps
 
-1. **Jordan (AE):** Send security package (SOC 2 NDA, BAA template, pen test policy) to Leo — today Jan 16
-2. **Marcus (SE):** Technical trial with Priya — deploy actual app, capture build times, demo Contentful webhook — Fri Jan 19
-3. **Jordan (AE):** CISO checkpoint with Leo — surface any dealbreaker within 24 hours — Jan 20
+1. **Jordan** — Send security materials (SOC 2 under NDA, BAA template, pen test policy, completed questionnaire) **today**
+2. **Marcus + Priya** — Run live trial on actual app, demonstrating build caching and Contentful integration **Friday**
+3. **Leo** — Flag security blockers to Jordan **by Jan 20**
+4. **Jordan + Priya** — Move to contract negotiations **week of Jan 22** if trial delivers and security review is clean

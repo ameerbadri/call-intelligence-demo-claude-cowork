@@ -1,141 +1,129 @@
 ---
-call_date: 2026-01-27
-company: Ironbridge Financial
-duration_minutes: 44
-call_type: champion_building
-participants:
-  - name: Sarah Chen
-    role: Acme AE
-    seller: true
-  - name: Marcus Webb
-    role: Acme SE
-    seller: true
-  - name: Dmitri Volkov
-    role: Director of Engineering
-    seller: false
-  - name: Yuki Tanaka
-    role: Frontend Lead
-    seller: false
-  - name: Samantha Cho
-    role: Head of Platform Engineering
-    seller: false
-
-deal_health_score: 75
-deal_health_label: "Moderate-to-Strong"
-
-ae_value_articulation_score: 4
-ae_multithreading_score: 5
+company: Ironbridge
+date: 2026-01-27
+ae_name: Sarah Chen
+se_name: Marcus Webb
+deal_stage: champion
+deal_health: 72
+deal_outcome: active
+call_purpose: champion_building
+next_step_quality: 5
+discovery_quality: null
+ae_discovery_score: 4
+ae_multithreading_score: 4
+ae_objection_handling_score: 5
+ae_value_articulation_score: null
 ae_next_step_score: 5
-
 se_technical_depth_score: 5
 se_demo_effectiveness_score: 5
+se_discovery_contribution_score: 4
 se_objection_handling_score: 5
-se_next_step_quality_score: 4
-
-trust_trajectory: Improving
-champion_health: Strong
-emotional_mismatch: false
-
-red_flags:
-  - competitor_threat
-  - vendor_risk_gating
-
-key_insights:
-  - dmitri_position_shift: "Skeptic to conviction on operational pain (25-min rollback → 30-sec)"
-  - samantha_conversion: "Technical skepticism to buy-in ('cleaner than what we built')"
-  - champion_validation: "Yuki no longer alone; Dmitri + Samantha actively supporting"
-  - competitive_pressure: "Cloudflare Pages real but not locked (infrastructure team preference; Samantha skeptical on maturity)"
-  - gating_items: "Change-of-control clause + fintech reference required before pricing"
-
-products_mentioned:
-  - Deploy Previews: high_signal
-  - Atomic Rollbacks: high_signal
-  - Datadog Integration: high_signal
-
-competitive_intel:
-  - Cloudflare Pages: infrastructure_team_preference_but_samantha_skeptical
-  - Vercel: positioned_as_most_comparable_enterprise_alternative
-  - AWS Amplify: incumbent_with_25_minute_rollback_pain
+meddpicc_metrics: partially
+meddpicc_economic_buyer: not_addressed
+meddpicc_decision_criteria: partially
+meddpicc_decision_process: identified
+meddpicc_paper_process: partially
+meddpicc_identified_pain: identified
+meddpicc_champion: identified
+meddpicc_competition: identified
+meddpicc_notes: "M:Deploy metrics tracked (frequency, duration, error rate, rollback rate) but no ROI quantified|E:Dmitri has budget influence but no CFO/EB engagement|DC:Cost, vendor risk, operational integration, DX named; no formal scoring|DP:Three-part gate clear (reference + contract + migration plan)|PP:Change-of-control clause flagged; procurement timeline unknown|IP:25-minute Amplify rollbacks, custom webhook fragility clearly quantified|Ch:Yuki strong internal advocate; trial-driven momentum|Co:Cloudflare Pages actively evaluated; Vercel mentioned as alternative"
+spiced_situation: 4
+spiced_pain: 4
+spiced_impact: 4
+spiced_critical_event: 3
+spiced_decision: 5
+tension_flag: false
+behavioral_trust_trajectory: Improving
+behavioral_emotional_mismatch: false
+behavioral_champion_health: Strong
+talk_ratio_seller: 58
+talk_ratio_prospect: 42
+competitive_mentions: ["Cloudflare Pages", "Vercel"]
+product_signals: ["Deploy Previews", "Atomic Deploys", "Webhook System", "Log Drains", "Datadog Integration"]
+red_flags: ["no_urgency"]
+duration_minutes: 44
 ---
 
-# Ironbridge Financial — 2026-01-27
+## Ironbridge Financial — Champion Building Call
 
-> **Champion Building** · 44 min · Deal Health: **75/100**
+**Company Profile:** 14 frontend engineers, 8 sites (production + internal tools). Currently on AWS Amplify. Fintech with compliance sensitivity and tight infrastructure margins.
 
-| | |
-|---|---|
-| **Seller Team** | Sarah Chen (AE), Marcus Webb (SE) |
-| **Prospect** | Dmitri Volkov (Dir. Engineering), Yuki Tanaka (Frontend Lead), Samantha Cho (Head of Platform) |
-| **Deal Stage** | Champion Building |
-| **Next-Step Grade** | 🟢 Three gating items locked with owners and dates |
+**Deal Health:** 72/100 | **Stage:** Champion Building | **Outcome:** Active
+**Risk Level:** Moderate | **Momentum:** Building (post-demo shift)
 
 ---
 
 ## Deal Summary
 
-Ironbridge Financial (14 FEs, 8 sites on Amplify) entered skeptical and left with three active champions. Dmitri (Director Eng, skeptic) converted on quantified rollback pain — 25 min → 30 sec atomic. Samantha (Head of Platform) converted on native Datadog integration replacing her fragile custom webhook setup. Three gating items must clear before pricing: fintech reference (Wed), change-of-control clause (EOW), phased migration plan (EOW).
+Three-stakeholder evaluation moving toward decision gate. Yuki (Frontend Lead) is established champion with trial proof; Dmitri (Director of Engineering) shifted position after demo—vendor risk and operational risk concerns now addressable. Samantha (Platform Engineering) moved from skeptical to cautiously positive on observability integration. Deal advances on three deliverables: fintech reference, change-of-control clause, phased migration plan.
 
 ---
 
-## Scores
-
-### AE — Sarah Chen
+## AE/SE Performance
 
 | Dimension | Score | Evidence |
-|---|---|---|
-| **Multithreading** | 🟩🟩🟩🟩🟩 | Brought three stakeholders with distinct concerns, routed air time to each, extracted decision criteria from all three roles, locked next steps with named owners. |
-| **Next-Step Commitment** | 🟩🟩🟩🟩🟩 | Fintech ref by Wed, change-of-control by EOW, migration plan by EOW, reconvene Thursday — every item has an owner and a date. |
-| **Value Articulation** | 🟩🟩🟩🟩⬜ | Captured decision criteria across stakeholders but let Marcus own the quantified ROI narrative — missed the moment to connect 25-min rollbacks explicitly to Dmitri's stated risk concern. |
+|-----------|-------|----------|
+| **Sarah — Objection Handling** | 🟩🟩🟩🟩🟩 | Addressed vendor risk directly ("I want to address it directly rather than pretending it doesn't exist") and secured commitment on change-of-control language. |
+| **Sarah — Multithreading** | 🟩🟩🟩🟩⬜ | Opened by asking each stakeholder's priority before demo; facilitated three different evaluation angles. Missed CFO/EB introduction. |
+| **Marcus — Technical Depth** | 🟩🟩🟩🟩🟩 | Probed Datadog integration friction, diagnosed custom webhook fragility, positioned native log drains as operational advantage. |
+| **Marcus — Demo Effectiveness** | 🟩🟩🟩🟩🟩 | Showed atomic deploy rollback (30 sec vs. 25 min) as operational risk quantification. Prospect immediately grasped the error-budget implication. |
 
-### SE — Marcus Webb
+---
 
-| Dimension | Score | Evidence |
-|---|---|---|
-| **Demo Effectiveness** | 🟩🟩🟩🟩🟩 | Rollback demo (30 sec vs. 25 min) moved Dmitri from skeptic to commitment; Datadog integration demo converted Samantha — "I'd be deleting my custom webhooks, not rebuilding them." |
-| **Objection Handling** | 🟩🟩🟩🟩🟩 | Addressed vendor risk (acquisition, financial health) with concrete mitigations; validated Samantha's Cloudflare skepticism and explained why "network company adding hosting" matters as a product maturity signal. |
+## MEDDPICC + Competitive Position
 
-### MEDDPICC
-
-**M:** 25-min rollbacks = eroded error budget; 14 engineers, 8 sites quantified · **E:** Dmitri (Dir. Eng) decision authority; budget not confirmed · **DC:** Deploy Previews, atomic rollbacks, Datadog native integration, fintech reference · **DP:** Gating items due EOW → reconvene Thu → pricing discussion · **PP:** Change-of-control clause required pre-pricing · **IP:** 25-min non-atomic rollbacks + fragile custom Datadog webhook setup · **Ch:** Yuki (original), Dmitri + Samantha (newly converted) — buying group aligned · **Co:** Cloudflare Pages (infra team interest; Samantha skeptical on maturity); Vercel (not active)
+| Component | Status | Note |
+|-----------|--------|------|
+| **Identified Pain** | ✅ | 25-minute Amplify rollbacks eroding error budget; custom Datadog webhooks fragile and manual |
+| **Champion** | ✅ | Yuki persistent trial advocate; team alignment visible ("the deploy preview workflow my team has been waiting for") |
+| **Decision Process** | ✅ | Three-gate sequence clear: fintech reference → change-of-control clause → migration plan → Thursday decision call |
+| **Competition** | ✅ | Cloudflare Pages actively considered ("one throat to choke"); Samantha skeptical of Pages' maturity level |
+| **Metrics / ROI** | ⚠️ | Operational metrics sharp (deploy duration, rollback rate, error budget); business ROI not quantified |
+| **Economic Buyer** | ⚠️ | Dmitri has budget influence but no CFO or VP Eng engagement. Late-stage risk if deal reaches commercial phase. |
+| **Paper Process** | ⚠️ | Change-of-control clause confirmed in enterprise agreements; procurement timeline and legal review process not discussed |
 
 ---
 
 ## Risk & Momentum
 
-| Severity | Signal | Detail |
-|---|---|---|
-| 🟡 | **Cloudflare competitive threat** | Infrastructure team already interested ("one throat to choke"); Samantha is skeptical on product maturity but isn't the final decision-maker. |
-| 🟡 | **Fintech reference availability** | Sarah committed a 2+ year fintech reference by Wednesday — if unavailable, it creates a credibility gap on vendor health claims. |
-| 🟢 | **Multi-stakeholder conversion** | Two skeptics converted in real time on operational pain; buying group is aligned heading into gating items. |
+| Signal | Severity | Implication |
+|--------|----------|-----------|
+| 🟢 **Trust improvement post-demo** | Improving | Dmitri and Samantha both shifted position after technical validation. Yuki's champion credibility reinforced. Momentum is real. |
+| 🟡 **No hard close date** | Moderate | "Thursday next week" is set, but no forcing event (board commitment, product launch, budget cycle deadline) surfaced. Risk of timeline slip. |
+| 🟡 **Economic buyer not yet engaged** | Moderate | Dmitri is Director-level but no CFO or VP Eng on call. If deal reaches commercial/legal, new stakeholder intro could surface new objections. |
 
 ---
 
 ## The Unsaid
 
-Dmitri entered as a risk officer and left as a committed evaluator — the inflection point was quantified operational cost, not features or brand. Samantha's "I'd be deleting it, not rebuilding it" signals she has mentally moved past evaluation into adoption, which makes her a second strong champion if the deal stalls.
+Dmitri's skepticism about vendor health was the admission barrier—once Marcus addressed it head-on with open-source portability and change-of-control specificity, Dmitri became actively evaluative rather than defensive. The shift is real but contingent: he's buying the operational story (atomic rollbacks, better observability), not the Acme vision. Samantha's comment about "not rebuilding the integration, I'd be deleting it" signals she's solved for her technical objection; the remaining friction is internal politics (Cloudflare was infrastructure team's suggestion) and commercial terms.
 
 ---
 
 ## Coaching Spotlight
 
-**Sarah Chen:** Strength: Flawless multithreading — orchestrated three stakeholders with distinct concerns and locked specific deliverables with zero ambiguity. Gap: When Marcus quantifies rollback ROI, make the bridge explicit — connect the 25-min figure back to Dmitri's original risk concern in your own words.
+**Sarah Chen (AE):** *Strength* — Direct vendor risk engagement turned a potential showstopper into a contractual discussion rather than a deal-killer. *Gap* — Didn't introduce or discuss economic buyer gatekeeping; left that hole open for late-stage surprises.
 
-**Marcus Webb:** Strength: Objection handling converted two skeptics in real time through technical depth and concrete ROI — especially the Datadog integration moment. Gap: None material this call.
+**Marcus Webb (SE):** *Strength* — Pinpointed observability integration as Samantha's real concern and delivered unexpected value (native Datadog) rather than generic feature recitation. *Gap* — None significant on this call; execution was exemplary.
 
 ---
 
 ## Product Signals
 
-| Product | Intensity | Prospect Context |
-|---|---|---|
-| **Atomic Rollbacks** | 🔴 High | 25 min → 30 sec ROI moved Dmitri from skeptic to commitment — the deal anchor. |
-| **Datadog Integration** | 🔴 High | Native webhooks + log drains converted Samantha: "cleaner than what we've built." |
-| **Deploy Previews** | 🔴 High | Yuki validation: "exactly what I showed Dmitri in my trial." |
+| Feature/Product | Intensity | Context |
+|-----------------|-----------|---------|
+| **Deploy Previews** | High | Yuki's team waiting for this; "the same URL updating without breaking the reviewer" is the exact pain point from their staging environment |
+| **Atomic Deploys + Instant Rollback** | High | 30-second rollback vs. 25-minute Amplify re-deploy is the operational risk quantification that moved Dmitri |
+| **Datadog Integration** | High | Samantha: "cleaner than what we've built. I wouldn't be rebuilding the integration, I'd be deleting it." Native log drains + webhooks solved her technical objection. |
 
 ---
 
 ## Next Steps
 
-1. **Sarah (AE):** Deliver fintech reference customer (2+ years, similar profile) — by Wed Jan 29
-2. **Sarah (AE):** Draft change-of-control clause language for term sheet — by Fri Jan 31
-3. **Marcus (SE):** Phased migration plan (8 sites, start with internal tool, 1-sprint cadence) + Datadog integration guide — by Fri Jan 31
+1. **Sarah:** Identify fintech reference customer (2+ year tenure) + provide change-of-control clause in term sheet draft — **by Wednesday end of week**
+2. **Marcus:** Document phased migration plan (start with internal tool, 1-sprint approach, 14 engineers / 8 sites) — **by Friday end of week**
+3. **Sarah + Dmitri:** Reconvene to review reference, contract, migration plan — **Thursday next week (specific date to be confirmed)**
+
+---
+
+**Call Quality Notes:** 44 minutes of substantive technical and commercial discussion. No fluff; every section moved deal forward. Prospect engaged across three stakeholder perspectives (Director risk/cost, Platform operational, Frontend DX). Momentum is earned, not assumed.
